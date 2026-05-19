@@ -1,0 +1,51 @@
+{
+  "$schema": "https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json",
+  "name": "Loomis Editorial Docs",
+  "namespace": "zeropress",
+  "slug": "docs3-editorial",
+  "version": "0.6.0",
+  "license": "MIT",
+  "runtime": "0.6",
+  "description": "Editorial Mentor docs theme. Warm paper-and-ink palette, Lora display + Outfit body, grouped colored sidebar, command-palette search, deep-paper dark mode.",
+  "features": {
+    "comments": false,
+    "newsletter": false,
+    "post_index": false
+  },
+  "menu_slots": {
+    "foundations": {
+      "title": "Foundations",
+      "description": "First sidebar group, terracotta accent"
+    },
+    "guides": {
+      "title": "Guides",
+      "description": "Second sidebar group, sage accent"
+    },
+    "reference": {
+      "title": "Reference",
+      "description": "Third sidebar group, ochre accent"
+    },
+    "legal": {
+      "title": "Legal",
+      "description": "Footer legal link list"
+    }
+  },
+  "site_meta": {
+    "brand_word": {
+      "title": "Brand wordmark",
+      "description": "Wordmark shown in sidebar and mobile top bar.",
+      "type": "string",
+      "default": "Loomis Docs"
+    },
+    "version_label": {
+      "title": "Version label",
+      "description": "Small version chip next to the wordmark in the desktop header.",
+      "type": "string"
+    },
+    "github_url": {
+      "title": "GitHub URL",
+      "description": "Optional GitHub link in the header.",
+      "type": "string"
+    }
+  }
+}

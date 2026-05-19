@@ -1,0 +1,22 @@
+<article class="doc-article">
+  <header class="page-header">
+    <p class="eyebrow">Post</p>
+    <h1>{{post.title}}</h1>
+    {{#if post.excerpt}}<p class="lede">{{post.excerpt}}</p>{{/if}}
+  </header>
+  <div class="article-grid">
+    <div class="prose">{{post.html}}</div>
+    {{#if post.toc}}
+    <aside class="toc" aria-label="On this page">
+      <p class="toc__title">On this page</p>
+      <nav>
+        <ul>
+          {{#for item in post.toc}}
+            <li class="toc__item toc__item--level-{{item.level}}"><a href="{{item.href}}" data-toc-link>{{item.title}}</a></li>
+          {{/for}}
+        </ul>
+      </nav>
+    </aside>
+    {{/if}}
+  </div>
+</article>

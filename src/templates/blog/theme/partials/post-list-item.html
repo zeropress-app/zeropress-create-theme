@@ -1,0 +1,17 @@
+{{#if_eq partial.variant "archive"}}
+  <li class="archive-entry" data-post-index="{{loop.index}}">
+    <a href="{{post.url}}">{{post.title}}</a>
+    <time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+  </li>
+{{#else}}
+  <article class="post-list-item post-list-item--{{partial.variant}}" data-post-index="{{loop.index}}">
+    <div class="post-meta">
+      <time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <span>{{post.reading_time}}</span>
+    </div>
+    <h2><a href="{{post.url}}">{{post.title}}</a></h2>
+    {{#if partial.show_excerpt}}<p class="post-excerpt">{{post.excerpt}}</p>{{/if}}
+    <a class="read-link" href="{{post.url}}">Continue reading →</a>
+  </article>
+{{/if_eq}}

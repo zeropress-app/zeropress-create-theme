@@ -1,0 +1,38 @@
+<footer class="site-footer">
+  <section class="footer-cta">
+    <div class="shell footer-cta__inner">
+      <div class="footer-cta__copy">
+        <p class="section-kicker">Newsletter</p>
+        <h2>A quiet letter, now and then.</h2>
+        <p>
+          Occasional notes from the margins — new essays, things worth reading,
+          and the small observations that don't fit anywhere else.
+        </p>
+      </div>
+      <div class="newsletter-form newsletter-form--wide" role="group" aria-label="Newsletter sign-up">
+        <label class="sr-only" for="newsletter-email">Email address</label>
+        <input id="newsletter-email" type="email" placeholder="your@email.com" inputmode="email" disabled>
+        <button type="button" disabled>Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-meta">
+    <div class="shell footer-meta__inner">
+      <div class="footer-brand">
+        <p class="footer-title">{{site.title}}</p>
+        <p class="footer-copy">{{site.description}}</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        {{menu:footer}}
+      </nav>
+    </div>
+    <div class="shell footer-quote">
+      <p>
+        {{#if site.footer.copyright_text}}{{site.footer.copyright_text}}. {{/if}}Browse <a href="/archive/">the archive</a>{{#if site.url}}, <a href="/feed.xml">the feed</a>, or <a href="/sitemap.xml">the sitemap</a>{{/if}}.{{#if site.footer.attribution}} Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a>.{{/if}}
+      </p>
+    </div>
+  </div>
+
+  <script defer src="/assets/theme.js"></script>
+</footer>

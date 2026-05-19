@@ -1,0 +1,474 @@
+{
+  "version": "0.6",
+  "generator": "margin-notes-react-port",
+  "generated_at": "2026-05-13T00:00:00Z",
+  "$schema": "https://zeropress.dev/schemas/preview-data.v0.6.schema.json",
+  "site": {
+    "title": "Margin Notes",
+    "description": "Quiet writing on craft, code, and the everyday.",
+    "url": "",
+    "locale": "en-US",
+    "timezone": "UTC",
+    "footer": {
+      "copyright_text": "© Margin Notes",
+      "attribution": true
+    },
+    "media_base_url": "",
+    "posts_per_page": 5,
+    "datetime_display": "static",
+    "date_style": "medium",
+    "time_style": "none",
+    "disallow_comments": false
+  },
+  "content": {
+    "authors": [
+      {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "display_name": "Lee Park"
+      }
+    ],
+    "posts": [
+      {
+        "public_id": 2001,
+        "title": "Writing in the Margins",
+        "slug": "writing-in-the-margins",
+        "document_type": "markdown",
+        "excerpt": "On keeping a notebook of half-thoughts, and why the best ideas often arrive sideways.",
+        "published_at_iso": "2025-04-12T09:00:00Z",
+        "updated_at_iso": "2025-04-12T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "essays"
+        ],
+        "tag_slugs": [
+          "writing",
+          "notebooks",
+          "habits"
+        ],
+        "content": "There is a particular kind of quiet that arrives only after the keyboard stops. The cursor blinks, but it is no longer waiting. It is keeping you company.\n\n## On craft\n\nMost of the work that matters happens in the editing. The first draft is just a permission slip — it tells you that the idea exists, that it can survive a sentence.\n\n> Write drunk on the idea. Edit sober on the reader.\n\n## Small habits\n\nI keep a folder of unfinished posts. Some of them are years old. Occasionally one of them turns into something. Usually they just remind me what I was thinking about that month.\n\n### A short list\n\n- Write the title last.\n- Read the post out loud before publishing.\n- Cut the first paragraph.\n\n## Closing\n\nIf you made it this far, thank you. The internet is loud, and your attention is a gift.\n"
+      },
+      {
+        "public_id": 2002,
+        "title": "The Quiet Web",
+        "slug": "the-quiet-web",
+        "document_type": "markdown",
+        "excerpt": "A love letter to small, slow, hand-made websites — and the people who still build them.",
+        "published_at_iso": "2025-03-28T09:00:00Z",
+        "updated_at_iso": "2025-03-28T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "essays"
+        ],
+        "tag_slugs": [
+          "web",
+          "indie",
+          "design"
+        ],
+        "content": "There is still a quiet web underneath the loud one. Hand-coded pages, weird sidebars, footnotes that lead somewhere personal.\n\n## On craft\n\nThe small site is a craft object. It does not have to scale. It just has to be true.\n\n## Small habits\n\nView source. Save the page. Send a kind email to the author. The web rewards small attentions.\n"
+      },
+      {
+        "public_id": 2003,
+        "title": "Color & Tokens — A Reference",
+        "slug": "design-tokens",
+        "document_type": "markdown",
+        "excerpt": "A living reference for the design system: background, foreground, primary, accent, muted, and the rule that ties them.",
+        "published_at_iso": "2025-03-15T09:00:00Z",
+        "updated_at_iso": "2025-03-15T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "design"
+        ],
+        "tag_slugs": [
+          "design",
+          "tokens",
+          "reference"
+        ],
+        "content": "The palette here is small on purpose. Six roles, two themes, no exceptions.\n\n## Surfaces\n\nThe surfaces are the quiet half of the system — the paper the writing sits on.\n\n<div class=\"swatch-grid\">\n  <div class=\"swatch\" data-token=\"--background\"><span class=\"swatch__chip\"></span><strong>Background</strong><code>--background</code><em data-token-value></em></div>\n  <div class=\"swatch\" data-token=\"--foreground\"><span class=\"swatch__chip\"></span><strong>Foreground</strong><code>--foreground</code><em data-token-value></em></div>\n  <div class=\"swatch\" data-token=\"--muted\"><span class=\"swatch__chip\"></span><strong>Muted</strong><code>--muted</code><em data-token-value></em></div>\n</div>\n\n## Ink and accent\n\nPrimary carries headings and emphasis; accent is the only color allowed to raise its voice.\n\n<div class=\"swatch-grid\">\n  <div class=\"swatch\" data-token=\"--primary\"><span class=\"swatch__chip\"></span><strong>Primary</strong><code>--primary</code><em data-token-value></em></div>\n  <div class=\"swatch\" data-token=\"--accent\"><span class=\"swatch__chip\"></span><strong>Accent</strong><code>--accent</code><em data-token-value></em></div>\n  <div class=\"swatch\" data-token=\"--border\"><span class=\"swatch__chip\"></span><strong>Rule</strong><code>--border</code><em data-token-value></em></div>\n</div>\n\n## Using the tokens\n\nReach for a role, not a hex. `bg-card` follows the theme; `bg-white` does not.\n"
+      },
+      {
+        "public_id": 2004,
+        "title": "Notes on Typography",
+        "slug": "notes-on-typography",
+        "document_type": "markdown",
+        "excerpt": "What I've learned about line height, measure, and the quiet tyranny of the default font stack.",
+        "published_at_iso": "2025-02-20T09:00:00Z",
+        "updated_at_iso": "2025-02-20T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "design"
+        ],
+        "tag_slugs": [
+          "design",
+          "typography"
+        ],
+        "content": "## Measure\n\nA line of body text is most readable somewhere between 60 and 75 characters. Wider, and the eye loses the return; narrower, and the rhythm fragments.\n\n## Leading\n\nGenerous leading is the easiest gift you can give a long page of prose.\n\n## Closing\n\nDefaults are a design decision. Choose them on purpose.\n"
+      },
+      {
+        "public_id": 2005,
+        "title": "Small Tools, Big Leverage",
+        "slug": "small-tools-big-leverage",
+        "document_type": "markdown",
+        "excerpt": "A handful of tiny scripts that quietly run my week. None of them are clever. All of them are mine.",
+        "published_at_iso": "2025-02-02T09:00:00Z",
+        "updated_at_iso": "2025-02-02T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "code"
+        ],
+        "tag_slugs": [
+          "code",
+          "tools",
+          "productivity"
+        ],
+        "content": "## On craft\n\nThe best tool is the one you wrote yesterday for a problem you have today.\n\n```sh\nalias todo='vim ~/notes/today.md'\n```\n\n## Closing\n\nKeep them small. Replace them often.\n"
+      },
+      {
+        "public_id": 2006,
+        "title": "Reading List: Winter",
+        "slug": "reading-list-winter",
+        "document_type": "markdown",
+        "excerpt": "Books, essays, and a few longreads that kept me company through the cold months.",
+        "published_at_iso": "2025-01-18T09:00:00Z",
+        "updated_at_iso": "2025-01-18T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "reading"
+        ],
+        "tag_slugs": [
+          "reading",
+          "books"
+        ],
+        "content": "## Books\n\n- *The Dispossessed* — Le Guin\n- *Ways of Seeing* — Berger\n- *A Field Guide to Getting Lost* — Solnit\n\n## Essays\n\nA handful of pieces that stayed with me longer than they should have.\n"
+      },
+      {
+        "public_id": 2007,
+        "title": "The Walk",
+        "slug": "the-walk",
+        "document_type": "markdown",
+        "excerpt": "Twenty minutes a day, no headphones. The smallest practice that changed the most.",
+        "published_at_iso": "2024-12-30T09:00:00Z",
+        "updated_at_iso": "2024-12-30T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "essays"
+        ],
+        "tag_slugs": [
+          "habits",
+          "life"
+        ],
+        "content": "## The pace\n\nA walk is a thinking machine you wear with your shoes.\n\n## The rule\n\nNo headphones. No phone. The point is the boredom; the boredom is the point.\n"
+      },
+      {
+        "public_id": 2008,
+        "title": "CSS I Keep Relearning",
+        "slug": "css-i-keep-relearning",
+        "document_type": "markdown",
+        "excerpt": "Margin collapse, stacking contexts, and the four properties I have to look up every single time.",
+        "published_at_iso": "2024-12-10T09:00:00Z",
+        "updated_at_iso": "2024-12-10T10:00:00Z",
+        "author_id": "11111111-1111-4111-8111-111111111111",
+        "status": "published",
+        "allow_comments": true,
+        "category_slugs": [
+          "code"
+        ],
+        "tag_slugs": [
+          "code",
+          "css",
+          "web"
+        ],
+        "content": "## Margin collapse\n\nAdjacent vertical margins collapse. It will surprise you again next month.\n\n## Stacking contexts\n\n`position: relative` does not create one. `z-index` on a non-positioned element does nothing.\n\n## The four\n\n`min-width: 0`, `flex-shrink`, `align-items: stretch`, and `overflow: clip`. I will look these up forever.\n"
+      }
+    ],
+    "pages": [
+      {
+        "title": "About",
+        "slug": "about",
+        "document_type": "markdown",
+        "excerpt": "About Margin Notes and Lee Park.",
+        "status": "published",
+        "content": "Hi, I'm Lee Park. Margin Notes is a small corner of the internet for slow thoughts on craft, code, and the everyday.\n\n## Why this journal\n\nA commonplace book in public — a place to keep the sentences that have stayed with me, and to think slowly in a year that mostly rewards speed.\n\n## How it's made\n\nWritten in plain Markdown. Published when the sentence feels finished.\n"
+      },
+      {
+        "title": "Contact",
+        "slug": "contact",
+        "document_type": "markdown",
+        "excerpt": "How to reach Margin Notes.",
+        "status": "published",
+        "content": "The slowest way to reach me is also the most reliable: write to **[lee@example.com](mailto:lee@example.com)**.\n\nFor short notes, leave a comment on a post.\n\nFor production use, connect this page to your preferred contact workflow.\n"
+      },
+      {
+        "title": "Categories",
+        "slug": "categories",
+        "document_type": "markdown",
+        "excerpt": "Browse Margin Notes by category.",
+        "status": "published",
+        "content": "Browse writing by category.\n\n- [Essays](/categories/essays/)\n- [Design](/categories/design/)\n- [Code](/categories/code/)\n- [Reading](/categories/reading/)\n"
+      },
+      {
+        "title": "Cookie Policy",
+        "slug": "cookie-policy",
+        "document_type": "markdown",
+        "excerpt": "Cookie policy for Margin Notes.",
+        "status": "published",
+        "content": "Margin Notes uses one functional cookie: a `localStorage` entry to remember your preferred color theme. We do not use analytics or tracking cookies.\n"
+      },
+      {
+        "title": "Privacy Policy",
+        "slug": "privacy",
+        "document_type": "markdown",
+        "excerpt": "Privacy policy for Margin Notes.",
+        "status": "published",
+        "content": "Margin Notes does not collect personal data. Comments are stored locally in your browser for demo purposes only.\n"
+      },
+      {
+        "title": "Terms of Service",
+        "slug": "terms",
+        "document_type": "markdown",
+        "excerpt": "Terms of service for Margin Notes.",
+        "status": "published",
+        "content": "All writing on Margin Notes is offered under a Creative Commons BY-NC 4.0 license. Quote freely; please link back.\n"
+      }
+    ],
+    "categories": [
+      {
+        "name": "Essays",
+        "slug": "essays",
+        "description": "Long-form essays."
+      },
+      {
+        "name": "Design",
+        "slug": "design",
+        "description": "Notes on design."
+      },
+      {
+        "name": "Code",
+        "slug": "code",
+        "description": "Notes on code."
+      },
+      {
+        "name": "Reading",
+        "slug": "reading",
+        "description": "Books and longreads."
+      }
+    ],
+    "tags": [
+      {
+        "name": "writing",
+        "slug": "writing",
+        "description": "Posts about writing."
+      },
+      {
+        "name": "notebooks",
+        "slug": "notebooks",
+        "description": "Posts about notebooks."
+      },
+      {
+        "name": "habits",
+        "slug": "habits",
+        "description": "Posts about habits."
+      },
+      {
+        "name": "web",
+        "slug": "web",
+        "description": "Posts about the web."
+      },
+      {
+        "name": "indie",
+        "slug": "indie",
+        "description": "Posts about indie web."
+      },
+      {
+        "name": "design",
+        "slug": "design",
+        "description": "Posts about design."
+      },
+      {
+        "name": "tokens",
+        "slug": "tokens",
+        "description": "Design tokens."
+      },
+      {
+        "name": "reference",
+        "slug": "reference",
+        "description": "Reference posts."
+      },
+      {
+        "name": "typography",
+        "slug": "typography",
+        "description": "Posts about typography."
+      },
+      {
+        "name": "code",
+        "slug": "code",
+        "description": "Posts about code."
+      },
+      {
+        "name": "tools",
+        "slug": "tools",
+        "description": "Posts about tools."
+      },
+      {
+        "name": "productivity",
+        "slug": "productivity",
+        "description": "Posts about productivity."
+      },
+      {
+        "name": "reading",
+        "slug": "reading",
+        "description": "Posts about reading."
+      },
+      {
+        "name": "books",
+        "slug": "books",
+        "description": "Posts about books."
+      },
+      {
+        "name": "life",
+        "slug": "life",
+        "description": "Posts about life."
+      },
+      {
+        "name": "css",
+        "slug": "css",
+        "description": "Posts about CSS."
+      }
+    ]
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary Menu",
+      "items": [
+        {
+          "title": "Home",
+          "url": "/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Categories",
+          "url": "/categories/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Contact",
+          "url": "/contact/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "footer": {
+      "name": "Footer Menu",
+      "items": [
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Contact",
+          "url": "/contact/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Cookie Policy",
+          "url": "/cookie-policy/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Privacy",
+          "url": "/privacy/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Terms",
+          "url": "/terms/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    }
+  },
+  "widgets": {
+    "sidebar": {
+      "name": "Sidebar",
+      "items": [
+        {
+          "type": "profile",
+          "title": "About this blog",
+          "settings": {
+            "display_name": "Lee Park",
+            "affiliation": "Margin Notes",
+            "bio_short": "A small corner of the internet for slow thoughts. Updated when there is something worth saying."
+          }
+        },
+        {
+          "type": "recent-posts",
+          "title": "Recent posts",
+          "settings": {
+            "limit": 5,
+            "show_date": true
+          }
+        },
+        {
+          "type": "categories",
+          "title": "Categories",
+          "settings": {
+            "show_count": true,
+            "hierarchical": false
+          }
+        },
+        {
+          "type": "tags",
+          "title": "Tags",
+          "settings": {
+            "limit": 20,
+            "show_count": true
+          }
+        }
+      ]
+    }
+  }
+}

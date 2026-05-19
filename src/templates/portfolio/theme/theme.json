@@ -1,0 +1,74 @@
+{
+  "$schema": "https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json",
+  "name": "Jun Park Portfolio",
+  "namespace": "zeropress",
+  "slug": "theme-portfolio2",
+  "version": "0.6.0",
+  "license": "MIT",
+  "runtime": "0.6",
+  "description": "Clean personal portfolio. Instrument Serif headlines, Inter body, JetBrains Mono metadata. Sticky header with theme toggle and social links, work index + case-study detail pages, typography specimen, and a three-document legal section.",
+  "features": {
+    "comments": false,
+    "newsletter": false,
+    "post_index": false
+  },
+  "menu_slots": {
+    "primary": {
+      "title": "Primary nav",
+      "description": "Top header links (Work, About, Typography, Contact)"
+    },
+    "social": {
+      "title": "Social links",
+      "description": "External profile links rendered as icons in header and footer"
+    },
+    "legal": {
+      "title": "Legal links",
+      "description": "Privacy / Terms / Cookies, rendered in the footer and on the legal sub-nav"
+    }
+  },
+  "site_meta": {
+    "author_name": {
+      "title": "Author name",
+      "type": "string"
+    },
+    "author_short_name": {
+      "title": "Author short name",
+      "description": "Brand text shown in the header.",
+      "type": "string"
+    },
+    "hero_eyebrow": {
+      "title": "Hero eyebrow",
+      "type": "string"
+    },
+    "hero_headline": {
+      "title": "Hero headline",
+      "type": "string"
+    },
+    "hero_lede": {
+      "title": "Hero lede",
+      "type": "string"
+    },
+    "currently_text": {
+      "title": "Currently block",
+      "type": "string"
+    },
+    "available_text": {
+      "title": "Available block",
+      "type": "string"
+    },
+    "contact_email": {
+      "title": "Contact email",
+      "type": "string"
+    }
+  },
+  "collection_slots": {
+    "cases": {
+      "title": "Featured cases",
+      "description": "3 featured project pages shown on the home page"
+    },
+    "work": {
+      "title": "All work",
+      "description": "Full ordered list of project pages shown on /work"
+    }
+  }
+}

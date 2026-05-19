@@ -1,0 +1,23 @@
+<article class="page-shell page-shell--narrow">
+  <p class="eyebrow mono">Contact</p>
+  <h1 class="page-title">Let's talk.</h1>
+  <p class="page-lede">The best way to reach me is by email. I read everything and reply within a few days.</p>
+
+  <div class="contact-block">
+    {{#if site.meta.contact_email}}
+      <a class="contact-block__email serif" href="mailto:{{site.meta.contact_email}}">{{site.meta.contact_email}}</a>
+    {{/if}}
+    <p class="contact-block__press muted">For press inquiries, please write to <a href="mailto:press@junpark.studio">press@junpark.studio</a>.</p>
+  </div>
+
+  <dl class="contact-meta">
+    <div>
+      <dt class="mono muted">Hours</dt>
+      <dd>Mon–Thu, 10:00–18:00 KST</dd>
+    </div>
+    <div>
+      <dt class="mono muted">Response time</dt>
+      <dd>Within 3 business days</dd>
+    </div>
+  </dl>
+</article>

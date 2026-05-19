@@ -1,0 +1,103 @@
+{{#if route.is_front_page}}
+<section class="masthead">
+  <div class="masthead__inner">
+    {{#if site.meta.issue_label}}<p class="eyebrow">{{site.meta.issue_label}}</p>{{/if}}
+    <h1 class="masthead__title">{{#if site.meta.masthead_title}}{{site.meta.masthead_title}}{{#else}}Slow looks. Long reads.{{/if}}</h1>
+    {{#if site.meta.masthead_lede}}<p class="masthead__lede">{{site.meta.masthead_lede}}</p>{{/if}}
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero__grid">
+    {{#if collections.cover-story.items}}
+      {{#for post in collections.cover-story.items}}{{#if loop.first}}
+        <a href="{{post.url}}" class="hero__feature">
+          {{#if post.featured_image}}<div class="hero__media"><img src="{{post.featured_image}}" alt=""></div>{{/if}}
+          <div class="hero__copy">
+            <span class="eyebrow">
+              {{#for category in post.categories}}{{#if loop.first}}{{category.name}} · {{/if}}{{/for}}
+              Cover Story
+            </span>
+            <h2 class="hero__title">{{post.title}}</h2>
+            {{#if post.excerpt}}<p class="hero__dek">{{post.excerpt}}</p>{{/if}}
+            <p class="hero__byline">
+              {{#if post.author.display_name}}By {{post.author.display_name}} · {{/if}}{{post.reading_time}}
+            </p>
+          </div>
+        </a>
+      {{/if}}{{/for}}
+    {{#else}}
+      {{#for post in posts.items}}{{#if loop.first}}
+        <a href="{{post.url}}" class="hero__feature">
+          {{#if post.featured_image}}<div class="hero__media"><img src="{{post.featured_image}}" alt=""></div>{{/if}}
+          <div class="hero__copy">
+            <span class="eyebrow">
+              {{#for category in post.categories}}{{#if loop.first}}{{category.name}} · {{/if}}{{/for}}
+              Cover Story
+            </span>
+            <h2 class="hero__title">{{post.title}}</h2>
+            {{#if post.excerpt}}<p class="hero__dek">{{post.excerpt}}</p>{{/if}}
+            <p class="hero__byline">
+              {{#if post.author.display_name}}By {{post.author.display_name}} · {{/if}}{{post.reading_time}}
+            </p>
+          </div>
+        </a>
+      {{/if}}{{/for}}
+    {{/if}}
+
+    <div class="hero__rail" data-limit-2>
+      {{#if collections.hero-rail.items}}
+        {{#for post in collections.hero-rail.items}}{{partial:post-card variant="sm" show_excerpt=false}}{{/for}}
+      {{#else}}
+        {{#for post in posts.items}}{{#if loop.first}}{{#else}}{{partial:post-card variant="sm" show_excerpt=false}}{{/if}}{{/for}}
+      {{/if}}
+    </div>
+  </div>
+</section>
+
+<section class="section-band">
+  <h2 class="section-band__title">{{#if site.meta.section_label}}{{site.meta.section_label}}{{#else}}Latest{{/if}}</h2>
+  <p class="section-band__meta">Updated weekly</p>
+</section>
+
+<section class="grid-wrap">
+  {{#if collections.latest-grid.items}}
+    <div class="grid">
+      {{#for post in collections.latest-grid.items}}{{partial:post-card variant="grid" show_excerpt=true}}{{/for}}
+    </div>
+  {{#else}}
+    <div class="grid" data-skip-3>
+      {{#for post in posts.items}}{{partial:post-card variant="grid" show_excerpt=true}}{{/for}}
+    </div>
+  {{/if}}
+</section>
+
+<section class="categories-strip">
+  <p class="eyebrow">{{#if site.meta.archive_cta_eyebrow}}{{site.meta.archive_cta_eyebrow}}{{#else}}Browse the Archive{{/if}}</p>
+  <h2 class="categories-strip__title">{{#if site.meta.archive_cta_title}}{{site.meta.archive_cta_title}}{{#else}}Find your next long read{{/if}}</h2>
+  <div class="categories-strip__pills">
+    {{#for category in taxonomies.categories}}
+      {{#if category.count}}<a href="{{category.url}}" class="pill">{{category.name}}</a>{{/if}}
+    {{/for}}
+  </div>
+</section>
+{{#else}}
+<section class="masthead masthead--narrow">
+  <div class="masthead__inner">
+    <p class="eyebrow">All dispatches</p>
+    <h1 class="masthead__title">Recent stories</h1>
+  </div>
+</section>
+<section class="grid-wrap">
+  <div class="grid">
+    {{#for post in posts.items}}{{partial:post-card variant="grid" show_excerpt=true}}{{/for}}
+  </div>
+  {{#if pagination.has_multiple_pages}}
+    <nav class="pagination" aria-label="Pagination">
+      {{#if pagination.has_prev}}<a href="{{pagination.prev_url}}">← Previous</a>{{/if}}
+      {{#for page in pagination.window}}{{#if_eq page.kind "page"}}<a href="{{page.url}}" class="{{#if page.current}}current{{/if}}">{{page.number}}</a>{{#else_if_eq page.kind "gap"}}<span>…</span>{{/if_eq}}{{/for}}
+      {{#if pagination.has_next}}<a href="{{pagination.next_url}}">Next →</a>{{/if}}
+    </nav>
+  {{/if}}
+</section>
+{{/if}}

@@ -1,0 +1,11 @@
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("portfolio2-theme");
+      var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    } catch (err) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>

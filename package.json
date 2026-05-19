@@ -1,0 +1,39 @@
+{
+  "name": "@zeropress/create-theme",
+  "version": "0.6.0",
+  "description": "ZeroPress theme starter generator",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "zeropress-create-theme": "bin/zeropress-create-theme.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeropress-app/zeropress-create-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zeropress-app/zeropress-create-theme/issues"
+  },
+  "homepage": "https://github.com/zeropress-app/zeropress-create-theme#readme",
+  "keywords": [
+    "zeropress",
+    "static-site-generator",
+    "theme"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "@zeropress/theme-validator": "0.6.1"
+  },
+  "devDependencies": {
+    "@zeropress/build": "0.6.1"
+  }
+}

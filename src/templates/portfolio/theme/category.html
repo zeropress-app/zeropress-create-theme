@@ -1,0 +1,11 @@
+<section class="page-shell page-shell--narrow">
+  <p class="eyebrow mono">Category</p>
+  <h1 class="page-title serif">{{taxonomy.name}}</h1>
+  {{#if posts.items}}
+    <ul class="plain post-index">
+      {{#for post in posts.items}}
+        <li><a href="{{post.url}}"><strong>{{post.title}}</strong></a>{{#if post.excerpt}}<p class="muted">{{post.excerpt}}</p>{{/if}}</li>
+      {{/for}}
+    </ul>
+  {{/if}}
+</section>

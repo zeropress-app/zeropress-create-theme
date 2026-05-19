@@ -1,0 +1,22 @@
+<section class="masthead masthead--narrow">
+  <div class="masthead__inner">
+    <p class="eyebrow">Category</p>
+    <h1 class="masthead__title">{{taxonomy.name}}</h1>
+    {{#if taxonomy.description}}<p class="masthead__lede">{{taxonomy.description}}</p>{{/if}}
+  </div>
+</section>
+<section class="grid-wrap with-aside">
+  <div class="grid-wrap__main">
+    <div class="grid">
+      {{#for post in posts.items}}{{partial:post-card variant="grid" show_excerpt=true}}{{/for}}
+    </div>
+    {{#if pagination.has_multiple_pages}}
+      <nav class="pagination" aria-label="Pagination">
+        {{#if pagination.has_prev}}<a href="{{pagination.prev_url}}">← Previous</a>{{/if}}
+        {{#for page in pagination.window}}{{#if_eq page.kind "page"}}<a href="{{page.url}}" class="{{#if page.current}}current{{/if}}">{{page.number}}</a>{{#else_if_eq page.kind "gap"}}<span>…</span>{{/if_eq}}{{/for}}
+        {{#if pagination.has_next}}<a href="{{pagination.next_url}}">Next →</a>{{/if}}
+      </nav>
+    {{/if}}
+  </div>
+  <aside class="grid-wrap__aside">{{partial:sidebar-widgets}}</aside>
+</section>

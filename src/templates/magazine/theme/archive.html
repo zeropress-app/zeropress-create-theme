@@ -1,0 +1,32 @@
+<section class="masthead masthead--narrow">
+  <div class="masthead__inner">
+    <p class="eyebrow">Archive</p>
+    <h1 class="masthead__title">All dispatches, by date</h1>
+    <p class="masthead__lede">Every published piece, grouped by month.</p>
+  </div>
+</section>
+<section class="grid-wrap with-aside">
+  <div class="grid-wrap__main">
+    {{#for group in archive.groups}}
+      <section class="archive-group">
+        <h2 class="archive-group__label">{{group.label}}</h2>
+        <ul class="archive-list">
+          {{#for post in group.items}}
+            <li class="archive-list__item">
+              <a href="{{post.url}}">{{post.title}}</a>
+              <time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+            </li>
+          {{/for}}
+        </ul>
+      </section>
+    {{/for}}
+    {{#if pagination.has_multiple_pages}}
+      <nav class="pagination" aria-label="Pagination">
+        {{#if pagination.has_prev}}<a href="{{pagination.prev_url}}">← Previous</a>{{/if}}
+        {{#for page in pagination.window}}{{#if_eq page.kind "page"}}<a href="{{page.url}}" class="{{#if page.current}}current{{/if}}">{{page.number}}</a>{{#else_if_eq page.kind "gap"}}<span>…</span>{{/if_eq}}{{/for}}
+        {{#if pagination.has_next}}<a href="{{pagination.next_url}}">Next →</a>{{/if}}
+      </nav>
+    {{/if}}
+  </div>
+  <aside class="grid-wrap__aside">{{partial:sidebar-widgets}}</aside>
+</section>

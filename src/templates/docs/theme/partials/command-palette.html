@@ -1,0 +1,30 @@
+<div class="cmdk" data-cmdk hidden>
+  <div class="cmdk__backdrop" data-cmdk-close></div>
+  <div class="cmdk__panel" role="dialog" aria-modal="true" aria-label="Search docs">
+    <div class="cmdk__field">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" data-cmdk-input placeholder="Search pages and sections..." autocomplete="off">
+      <kbd class="kbd">esc</kbd>
+    </div>
+    <ul class="cmdk__list" data-cmdk-list></ul>
+    <p class="cmdk__empty" data-cmdk-empty hidden>No matches.</p>
+  </div>
+  <script type="application/json" data-cmdk-index>
+    {
+      "groups": [
+        {{#if menus.foundations.items}}{ "label": "Foundations", "items": [
+          {{#for item in menus.foundations.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
+        ] }{{/if}}
+        {{#if menus.guides.items}},{ "label": "Guides", "items": [
+          {{#for item in menus.guides.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
+        ] }{{/if}}
+        {{#if menus.reference.items}},{ "label": "Reference", "items": [
+          {{#for item in menus.reference.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
+        ] }{{/if}}
+        {{#if menus.legal.items}},{ "label": "Legal", "items": [
+          {{#for item in menus.legal.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
+        ] }{{/if}}
+      ]
+    }
+  </script>
+</div>

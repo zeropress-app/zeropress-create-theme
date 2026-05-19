@@ -1,0 +1,96 @@
+{{#if_eq page.meta.page_type "project"}}
+  <article class="page-shell">
+    <a class="back-link mono" href="/work/">← All work</a>
+    <header class="project-header">
+      <p class="eyebrow mono">{{#if page.meta.client}}{{page.meta.client}}{{/if}}{{#if page.meta.date}} · {{page.meta.date}}{{/if}}</p>
+      <h1 class="page-title page-title--xl serif">{{page.title}}</h1>
+      {{#if page.excerpt}}<p class="page-lede">{{page.excerpt}}</p>{{/if}}
+    </header>
+
+    {{#if page.featured_image}}
+      <figure class="project-hero"><img src="{{page.featured_image}}" alt=""></figure>
+    {{/if}}
+
+    <div class="project-body">
+      <aside class="project-side">
+        {{#if page.meta.role}}
+          <div><h4 class="mono muted">Role</h4><p>{{page.meta.role}}</p></div>
+        {{/if}}
+        {{#if page.meta.year}}
+          <div><h4 class="mono muted">Year</h4><p>{{page.meta.year}}</p></div>
+        {{/if}}
+        {{#if page.meta.stack_text}}
+          <div><h4 class="mono muted">Stack</h4><p>{{page.meta.stack_text}}</p></div>
+        {{/if}}
+      </aside>
+      <div class="project-main">
+        {{#if page.html}}
+          <section class="prose">{{page.html}}</section>
+        {{/if}}
+      </div>
+    </div>
+  </article>
+
+{{#else_if_eq page.slug "work"}}
+  <article class="page-shell">
+    <header class="work-header">
+      <p class="eyebrow mono">Selected work · 2022 — 2025</p>
+      <h1 class="page-title page-title--xl serif">A handful of projects I'm proud of.</h1>
+    </header>
+    {{#if collections.work.items}}
+      <ul class="work-list">
+        {{#for project in collections.work.items}}
+          <li>{{partial:work-row}}</li>
+        {{/for}}
+      </ul>
+    {{/if}}
+  </article>
+
+{{#else_if_eq page.slug "typography"}}
+  {{partial:typography-specimen}}
+
+{{#else_if_eq page.slug "contact"}}
+  {{partial:contact-info}}
+
+{{#else_if_eq page.slug "about"}}
+  <article class="page-shell page-shell--narrow">
+    <p class="eyebrow mono">About</p>
+    <h1 class="page-title serif">A short biography.</h1>
+    <div class="prose">{{page.html}}</div>
+    <dl class="about-facts">
+      <div><dt class="mono muted">Based</dt><dd>Seoul, KR</dd></div>
+      <div><dt class="mono muted">Studio</dt><dd>Independent</dd></div>
+      <div><dt class="mono muted">Since</dt><dd>2014</dd></div>
+      <div><dt class="mono muted">Clients</dt><dd>42 to date</dd></div>
+    </dl>
+  </article>
+
+{{#else_if_eq page.meta.page_type "legal"}}
+  <article class="page-shell legal-shell">
+    <aside class="legal-side">
+      <p class="mono muted">Legal</p>
+      {{#if menus.legal.items}}
+        <ul class="legal-side__list">
+          {{#for item in menus.legal.items}}
+            <li><a href="{{item.url}}">{{item.title}}</a></li>
+          {{/for}}
+        </ul>
+      {{/if}}
+    </aside>
+    <div class="legal-main">
+      <header class="legal-main__head">
+        <h1 class="serif">{{page.title}}</h1>
+        {{#if page.meta.updated}}<p class="mono muted">Last updated {{page.meta.updated}}</p>{{/if}}
+      </header>
+      <div class="prose">{{page.html}}</div>
+    </div>
+  </article>
+
+{{#else}}
+  <article class="page-shell page-shell--narrow">
+    {{#if_eq page.document_type "plaintext"}}
+      <h1 class="page-title serif">{{page.title}}</h1>
+    {{/if_eq}}
+    <div class="prose">{{page.html}}</div>
+  </article>
+{{/if_eq}}

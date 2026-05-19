@@ -1,0 +1,20 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <p class="site-footer__title">{{site.title}}</p>
+      {{#if site.description}}<p class="site-footer__desc">{{site.description}}</p>{{/if}}
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      {{menu:footer}}
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <div class="site-footer__legal-links">
+      {{menu:legal}}
+    </div>
+    <div class="site-footer__fineprint">
+      {{#if site.footer.copyright_text}}<span>{{site.footer.copyright_text}}</span>{{#else_if site.title}}<span>{{site.title}}</span>{{/if}}
+      {{#if site.footer.attribution}}<span>· Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a></span>{{/if}}
+    </div>
+  </div>
+</footer>

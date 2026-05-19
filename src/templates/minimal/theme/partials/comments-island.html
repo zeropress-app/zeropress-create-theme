@@ -1,0 +1,19 @@
+<section class="comments" aria-labelledby="comments-heading" data-comments-root data-comments-post="{{post.public_id}}">
+  <header class="comments__header">
+    <h2 id="comments-heading">Comments <span class="comments__count" data-comments-count>(0)</span></h2>
+  </header>
+  <ul class="comments__list" data-comments-list></ul>
+  <form class="comment-form" data-comment-form>
+    <label class="comment-form__field">
+      <span class="sr-only">Your name</span>
+      <input name="name" type="text" placeholder="Your name" autocomplete="name">
+    </label>
+    <label class="comment-form__field">
+      <span class="sr-only">Your comment</span>
+      <textarea name="body" rows="4" required placeholder="Write a comment…"></textarea>
+    </label>
+    <div class="comment-form__actions">
+      <button type="submit">Post comment</button>
+    </div>
+  </form>
+</section>

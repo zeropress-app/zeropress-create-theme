@@ -1,0 +1,9 @@
+<a class="work-row" href="{{project.url}}">
+  <span class="work-row__date mono">{{#if project.meta.date}}{{project.meta.date}}{{#else_if project.meta.year}}{{project.meta.year}}{{/if}}</span>
+  <div class="work-row__body">
+    <h3 class="work-row__title">{{project.title}}</h3>
+    {{#if project.excerpt}}<p class="work-row__desc">{{project.excerpt}}</p>{{/if}}
+  </div>
+  <span class="work-row__role">{{#if project.meta.role}}{{project.meta.role}}{{/if}}</span>
+  <span class="work-row__arrow" aria-hidden="true">↗</span>
+</a>

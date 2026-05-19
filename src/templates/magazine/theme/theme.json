@@ -1,0 +1,87 @@
+{
+  "$schema": "https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json",
+  "name": "The Margin",
+  "namespace": "zeropress",
+  "slug": "theme-magazine2",
+  "version": "0.6.0",
+  "license": "MIT",
+  "runtime": "0.6",
+  "description": "Clean modern editorial magazine. Instrument Serif + Inter, drop-cap long reads, dark mode toggle, reading-progress bar, category archive, legal pages.",
+  "features": {
+    "comments": false,
+    "newsletter": false,
+    "post_index": true
+  },
+  "menu_slots": {
+    "primary": {
+      "title": "Primary nav",
+      "description": "Top navigation rendered to the right of the masthead"
+    },
+    "footer": {
+      "title": "Footer nav",
+      "description": "Compact footer link list"
+    },
+    "legal": {
+      "title": "Legal nav",
+      "description": "Privacy / Terms / Cookie links shown below the footer"
+    }
+  },
+  "widget_areas": {
+    "sidebar": {
+      "title": "Sidebar widgets",
+      "description": "Right-hand widget stack on category, tag, and archive routes"
+    }
+  },
+  "site_meta": {
+    "issue_label": {
+      "title": "Issue label",
+      "description": "Small label above the masthead title (e.g. Issue No. 47).",
+      "type": "string",
+      "default": "Issue No. 47 — May 2026"
+    },
+    "masthead_title": {
+      "title": "Masthead headline",
+      "description": "The large editorial headline on the home page.",
+      "type": "string",
+      "default": "Slow looks. Long reads."
+    },
+    "masthead_lede": {
+      "title": "Masthead lede",
+      "description": "Short paragraph beneath the masthead headline.",
+      "type": "string",
+      "default": "A magazine for the things that don't fit in a feed."
+    },
+    "section_label": {
+      "title": "Latest section label",
+      "description": "Eyebrow above the latest grid.",
+      "type": "string",
+      "default": "Latest"
+    },
+    "archive_cta_eyebrow": {
+      "title": "Archive CTA eyebrow",
+      "description": "Eyebrow above the bottom category strip.",
+      "type": "string",
+      "default": "Browse the Archive"
+    },
+    "archive_cta_title": {
+      "title": "Archive CTA title",
+      "description": "Heading above the bottom category strip.",
+      "type": "string",
+      "default": "Find your next long read"
+    }
+  },
+  "collection_slots": {
+    "cover-story": {
+      "title": "Cover Story",
+      "description": "Primary story shown as the large home-page feature."
+    },
+    "hero-rail": {
+      "title": "Hero Rail",
+      "description": "Secondary stories shown beside the cover story."
+    },
+    "latest-grid": {
+      "title": "Latest Grid",
+      "description": "Curated story grid shown below the hero area."
+    }
+  }
+}

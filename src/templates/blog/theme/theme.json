@@ -1,0 +1,30 @@
+{
+  "$schema": "https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json",
+  "name": "Margin Notes",
+  "namespace": "zeropress",
+  "slug": "theme-blog2",
+  "version": "0.6.0",
+  "license": "MIT",
+  "runtime": "0.6",
+  "description": "Quiet two-column personal blog with Fraunces serif headings and Inter body. Title, tagline, top menu, theme toggle, sidebar with blog info and recent posts, post detail with TOC and threaded comments.",
+  "features": {
+    "comments": true,
+    "newsletter": false
+  },
+  "menu_slots": {
+    "primary": {
+      "title": "Primary Menu",
+      "description": "Header navigation rendered as small uppercase tracked links"
+    },
+    "footer": {
+      "title": "Footer Menu",
+      "description": "Compact footer link list (legal pages and shortcuts)"
+    }
+  },
+  "widget_areas": {
+    "sidebar": {
+      "title": "Sidebar Widgets",
+      "description": "Right-hand sidebar stack on home, archive, taxonomy, post, and page templates"
+    }
+  }
+}

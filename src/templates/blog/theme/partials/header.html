@@ -1,0 +1,35 @@
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <a class="site-title-link" href="/">
+          <span class="site-title">{{site.title}}</span>
+        </a>
+        <p class="site-subtitle">{{site.description}}</p>
+      </div>
+      <button class="theme-toggle" data-theme-toggle type="button" aria-label="Toggle color theme">🌙</button>
+    </div>
+
+    <div class="header-bottom">
+      <nav class="site-nav" aria-label="Main navigation">
+        {{menu:primary}}
+      </nav>
+
+      <div class="header-search">
+        <label class="sr-only" for="site-search">Search site</label>
+        <div class="search-theme-wrapper">
+          <input
+            id="site-search"
+            class="search-input"
+            type="search"
+            placeholder="Search writing…"
+            autocomplete="off"
+            enterkeyhint="search"
+            disabled
+          >
+          <span class="search-shortcut" aria-hidden="true">/</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

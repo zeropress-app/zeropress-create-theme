@@ -1,0 +1,559 @@
+{
+  "$schema": "https://zeropress.dev/schemas/preview-data.v0.6.schema.json",
+  "version": "0.6",
+  "generator": "the-margin-magazine2-mock",
+  "generated_at": "2026-05-13T09:00:00Z",
+  "site": {
+    "title": "The Margin",
+    "description": "A magazine for the things that don't fit in a feed.",
+    "url": "",
+    "locale": "en-US",
+    "timezone": "UTC",
+    "footer": {
+      "copyright_text": "© 2026 The Margin.",
+      "attribution": true
+    },
+    "meta": {
+      "issue_label": "Issue No. 47 — May 2026",
+      "masthead_title": "Slow looks. Long reads.",
+      "masthead_lede": "A magazine for the things that don't fit in a feed.",
+      "section_label": "Latest",
+      "archive_cta_eyebrow": "Browse the Archive",
+      "archive_cta_title": "Find your next long read"
+    },
+    "media_base_url": "",
+    "posts_per_page": 9,
+    "datetime_display": "static",
+    "date_style": "medium",
+    "time_style": "none",
+    "disallow_comments": true
+  },
+  "content": {
+    "authors": [
+      {
+        "id": "auth-marsh",
+        "display_name": "Helena Marsh"
+      },
+      {
+        "id": "auth-okafor",
+        "display_name": "Daniel Okafor"
+      },
+      {
+        "id": "auth-ito",
+        "display_name": "Mei Ito"
+      },
+      {
+        "id": "auth-vasquez",
+        "display_name": "Lucia Vásquez"
+      },
+      {
+        "id": "auth-pereira",
+        "display_name": "Tomás Pereira"
+      }
+    ],
+    "posts": [
+      {
+        "public_id": 3001,
+        "title": "The Quiet Return of the Long Lunch",
+        "slug": "quiet-return-long-lunch",
+        "content": "After a decade of desk salads and protein bars, a generation is rediscovering the midday meal — and the conversations that come with it.\n\nThere is a particular hour, just after the city exhales its commuters and before the streetlights commit to their work, when restaurants take on the quality of a held breath. It is in this hour that something has begun to return — not nostalgia, exactly, but a re-noticing.\n\n## A second movement\n\nWhat follows is less an argument than an inventory: of small mechanical sounds, half-finished gestures, conversations overheard across café tables that, taken together, suggest a culture in the middle of changing its mind.\n\n> Style is the answer to everything — a fresh way to approach a dull or a dangerous thing.\n\n## Field notes\n\n| Ritual | Tempo | Signal |\n| --- | --- | --- |\n| Shared table | Slow | Conversation returns |\n| Walk after coffee | Medium | The afternoon loosens |\n| Phone in a coat pocket | Quiet | Attention survives |\n\n- [x] Leave the desk before the inbox closes around the hour.\n- [ ] Let the coffee go cold for a better reason.\n\n> [!TIP]\n> Use structured Markdown to keep editorial notes readable without custom HTML.\n\nBy the time you reach the bottom of the page, the light outside will have shifted. The argument, such as it is, will have receded. What remains, we hope, is the residue of an afternoon spent paying close attention to something most people walked past.",
+        "document_type": "markdown",
+        "excerpt": "After a decade of desk salads and protein bars, a generation is rediscovering the midday meal — and the conversations that come with it.",
+        "published_at_iso": "2026-05-08T09:00:00Z",
+        "updated_at_iso": "2026-05-08T09:00:00Z",
+        "author_id": "auth-marsh",
+        "featured_image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "culture"
+        ],
+        "tag_slugs": [
+          "food",
+          "ritual"
+        ]
+      },
+      {
+        "public_id": 3002,
+        "title": "On Reading in Hotel Lobbies",
+        "slug": "reading-in-hotel-lobbies",
+        "content": "An essay on the strange acoustics of public solitude — and why the best chapters of the year were finished in a chair that wasn't ours.\n\nA hotel lobby is the only public room designed for waiting that does not punish you for it. There are deep chairs, and the lighting forgives. The staff move past as if you were a piece of well-placed furniture.\n\n## The room around the page\n\nIt is in this in-betweenness that reading happens differently. The page becomes a small private country inside a larger civic one.\n\n> Some books only really open when there is a chandelier above them.\n",
+        "document_type": "markdown",
+        "excerpt": "An essay on the strange acoustics of public solitude — and why the best chapters of the year were finished in a chair that wasn't ours.",
+        "published_at_iso": "2026-05-02T09:00:00Z",
+        "updated_at_iso": "2026-05-02T09:00:00Z",
+        "author_id": "auth-okafor",
+        "featured_image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "culture"
+        ],
+        "tag_slugs": [
+          "reading",
+          "essay"
+        ]
+      },
+      {
+        "public_id": 3003,
+        "title": "The Last Independent Bookbinder in Lisbon",
+        "slug": "last-bookbinder-lisbon",
+        "content": "A portrait of the workshop on Rua das Janelas Verdes, where every edge is squared by hand and every ribbon is sewn into place.\n\nThe shop has no sign. You find it because someone tells you, or you don't.\n\n## The discipline of the form\n\nMr. Almeida has been binding books for fifty-two years. He is unimpressed by most things, and entirely impressed by good linen thread.\n\n> When the cover lies flat the first time you open it, you know the book will outlive you.\n",
+        "document_type": "markdown",
+        "excerpt": "A portrait of the workshop on Rua das Janelas Verdes, where every edge is squared by hand and every ribbon is sewn into place.",
+        "published_at_iso": "2026-04-25T09:00:00Z",
+        "updated_at_iso": "2026-04-25T09:00:00Z",
+        "author_id": "auth-pereira",
+        "featured_image": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "design"
+        ],
+        "tag_slugs": [
+          "craft",
+          "interview"
+        ]
+      },
+      {
+        "public_id": 3004,
+        "title": "Notes from a Slow Train",
+        "slug": "notes-from-a-slow-train",
+        "content": "Twenty-six hours from Stockholm to Naples, and the small ways the landscape becomes a sentence.\n\nThe sleeper car was the size of a closet, and the closet was full of weather.\n\n## What the window writes\n\nBy hour fourteen, the alps were behind us, and Italy began as a smell.\n",
+        "document_type": "markdown",
+        "excerpt": "Twenty-six hours from Stockholm to Naples, and the small ways the landscape becomes a sentence.",
+        "published_at_iso": "2026-04-18T09:00:00Z",
+        "updated_at_iso": "2026-04-18T09:00:00Z",
+        "author_id": "auth-vasquez",
+        "featured_image": "https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "travel"
+        ],
+        "tag_slugs": [
+          "trains",
+          "europe"
+        ]
+      },
+      {
+        "public_id": 3005,
+        "title": "What the Algorithm Hides",
+        "slug": "what-the-algorithm-hides",
+        "content": "A reporter spends a month reading only what was not recommended. The findings are stranger than the diet itself.\n\nFor thirty days I read no headlines that were chosen for me.\n\n## The shape of a curated absence\n\nWhat I found, mostly, was that I had been reading the same article, in slightly different fonts, for two years.\n",
+        "document_type": "markdown",
+        "excerpt": "A reporter spends a month reading only what was not recommended. The findings are stranger than the diet itself.",
+        "published_at_iso": "2026-04-10T09:00:00Z",
+        "updated_at_iso": "2026-04-10T09:00:00Z",
+        "author_id": "auth-okafor",
+        "featured_image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "technology"
+        ],
+        "tag_slugs": [
+          "media",
+          "attention"
+        ]
+      },
+      {
+        "public_id": 3006,
+        "title": "A Kitchen Without Recipes",
+        "slug": "kitchen-without-recipes",
+        "content": "On the chef who runs a sixteen-seat room from memory, and what is gained when nothing is written down.\n\nThe menu changes every day. There is no menu.\n",
+        "document_type": "markdown",
+        "excerpt": "On the chef who runs a sixteen-seat room from memory, and what is gained when nothing is written down.",
+        "published_at_iso": "2026-04-03T09:00:00Z",
+        "updated_at_iso": "2026-04-03T09:00:00Z",
+        "author_id": "auth-ito",
+        "featured_image": "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "food"
+        ],
+        "tag_slugs": [
+          "chefs",
+          "kyoto"
+        ]
+      },
+      {
+        "public_id": 3007,
+        "title": "The Furniture That Refuses to Date",
+        "slug": "furniture-that-refuses-to-date",
+        "content": "Why a particular chair from 1956 still feels like the chair we will buy this year.\n\nThere are objects that simply opt out of fashion.\n",
+        "document_type": "markdown",
+        "excerpt": "Why a particular chair from 1956 still feels like the chair we will buy this year.",
+        "published_at_iso": "2026-03-26T09:00:00Z",
+        "updated_at_iso": "2026-03-26T09:00:00Z",
+        "author_id": "auth-marsh",
+        "featured_image": "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "design"
+        ],
+        "tag_slugs": [
+          "objects"
+        ]
+      },
+      {
+        "public_id": 3008,
+        "title": "A Field Guide to Walking Cities",
+        "slug": "field-guide-walking-cities",
+        "content": "Five cities, on foot, with no destination in mind. A taxonomy of pavement, light, and the patience of strangers.\n\nWalking, when there is nowhere to be, is the cheapest form of travel.\n",
+        "document_type": "markdown",
+        "excerpt": "Five cities, on foot, with no destination in mind. A taxonomy of pavement, light, and the patience of strangers.",
+        "published_at_iso": "2026-03-18T09:00:00Z",
+        "updated_at_iso": "2026-03-18T09:00:00Z",
+        "author_id": "auth-vasquez",
+        "featured_image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "travel"
+        ],
+        "tag_slugs": [
+          "walking"
+        ]
+      },
+      {
+        "public_id": 3009,
+        "title": "On Repairing Things",
+        "slug": "on-repairing-things",
+        "content": "A small philosophy of mending, glued together over six months in a shop where nothing is thrown away.\n\nRepair is the opposite of consumption only in the way that breathing out is the opposite of breathing in.\n",
+        "document_type": "markdown",
+        "excerpt": "A small philosophy of mending, glued together over six months in a shop where nothing is thrown away.",
+        "published_at_iso": "2026-03-08T09:00:00Z",
+        "updated_at_iso": "2026-03-08T09:00:00Z",
+        "author_id": "auth-pereira",
+        "featured_image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=1600&q=80",
+        "status": "published",
+        "allow_comments": false,
+        "category_slugs": [
+          "culture"
+        ],
+        "tag_slugs": [
+          "craft",
+          "essay"
+        ]
+      }
+    ],
+    "pages": [
+      {
+        "title": "Privacy Policy",
+        "slug": "privacy-policy",
+        "content": "# Privacy Policy\n\n_Last updated: May 13, 2026._\n\nThe Margin (\"we\", \"us\") respects your privacy. This page describes what data we collect, how we use it, and the choices available to you.\n\n## What we collect\n\n- **Analytics**: aggregate, anonymous page-view counts.\n- **Newsletter**: if you subscribe, your email address and the date of subscription.\n- **Comments**: name and email if you choose to comment.\n\n## How we use it\n\nWe use this information solely to operate and improve the publication. We do not sell or share personal data with third parties for advertising purposes.\n\n## Your rights\n\nYou may request a copy of any personal data we hold about you, or ask us to delete it, at any time.",
+        "document_type": "markdown",
+        "excerpt": "How The Margin handles personal data.",
+        "status": "published"
+      },
+      {
+        "title": "Cookie Policy",
+        "slug": "cookie-policy",
+        "content": "# Cookie Policy\n\n_Last updated: May 13, 2026._\n\nThis site uses a small number of cookies and similar technologies. This page explains which ones, and why.\n\n## Strictly necessary\n\nThese cookies remember your color theme preference and any session-level state. They cannot be turned off.\n\n## Analytics\n\nWe use a privacy-respecting analytics service that does not set persistent identifiers.\n\n## Your choices\n\nYou can clear cookies at any time through your browser settings.",
+        "document_type": "markdown",
+        "excerpt": "Which cookies The Margin uses, and why.",
+        "status": "published"
+      },
+      {
+        "title": "Terms of Service",
+        "slug": "terms-of-service",
+        "content": "# Terms of Service\n\n_Last updated: May 13, 2026._\n\nBy accessing The Margin you agree to the following terms.\n\n## Content\n\nAll articles, photographs, and design elements are © The Margin or their respective creators. You may quote short excerpts with attribution.\n\n## Acceptable use\n\nYou agree not to attempt to disrupt the service, scrape content at scale, or impersonate other readers in comments.\n\n## Disclaimers\n\nThe site is provided \"as is\". We make no warranty as to fitness for any particular purpose.",
+        "document_type": "markdown",
+        "excerpt": "Terms governing your use of The Margin.",
+        "status": "published"
+      },
+      {
+        "title": "About",
+        "slug": "about",
+        "content": "# About The Margin\n\nThe Margin is an independent magazine of slow journalism, design, and field notes — published on uncoated stock and shipped the long way round.\n\nWe are not in a hurry, and we hope you aren't either.",
+        "document_type": "markdown",
+        "excerpt": "An independent magazine of slow journalism.",
+        "status": "published"
+      }
+    ],
+    "categories": [
+      {
+        "name": "Culture",
+        "slug": "culture",
+        "description": "Essays on art, literature, film and the ideas shaping how we live."
+      },
+      {
+        "name": "Design",
+        "slug": "design",
+        "description": "Form, function, and the objects that quietly define modern life."
+      },
+      {
+        "name": "Technology",
+        "slug": "technology",
+        "description": "Long-form reporting on the systems remaking work, attention and power."
+      },
+      {
+        "name": "Travel",
+        "slug": "travel",
+        "description": "Dispatches from places worth slowing down for."
+      },
+      {
+        "name": "Food",
+        "slug": "food",
+        "description": "Kitchens, growers, and the rituals around the table."
+      }
+    ],
+    "tags": [
+      {
+        "name": "Food",
+        "slug": "food"
+      },
+      {
+        "name": "Ritual",
+        "slug": "ritual"
+      },
+      {
+        "name": "Reading",
+        "slug": "reading"
+      },
+      {
+        "name": "Essay",
+        "slug": "essay"
+      },
+      {
+        "name": "Craft",
+        "slug": "craft"
+      },
+      {
+        "name": "Interview",
+        "slug": "interview"
+      },
+      {
+        "name": "Trains",
+        "slug": "trains"
+      },
+      {
+        "name": "Europe",
+        "slug": "europe"
+      },
+      {
+        "name": "Media",
+        "slug": "media"
+      },
+      {
+        "name": "Attention",
+        "slug": "attention"
+      },
+      {
+        "name": "Chefs",
+        "slug": "chefs"
+      },
+      {
+        "name": "Kyoto",
+        "slug": "kyoto"
+      },
+      {
+        "name": "Objects",
+        "slug": "objects"
+      },
+      {
+        "name": "Walking",
+        "slug": "walking"
+      }
+    ]
+  },
+  "collections": {
+    "cover-story": {
+      "title": "Cover Story",
+      "description": "The lead story shown as the large home-page feature.",
+      "items": [
+        {
+          "type": "post",
+          "slug": "quiet-return-long-lunch"
+        }
+      ]
+    },
+    "hero-rail": {
+      "title": "Hero Rail",
+      "description": "Secondary stories shown beside the cover story.",
+      "items": [
+        {
+          "type": "post",
+          "slug": "reading-in-hotel-lobbies"
+        },
+        {
+          "type": "post",
+          "slug": "last-bookbinder-lisbon"
+        }
+      ]
+    },
+    "latest-grid": {
+      "title": "Latest Grid",
+      "description": "Curated story grid shown below the hero area.",
+      "items": [
+        {
+          "type": "post",
+          "slug": "notes-from-a-slow-train"
+        },
+        {
+          "type": "post",
+          "slug": "what-the-algorithm-hides"
+        },
+        {
+          "type": "post",
+          "slug": "kitchen-without-recipes"
+        },
+        {
+          "type": "post",
+          "slug": "furniture-that-refuses-to-date"
+        },
+        {
+          "type": "post",
+          "slug": "field-guide-walking-cities"
+        },
+        {
+          "type": "post",
+          "slug": "on-repairing-things"
+        }
+      ]
+    }
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary",
+      "items": [
+        {
+          "title": "Culture",
+          "url": "/categories/culture/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Design",
+          "url": "/categories/design/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Technology",
+          "url": "/categories/technology/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Travel",
+          "url": "/categories/travel/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Food",
+          "url": "/categories/food/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "footer": {
+      "name": "Footer",
+      "items": [
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Feed",
+          "url": "/feed.xml",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "legal": {
+      "name": "Legal",
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Cookie Policy",
+          "url": "/cookie-policy/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Terms of Service",
+          "url": "/terms-of-service/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    }
+  },
+  "widgets": {
+    "sidebar": {
+      "name": "Sidebar",
+      "items": [
+        {
+          "type": "text",
+          "title": "About this issue",
+          "settings": {
+            "document_type": "markdown",
+            "content": "**Issue No. 47.** Nine pieces on slow lunches, lobby reading, and what the algorithm hides."
+          }
+        },
+        {
+          "type": "recent-posts",
+          "title": "Recent dispatches",
+          "settings": {
+            "limit": 5,
+            "show_date": true
+          }
+        },
+        {
+          "type": "categories",
+          "title": "Sections",
+          "settings": {
+            "show_count": true,
+            "hierarchical": false
+          }
+        },
+        {
+          "type": "tags",
+          "title": "Topics",
+          "settings": {
+            "limit": 14,
+            "show_count": false
+          }
+        }
+      ]
+    }
+  }
+}

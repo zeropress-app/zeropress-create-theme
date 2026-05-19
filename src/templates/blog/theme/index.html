@@ -1,0 +1,18 @@
+<section class="narrow-intro">
+  <p class="eyebrow">Latest writing</p>
+  <h1>Recent essays &amp; notes</h1>
+  <p class="lede">A clean editorial layout for essays, notes, references, and the small observations in between.</p>
+</section>
+<section class="content-grid home-grid">
+  <div class="posts-area">
+    <div class="post-list post-list--home">
+      {{#for post in posts.items}}
+        {{partial:post-list-item variant="list" show_excerpt=true}}
+      {{/for}}
+    </div>
+    {{partial:pagination}}
+  </div>
+  <aside class="sidebar-stack">
+    {{partial:sidebar-widgets}}
+  </aside>
+</section>

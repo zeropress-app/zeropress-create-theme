@@ -1,0 +1,7 @@
+<article class="page">
+  <header class="page__header">
+    <p class="eyebrow">Page</p>
+    {{#if_eq page.document_type "plaintext"}}<h1 class="page__title">{{page.title}}</h1>{{/if_eq}}
+  </header>
+  <div class="page__body prose-editorial">{{page.html}}</div>
+</article>

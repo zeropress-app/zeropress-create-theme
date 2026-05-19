@@ -1,0 +1,18 @@
+<section class="narrow-intro">
+  <p class="eyebrow">Tag</p>
+  <h1>#{{taxonomy.name}}</h1>
+  <p class="lede">Posts grouped around a shared topic.</p>
+</section>
+<section class="content-grid content-grid--balanced">
+  <div class="posts-area">
+    <div class="post-list">
+      {{#for post in posts.items}}
+        {{partial:post-list-item variant="list" show_excerpt=true}}
+      {{/for}}
+    </div>
+    {{partial:pagination}}
+  </div>
+  <aside class="sidebar-stack">
+    {{partial:sidebar-widgets}}
+  </aside>
+</section>

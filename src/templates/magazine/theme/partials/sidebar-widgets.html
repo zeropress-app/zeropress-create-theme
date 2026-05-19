@@ -1,0 +1,24 @@
+{{#if widgets.sidebar.items}}
+  <div class="sidebar">
+    {{#for widget in widgets.sidebar.items}}
+      <section class="widget widget--{{widget.type}}">
+        {{#if widget.title}}<h3 class="widget__title eyebrow">{{widget.title}}</h3>{{/if}}
+        {{#if_eq widget.type "text"}}
+          <div class="widget__text">{{widget.html}}</div>
+        {{#else_if_eq widget.type "recent-posts"}}
+          <ul class="widget__list">
+            {{#for item in widget.items}}<li><a href="{{item.url}}">{{item.title}}</a></li>{{/for}}
+          </ul>
+        {{#else_if_eq widget.type "categories"}}
+          <ul class="widget__list">
+            {{#for item in widget.items}}<li><a href="{{item.url}}">{{item.name}}</a>{{#if item.count}} <span class="muted">({{item.count}})</span>{{/if}}</li>{{/for}}
+          </ul>
+        {{#else_if_eq widget.type "tags"}}
+          <div class="widget__tags">
+            {{#for item in widget.items}}<a href="{{item.url}}" class="chip">#{{item.name}}</a>{{/for}}
+          </div>
+        {{/if_eq}}
+      </section>
+    {{/for}}
+  </div>
+{{/if}}

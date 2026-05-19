@@ -1,0 +1,42 @@
+<div class="page-shell">
+  <section class="hero">
+    {{#if site.meta.hero_eyebrow}}<p class="eyebrow mono">{{site.meta.hero_eyebrow}}</p>{{/if}}
+    <h1 class="hero__headline serif">{{#if site.meta.hero_headline}}{{site.meta.hero_headline}}{{#else}}{{site.title}}{{/if}}</h1>
+    {{#if site.meta.hero_lede}}<p class="hero__lede">{{site.meta.hero_lede}}</p>{{/if}}
+  </section>
+
+  {{#if collections.cases.items}}
+    <section class="featured">
+      <div class="featured__head">
+        <h2 class="serif">Featured work</h2>
+        <a class="mono muted" href="/work/">View all →</a>
+      </div>
+      <ul class="featured__grid">
+        {{#for project in collections.cases.items}}
+          <li>{{partial:project-card}}</li>
+        {{/for}}
+      </ul>
+    </section>
+  {{/if}}
+
+  <section class="meta-cols">
+    <div>
+      <h3 class="serif">Currently</h3>
+      <p class="muted">{{#if site.meta.currently_text}}{{site.meta.currently_text}}{{/if}}</p>
+    </div>
+    <div>
+      <h3 class="serif">Available</h3>
+      <p class="muted">{{#if site.meta.available_text}}{{site.meta.available_text}}{{/if}} <a href="/contact/">Get in touch</a>.</p>
+    </div>
+    <div>
+      <h3 class="serif">Elsewhere</h3>
+      {{#if menus.social.items}}
+        <ul class="elsewhere-list">
+          {{#for item in menus.social.items}}
+            <li><a href="{{item.url}}" target="_blank" rel="noreferrer noopener">{{item.title}} ↗</a></li>
+          {{/for}}
+        </ul>
+      {{/if}}
+    </div>
+  </section>
+</div>

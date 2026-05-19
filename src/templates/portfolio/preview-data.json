@@ -1,0 +1,369 @@
+{
+  "$schema": "https://zeropress.dev/schemas/preview-data.v0.6.schema.json",
+  "version": "0.6",
+  "generator": "portfolio2-mock",
+  "generated_at": "2026-05-13T09:00:00Z",
+  "site": {
+    "title": "Jun Park",
+    "description": "Independent product designer and developer based in Seoul.",
+    "url": "",
+    "locale": "en-US",
+    "timezone": "Asia/Seoul",
+    "post_index": {
+      "enabled": false,
+      "path": "/writing",
+      "paginate": false
+    },
+    "footer": {
+      "copyright_text": "2026 Jun Park",
+      "attribution": true
+    },
+    "meta": {
+      "author_name": "Jun Park",
+      "author_short_name": "Jun Park",
+      "hero_eyebrow": "Independent designer · Seoul",
+      "hero_headline": "I design quiet, useful interfaces for ambitious teams shaping the next decade of software.",
+      "hero_lede": "Hi, I'm Jun — an independent product designer and developer based in Seoul. For the last decade I've helped startups and established teams ship calm, considered software. Currently leading design at a small fintech, and taking on a few outside projects each year.",
+      "currently_text": "Lead designer at Northwind. Writing weekly at Field Notes.",
+      "available_text": "One advisory engagement opening in Q3 2026.",
+      "contact_email": "hello@junpark.studio"
+    },
+    "media_base_url": "",
+    "posts_per_page": 10,
+    "datetime_display": "static",
+    "date_style": "medium",
+    "time_style": "none",
+    "disallow_comments": true
+  },
+  "content": {
+    "authors": [
+      {
+        "id": "auth-jun",
+        "display_name": "Jun Park"
+      }
+    ],
+    "posts": [],
+    "pages": [
+      {
+        "title": "Work",
+        "slug": "work",
+        "path": "work",
+        "content": "Selected projects from the last few years.",
+        "document_type": "plaintext",
+        "excerpt": "Selected projects.",
+        "status": "published"
+      },
+      {
+        "title": "About",
+        "slug": "about",
+        "path": "about",
+        "content": "I'm Jun, a product designer and developer based in Seoul. For the last decade I've worked with founders and small teams to ship software that respects the people using it.\n\nMy background is in industrial design — I trained in Milan before moving into screens. I think about software the way I was taught to think about objects: scale, weight, material, and the way it sits in someone's hand.\n\nOutside of client work I write a small newsletter on the craft of interface design, and I keep an irregular reading list of essays I find useful.\n\n## Working notes\n\n| Practice | Rhythm |\n| --- | --- |\n| Product strategy | Weekly critique |\n| Interface systems | Design and implementation |\n| Writing | Field notes and essays |\n\n- [x] Keep the work quiet and useful.\n- [ ] Publish the next field note.\n\n> [!NOTE]\n> This page intentionally includes table, task list, and alert Markdown so the portfolio prose styles can be verified.",
+        "document_type": "markdown",
+        "excerpt": "About Jun Park, an independent product designer based in Seoul.",
+        "status": "published"
+      },
+      {
+        "title": "Typography",
+        "slug": "typography",
+        "path": "typography",
+        "content": "Typography specimen.",
+        "document_type": "plaintext",
+        "excerpt": "Typographic system and specimen for the portfolio.",
+        "status": "published"
+      },
+      {
+        "title": "Contact",
+        "slug": "contact",
+        "path": "contact",
+        "content": "Contact information.",
+        "document_type": "plaintext",
+        "excerpt": "Get in touch with Jun Park about a project or collaboration.",
+        "status": "published"
+      },
+      {
+        "title": "Northwind Banking",
+        "slug": "northwind-banking",
+        "path": "work/northwind-banking",
+        "content": "## Overview\n\nNorthwind is a regional bank with deep roots and an aging digital experience. We rebuilt the core banking app from the ground up — focusing on calm, glanceable information and a design system that lets a small team ship consistently across web, iOS, and Android.\n\n## Responsibilities\n\n- Defined product strategy with the executive team\n- Built the foundational design system and component library\n- Led research and usability testing across 4 markets\n- Partnered with engineering on the SwiftUI and React rewrite",
+        "document_type": "markdown",
+        "excerpt": "Redesigning a 30-year-old banking platform for a new generation of customers.",
+        "featured_image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "client": "Northwind Financial",
+          "role": "Lead Product Designer",
+          "year": "2025",
+          "date": "Jan 2025 – Present",
+          "stack_text": "Figma, React, TypeScript, SwiftUI, Storybook"
+        }
+      },
+      {
+        "title": "Field Notes CMS",
+        "slug": "field-notes-cms",
+        "path": "work/field-notes-cms",
+        "content": "## Overview\n\nBuilt for foreign correspondents who file from cafés, trains, and conflict zones, Field Notes is an offline-first writing tool with a quiet editing surface and a powerful sync engine.\n\n## Responsibilities\n\n- Designed the writing and review experience\n- Implemented the offline-first sync layer\n- Shipped the first public release in 6 months",
+        "document_type": "markdown",
+        "excerpt": "A minimal headless CMS for journalists working in the field with intermittent connectivity.",
+        "featured_image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "client": "Field Notes Press",
+          "role": "Design & Engineering",
+          "year": "2024",
+          "date": "Jun – Dec 2024",
+          "stack_text": "Next.js, TypeScript, SQLite, CRDTs, Tailwind"
+        }
+      },
+      {
+        "title": "Atlas Type Foundry",
+        "slug": "atlas-type-foundry",
+        "path": "work/atlas-type-foundry",
+        "content": "## Overview\n\nA complete identity system and commerce experience for a small foundry releasing two retail families a year. The site doubles as a specimen — every page is set in Atlas's own typefaces.\n\n## Responsibilities\n\n- Designed the wordmark and identity system\n- Built the specimen-driven storefront\n- Set up licensing and checkout flow",
+        "document_type": "markdown",
+        "excerpt": "Identity and storefront for an independent type foundry based in Seoul.",
+        "featured_image": "https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&w=1600&q=80",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "client": "Atlas Type",
+          "role": "Brand Identity, Web",
+          "year": "2024",
+          "date": "Mar – May 2024",
+          "stack_text": "Astro, Stripe, Sanity, GSAP"
+        }
+      },
+      {
+        "title": "Marlow Coffee",
+        "slug": "marlow-coffee",
+        "path": "work/marlow-coffee",
+        "content": "## Overview\n\nA direct-to-consumer storefront with a subscription engine, paired with a packaging refresh that travels well from shelf to shipping box.\n\n## Responsibilities\n\n- Designed the storefront and subscription flow\n- Refreshed bag and box packaging\n- Wrote product copy with the founders",
+        "document_type": "markdown",
+        "excerpt": "An e-commerce experience for a single-origin coffee roaster in Portland.",
+        "featured_image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "client": "Marlow Roasters",
+          "role": "Web, Packaging",
+          "year": "2023",
+          "date": "Sep – Nov 2023",
+          "stack_text": "Shopify Hydrogen, React, Klaviyo"
+        }
+      },
+      {
+        "title": "Harbor Health",
+        "slug": "harbor-health",
+        "path": "work/harbor-health",
+        "content": "## Overview\n\nHarbor serves 14 community clinics across the Pacific Northwest. We replaced a fragmented portal with a single calm interface for booking, records, and messaging — built with accessibility as the baseline, not an afterthought.\n\n## Responsibilities\n\n- Led discovery interviews with patients and clinicians\n- Designed the booking, records, and messaging surfaces\n- Documented WCAG 2.2 AA patterns for the team",
+        "document_type": "markdown",
+        "excerpt": "A patient-first booking and records app for a network of community clinics.",
+        "featured_image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "client": "Harbor Health Co-op",
+          "role": "Product Design",
+          "year": "2023",
+          "date": "Feb – Aug 2023",
+          "stack_text": "Figma, React, Radix UI, PostgreSQL"
+        }
+      },
+      {
+        "title": "Meridian OS",
+        "slug": "meridian-os",
+        "path": "work/meridian-os",
+        "content": "## Overview\n\nMeridian needed one visual language across a CLI dashboard, a desktop client, and a marketing site. We shipped a token-driven system with theming, density modes, and a documentation site that engineers actually read.\n\n## Responsibilities\n\n- Architected design tokens and theming primitives\n- Built 60+ React components with full a11y coverage\n- Wrote and maintained the documentation site",
+        "document_type": "markdown",
+        "excerpt": "A cross-platform design system powering a suite of developer tools.",
+        "featured_image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
+        "status": "published",
+        "meta": {
+          "page_type": "project",
+          "client": "Meridian Labs",
+          "role": "Design Systems Lead",
+          "year": "2022",
+          "date": "May – Dec 2022",
+          "stack_text": "React, TypeScript, Style Dictionary, Storybook"
+        }
+      },
+      {
+        "title": "Privacy Policy",
+        "slug": "privacy",
+        "path": "legal/privacy",
+        "content": "This Privacy Policy describes how junpark.studio (\"we\", \"our\") collects, uses, and shares information about you when you visit this website. This is a sample document for a portfolio site and should not be relied upon as legal advice.\n\n## 1. Information we collect\n\nWe collect a minimal amount of information necessary to operate the site. This includes anonymous analytics data such as the pages you visit, your approximate location at the country level, and the device and browser you use.\n\n## 2. How we use your information\n\n- To understand which pages are most useful to visitors.\n- To detect, prevent, and respond to abuse or technical issues.\n- To respond to messages you send us through the contact page.\n\n## 3. Sharing\n\nWe do not sell your personal information. We share data only with service providers who help us run the site, and only as needed to perform their work for us.\n\n## 4. Your rights\n\nDepending on where you live, you may have the right to access, correct, or delete the personal information we hold about you. To exercise these rights, email privacy@junpark.studio.\n\n## 5. Contact\n\nIf you have any questions about this policy, please write to privacy@junpark.studio.",
+        "document_type": "markdown",
+        "excerpt": "How we handle your data.",
+        "status": "published",
+        "meta": {
+          "page_type": "legal",
+          "updated": "May 1, 2026"
+        }
+      },
+      {
+        "title": "Terms of Service",
+        "slug": "terms",
+        "path": "legal/terms",
+        "content": "These Terms of Service govern your use of junpark.studio. By accessing the site you agree to these terms. This is a sample document provided as part of a portfolio template.\n\n## 1. Use of the site\n\nYou may browse and read the content on this site for personal, non-commercial use. You may not scrape, republish, or use the content to train machine-learning models without prior written consent.\n\n## 2. Intellectual property\n\nAll written content, project case studies, photographs, and design work are © Jun Park unless otherwise noted. Client work is shown with permission and remains the property of the respective clients.\n\n## 3. Disclaimer\n\nThe site is provided \"as is\" without warranties of any kind. We make no guarantees about the accuracy or completeness of the information published here.\n\n## 4. Limitation of liability\n\nTo the fullest extent permitted by law, we are not liable for any indirect or consequential damages arising from your use of the site.\n\n## 5. Changes\n\nWe may update these terms from time to time. The date at the top of the page indicates when the terms were last revised.\n\n## 6. Governing law\n\nThese terms are governed by the laws of the Republic of Korea.",
+        "document_type": "markdown",
+        "excerpt": "The terms that govern use of this site.",
+        "status": "published",
+        "meta": {
+          "page_type": "legal",
+          "updated": "May 1, 2026"
+        }
+      },
+      {
+        "title": "Cookie Policy",
+        "slug": "cookies",
+        "path": "legal/cookies",
+        "content": "This Cookie Policy explains how junpark.studio uses cookies and similar technologies when you visit the site. This is a sample document for a portfolio template.\n\n## 1. What are cookies\n\nCookies are small text files placed on your device when you visit a website. They are widely used to make sites work, or work more efficiently, and to provide information to the site owner.\n\n## 2. Cookies we use\n\n- **Essential** — required for the site to function, such as remembering your light or dark mode preference.\n- **Analytics** — anonymous, aggregated statistics about how visitors use the site. No personal identifiers are stored.\n\n## 3. Managing cookies\n\nMost browsers let you refuse or delete cookies. Doing so may affect parts of the site, such as your saved theme preference.\n\n## 4. Third parties\n\nWe do not use third-party advertising cookies. Any analytics provider we use is contractually required to handle data on our behalf only.\n\n## 5. Contact\n\nQuestions about cookies can be sent to privacy@junpark.studio.",
+        "document_type": "markdown",
+        "excerpt": "How we use cookies on this site.",
+        "status": "published",
+        "meta": {
+          "page_type": "legal",
+          "updated": "May 1, 2026"
+        }
+      }
+    ],
+    "categories": [],
+    "tags": []
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary",
+      "items": [
+        {
+          "title": "Work",
+          "url": "/work/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "About",
+          "url": "/about/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Typography",
+          "url": "/typography/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Contact",
+          "url": "/contact/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "social": {
+      "name": "Social",
+      "items": [
+        {
+          "title": "GitHub",
+          "url": "https://github.com",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        },
+        {
+          "title": "LinkedIn",
+          "url": "https://linkedin.com",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        },
+        {
+          "title": "X",
+          "url": "https://x.com",
+          "type": "custom",
+          "target": "_blank",
+          "children": []
+        }
+      ]
+    },
+    "legal": {
+      "name": "Legal",
+      "items": [
+        {
+          "title": "Privacy",
+          "url": "/legal/privacy/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Terms",
+          "url": "/legal/terms/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Cookies",
+          "url": "/legal/cookies/",
+          "type": "custom",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    }
+  },
+  "collections": {
+    "cases": {
+      "title": "Featured cases",
+      "items": [
+        {
+          "type": "page",
+          "slug": "northwind-banking"
+        },
+        {
+          "type": "page",
+          "slug": "field-notes-cms"
+        },
+        {
+          "type": "page",
+          "slug": "atlas-type-foundry"
+        }
+      ]
+    },
+    "work": {
+      "title": "All work",
+      "items": [
+        {
+          "type": "page",
+          "slug": "northwind-banking"
+        },
+        {
+          "type": "page",
+          "slug": "field-notes-cms"
+        },
+        {
+          "type": "page",
+          "slug": "atlas-type-foundry"
+        },
+        {
+          "type": "page",
+          "slug": "marlow-coffee"
+        },
+        {
+          "type": "page",
+          "slug": "harbor-health"
+        },
+        {
+          "type": "page",
+          "slug": "meridian-os"
+        }
+      ]
+    }
+  }
+}

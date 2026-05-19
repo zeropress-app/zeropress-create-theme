@@ -1,0 +1,65 @@
+<article class="article">
+  <header class="article__header">
+    {{#for category in post.categories}}{{#if loop.first}}
+      <a href="{{category.url}}" class="eyebrow">{{category.name}}</a>
+    {{/if}}{{/for}}
+    <h1 class="article__title">{{post.title}}</h1>
+    {{#if post.excerpt}}<p class="article__dek">{{post.excerpt}}</p>{{/if}}
+    <div class="article__meta">
+      {{#if post.author.display_name}}<span>{{post.author.display_name}}</span><span>·</span>{{/if}}
+      <time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+      {{#if post.reading_time}}<span>·</span><span>{{post.reading_time}}</span>{{/if}}
+    </div>
+  </header>
+
+  {{#if post.featured_image}}
+    <figure class="article__cover">
+      <img src="{{post.featured_image}}" alt="">
+    </figure>
+  {{/if}}
+
+  <div class="article__body prose-editorial">{{post.html}}</div>
+
+  {{#if post.tags}}
+    <section class="filed-under">
+      <span class="eyebrow">Filed under</span>
+      <div class="taxonomy-list">
+        {{#for tag in post.tags}}<a href="{{tag.url}}" class="chip">#{{tag.name}}</a>{{/for}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if post.prev}}
+    <nav class="post-nav" aria-label="Adjacent">
+      <a class="post-nav__link" href="{{post.prev.url}}">
+        <span class="eyebrow">← Previous</span>
+        <strong>{{post.prev.title}}</strong>
+      </a>
+      {{#if post.next}}
+        <a class="post-nav__link end" href="{{post.next.url}}">
+          <span class="eyebrow">Next →</span>
+          <strong>{{post.next.title}}</strong>
+        </a>
+      {{/if}}
+    </nav>
+  {{#else_if post.next}}
+    <nav class="post-nav" aria-label="Adjacent">
+      <span></span>
+      <a class="post-nav__link end" href="{{post.next.url}}">
+        <span class="eyebrow">Next →</span>
+        <strong>{{post.next.title}}</strong>
+      </a>
+    </nav>
+  {{/if}}
+</article>
+
+{{#if post.surroundings.same_category}}
+  <section class="more-from">
+    <p class="eyebrow">More from this category</p>
+    <div class="grid">
+      {{#for related in post.surroundings.same_category}}
+        {{partial:post-card variant="grid" show_excerpt=false}}
+      {{/for}}
+    </div>
+  </section>
+{{/if}}
