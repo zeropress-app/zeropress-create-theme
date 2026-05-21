@@ -3,5 +3,5 @@
     <p class="eyebrow">Page</p>
     {{#if_eq page.document_type "plaintext"}}<h1 class="page__title">{{page.title}}</h1>{{/if_eq}}
   </header>
-  <div class="page__body prose-editorial">{{page.html}}</div>
+  <div class="page__body prose-editorial" {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{page.html}}</div>
 </article>

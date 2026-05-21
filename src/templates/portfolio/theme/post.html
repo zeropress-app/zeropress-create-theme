@@ -2,5 +2,5 @@
   <p class="eyebrow mono">{{post.published_at}}{{#if post.reading_time}} · {{post.reading_time}}{{/if}}</p>
   <h1 class="page-title serif">{{post.title}}</h1>
   {{#if post.excerpt}}<p class="page-lede">{{post.excerpt}}</p>{{/if}}
-  <div class="prose">{{post.html}}</div>
+  <div class="prose" {{#if site.search}}{{#if_neq post.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{post.html}}</div>
 </article>

@@ -10,7 +10,7 @@
     </div>
   </header>
 
-  <div class="prose">{{post.html}}</div>
+  <div class="prose" {{#if site.search}}{{#if_neq post.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{post.html}}</div>
 
   {{#if post.tags}}
     <div class="post__tags">

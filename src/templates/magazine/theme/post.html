@@ -18,7 +18,7 @@
     </figure>
   {{/if}}
 
-  <div class="article__body prose-editorial">{{post.html}}</div>
+  <div class="article__body prose-editorial" {{#if site.search}}{{#if_neq post.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{post.html}}</div>
 
   {{#if post.tags}}
     <section class="filed-under">

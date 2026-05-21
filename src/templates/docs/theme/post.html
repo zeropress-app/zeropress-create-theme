@@ -5,7 +5,7 @@
     {{#if post.excerpt}}<p class="lede">{{post.excerpt}}</p>{{/if}}
   </header>
   <div class="article-grid">
-    <div class="prose">{{post.html}}</div>
+    <div class="prose" {{#if site.search}}{{#if_neq post.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{post.html}}</div>
     {{#if post.toc}}
     <aside class="toc" aria-label="On this page">
       <p class="toc__title">On this page</p>

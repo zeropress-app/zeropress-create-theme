@@ -6,7 +6,7 @@
   </header>
 
   <div class="article-grid">
-    <div class="prose">
+    <div class="prose" {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>
       {{page.html}}
 
       {{#if page.meta.prev_url}}
