@@ -1,6 +1,6 @@
 {
   "name": "@zeropress/create-theme",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "ZeroPress theme starter generator",
   "type": "module",
   "license": "MIT",
@@ -31,9 +31,9 @@
     "node": ">=18.18.0"
   },
   "dependencies": {
-    "@zeropress/theme-validator": "0.6.1"
+    "@zeropress/theme-validator": "0.6.2"
   },
   "devDependencies": {
-    "@zeropress/build": "0.6.1"
+    "@zeropress/build": "0.6.2"
   }
 }
