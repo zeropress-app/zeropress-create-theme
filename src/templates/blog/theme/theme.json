@@ -1,5 +1,5 @@
 {
-  "$schema": "https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json",
+  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
   "name": "Margin Notes",
   "namespace": "zeropress",
   "slug": "theme-blog2",

@@ -2,7 +2,7 @@
   "version": "0.6",
   "generator": "margin-notes-react-port",
   "generated_at": "2026-05-13T00:00:00Z",
-  "$schema": "https://zeropress.dev/schemas/preview-data.v0.6.schema.json",
+  "$schema": "https://schemas.zeropress.dev/preview-data/v0.6/schema.json",
   "site": {
     "title": "Margin Notes",
     "description": "Quiet writing on craft, code, and the everyday.",

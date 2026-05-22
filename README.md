@@ -22,9 +22,9 @@ Generated starter projects use:
 Public contract references:
 
 - [Theme Runtime v0.6 Spec](https://zeropress.dev/spec/theme-runtime-v0.6.html)
-- [Theme Runtime v0.6 Schema](https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json)
+- [Theme Runtime v0.6 Schema](https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json)
 - [Preview Data v0.6 Spec](https://zeropress.dev/spec/preview-data-v0.6.html)
-- [Preview Data v0.6 Schema](https://zeropress.dev/schemas/preview-data.v0.6.schema.json)
+- [Preview Data v0.6 Schema](https://schemas.zeropress.dev/preview-data/v0.6/schema.json)
 
 ## Quick Start
 
@@ -115,7 +115,7 @@ Generated `package.json` includes:
 
 Generated `theme/theme.json` is rewritten with:
 
-- `$schema: "https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json"`
+- `$schema: "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json"`
 - `runtime: "0.6"`
 - `namespace: "my-company"`
 - `slug` and `name` from `--name`

@@ -123,7 +123,7 @@ test('run scaffolds a buildable v0.6 starter project', async () => {
     const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8'));
     const starterPackage = JSON.parse(await fs.readFile(path.join(projectDir, 'package.json'), 'utf8'));
 
-    assert.equal(themeJson.$schema, 'https://zeropress.dev/schemas/theme.v0.6.runtime.schema.json');
+    assert.equal(themeJson.$schema, 'https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json');
     assert.equal(themeJson.name, 'my-theme');
     assert.equal(themeJson.namespace, 'my-company');
     assert.equal(themeJson.slug, 'my-theme');
@@ -131,7 +131,7 @@ test('run scaffolds a buildable v0.6 starter project', async () => {
     assert.equal(themeJson.license, 'MIT');
     assert.equal(themeJson.runtime, '0.6');
     assert.equal(previewData.version, '0.6');
-    assert.equal(previewData.$schema, 'https://zeropress.dev/schemas/preview-data.v0.6.schema.json');
+    assert.equal(previewData.$schema, 'https://schemas.zeropress.dev/preview-data/v0.6/schema.json');
     assert.equal(starterPackage.private, true);
     assert.equal(starterPackage.scripts.build, 'zeropress-build ./theme --data ./preview-data.json --out ./dist');
     assert.equal(starterPackage.scripts.dev, 'zeropress-theme dev ./theme --data ./preview-data.json');
