@@ -9,7 +9,6 @@
   "description": "Quiet, content-first blog theme. Pure CSS prefers-color-scheme dark mode, serif body / sans headings, lightweight comments island.",
   "features": {
     "comments": true,
-    "newsletter": false,
     "post_index": true
   },
   "menu_slots": {

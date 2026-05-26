@@ -133,7 +133,8 @@ test('run scaffolds a buildable v0.6 starter project', async () => {
     assert.equal(previewData.version, '0.6');
     assert.equal(previewData.$schema, 'https://schemas.zeropress.dev/preview-data/v0.6/schema.json');
     assert.equal(starterPackage.private, true);
-    assert.equal(starterPackage.scripts.build, 'zeropress-build ./theme --data ./preview-data.json --out ./dist');
+    assert.equal(starterPackage.scripts.clean, 'rm -rf ./dist');
+    assert.equal(starterPackage.scripts.build, 'npm run clean && zeropress-build ./theme --data ./preview-data.json --out ./dist');
     assert.equal(starterPackage.scripts.dev, 'zeropress-theme dev ./theme --data ./preview-data.json');
     assert.deepEqual(starterPackage.dependencies, {
       '@zeropress/build': '0.6.1',
@@ -155,6 +156,22 @@ for (const template of templates) {
       const themeJson = JSON.parse(await fs.readFile(path.join(projectDir, 'theme', 'theme.json'), 'utf8'));
       assert.equal(themeJson.slug, slug);
       assert.equal(themeJson.runtime, '0.6');
+
+      await execFileAsync(buildBin, [
+        './theme',
+        '--data',
+        './preview-data.json',
+        '--out',
+        './dist',
+      ], { cwd: projectDir });
+
+      await fs.access(path.join(projectDir, 'dist', 'index.html'));
+
+      await execFileAsync('npm', ['run', 'clean'], { cwd: projectDir });
+      await assert.rejects(
+        () => fs.access(path.join(projectDir, 'dist')),
+        /ENOENT/,
+      );
 
       await execFileAsync(buildBin, [
         './theme',

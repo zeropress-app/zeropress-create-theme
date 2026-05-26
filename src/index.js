@@ -188,7 +188,8 @@ async function writeStarterPackageJson(targetDir, slug) {
     version: DEFAULT_VERSION,
     type: 'module',
     scripts: {
-      build: 'zeropress-build ./theme --data ./preview-data.json --out ./dist',
+      clean: 'rm -rf ./dist',
+      build: 'npm run clean && zeropress-build ./theme --data ./preview-data.json --out ./dist',
       dev: 'zeropress-theme dev ./theme --data ./preview-data.json',
     },
     dependencies: {

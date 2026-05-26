@@ -8,8 +8,7 @@
   "runtime": "0.6",
   "description": "Quiet two-column personal blog with Fraunces serif headings and Inter body. Title, tagline, top menu, theme toggle, sidebar with blog info and recent posts, post detail with TOC and threaded comments.",
   "features": {
-    "comments": true,
-    "newsletter": false
+    "comments": true
   },
   "menu_slots": {
     "primary": {

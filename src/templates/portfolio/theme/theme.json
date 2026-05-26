@@ -9,7 +9,6 @@
   "description": "Clean personal portfolio. Instrument Serif headlines, Inter body, JetBrains Mono metadata. Sticky header with theme toggle and social links, work index + case-study detail pages, typography specimen, and a three-document legal section.",
   "features": {
     "comments": false,
-    "newsletter": false,
     "post_index": false
   },
   "menu_slots": {

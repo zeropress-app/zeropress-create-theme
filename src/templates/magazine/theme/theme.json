@@ -9,7 +9,6 @@
   "description": "Clean modern editorial magazine. Instrument Serif + Inter, drop-cap long reads, dark mode toggle, reading-progress bar, category archive, legal pages.",
   "features": {
     "comments": false,
-    "newsletter": false,
     "post_index": true
   },
   "menu_slots": {
