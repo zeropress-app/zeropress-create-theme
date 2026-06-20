@@ -31,9 +31,9 @@
     "node": ">=18.18.0"
   },
   "dependencies": {
-    "@zeropress/theme-validator": "0.6.4"
+    "@zeropress/theme-validator": "0.6.5"
   },
   "devDependencies": {
-    "@zeropress/build": "0.6.4"
+    "@zeropress/build": "0.6.12"
   }
 }
