@@ -1,285 +1,271 @@
 {
   "$schema": "https://schemas.zeropress.dev/preview-data/v0.6/schema.json",
   "version": "0.6",
-  "generator": "manual",
-  "generated_at": "2026-05-13T00:00:00Z",
+  "generator": "zeropress-build-pages",
+  "generated_at": "2026-06-20T01:11:50.062Z",
   "site": {
-    "title": "Loomis Docs",
-    "description": "A calm, editorial documentation starter for guides, references, and changelogs.",
-    "url": "",
-    "locale": "en-US",
-    "timezone": "UTC",
-    "front_page": {
-      "type": "theme_index"
-    },
-    "post_index": {
-      "enabled": false
-    },
-    "footer": {
-      "copyright_text": "© 2026 Loomis Press. Set in Lora and Outfit.",
-      "attribution": true
-    },
-    "meta": {
-      "brand_word": "Loomis Docs",
-      "version_label": "v1.1",
-      "github_url": "https://github.com/loomis/docs"
-    },
+    "title": "Docs2 Preview",
+    "description": "A sidebar documentation preview for the bundled docs2 theme.",
+    "url": "https://docs2.zeropress.page",
     "media_base_url": "",
+    "locale": "en-US",
     "posts_per_page": 10,
     "datetime_display": "static",
     "date_style": "medium",
     "time_style": "none",
-    "disallow_comments": true
+    "timezone": "UTC",
+    "permalinks": {
+      "output_style": "html-extension",
+      "posts": "/posts/:slug/",
+      "pages": "/:slug/",
+      "categories": "/categories/:slug/",
+      "tags": "/tags/:slug/"
+    },
+    "front_page": {
+      "type": "page",
+      "page_slug": "index"
+    },
+    "post_index": {
+      "enabled": false
+    },
+    "disallow_comments": true,
+    "expose_generator": true,
+    "search": true,
+    "indexing": false,
+    "footer": {
+      "copyright_text": "ZeroPress Docs2 Preview"
+    }
   },
   "content": {
     "authors": [],
     "posts": [],
     "pages": [
       {
-        "title": "Installation",
-        "slug": "installation",
-        "document_type": "html",
-        "excerpt": "Get a local copy running in under a minute. The starter has no required configuration.",
-        "status": "published",
+        "title": "Getting Started",
+        "slug": "getting-started",
+        "path": "getting-started",
+        "updated_at_iso": "2026-06-20T10:05:23+09:00",
         "meta": {
-          "category": "Foundations",
-          "chapter": "Chapter 2",
-          "prev_url": "/",
-          "prev_label": "Introduction",
-          "next_url": "/structure/",
-          "next_label": "Project Structure"
+          "source_markdown_url": "/getting-started.md"
         },
-        "content": "<h2 id=\"requirements\">Requirements</h2><p>You'll need Node 18 or newer and any package manager you like — npm, pnpm, or bun all work. No database, no environment variables, no accounts.</p><h2 id=\"install\">Install</h2><p>Clone the project and install dependencies. The starter uses Vite, React, and Tailwind, so the install is small and fast.</p><div class=\"code-block\"><div class=\"code-block__chrome\"><div class=\"code-block__dots\"><span></span><span></span><span></span></div><span class=\"code-block__name\">terminal</span></div><pre class=\"code-block__code\"><code><span class=\"tok-comment\"># clone &amp; install</span>\ngit clone https://example.com/loomis-docs.git\ncd loomis-docs\nnpm install</code></pre></div><h2 id=\"run\">Run locally</h2><p>Start the dev server with <code>npm run dev</code>. The site reloads as you edit any page.</p><div class=\"callout callout--note\"><div class=\"callout__icon\">i</div><div class=\"callout__body\"><h4>Hot tip</h4><p>Pages are plain React components — duplicate <code>Installation.tsx</code> and rename it to bootstrap a new doc in seconds.</p></div></div>"
-      },
-      {
-        "title": "Project Structure",
-        "slug": "structure",
-        "document_type": "html",
-        "excerpt": "Three folders, one design system, no surprises.",
-        "status": "published",
-        "meta": {
-          "category": "Foundations",
-          "chapter": "Chapter 3",
-          "prev_url": "/installation/",
-          "prev_label": "Installation",
-          "next_url": "/writing/",
-          "next_label": "Writing Content"
-        },
-        "content": "<h2 id=\"tree\">Folder tree</h2><p>The starter keeps things flat on purpose. You should be able to find any file by guessing.</p><div class=\"code-block\"><div class=\"code-block__chrome\"><div class=\"code-block__dots\"><span></span><span></span><span></span></div><span class=\"code-block__name\">project</span></div><pre class=\"code-block__code\"><code>src/\n  components/docs/   <span class=\"tok-comment\"># layout, sidebar, prose, TOC</span>\n  pages/docs/        <span class=\"tok-comment\"># one file per guide</span>\n  index.css          <span class=\"tok-comment\"># the entire design system</span></code></pre></div><h2 id=\"where\">Where to add things</h2><p>New guide? Drop a file in <code>pages/docs/</code> and add it to <code>docsContent.ts</code>. New visual primitive? Add it to <code>Prose.tsx</code> so every page can reuse it.</p><div class=\"callout callout--tip\"><div class=\"callout__icon\">i</div><div class=\"callout__body\"><h4>One source of truth</h4><p>Sidebar, search, and TOC all read from the same content index — change it once, change it everywhere.</p></div></div>"
-      },
-      {
-        "title": "Writing Content",
-        "slug": "writing",
-        "document_type": "html",
-        "excerpt": "Voice, structure, and callout habits.",
-        "status": "published",
-        "meta": {
-          "category": "Guides",
-          "chapter": "Chapter 4",
-          "prev_url": "/structure/",
-          "prev_label": "Project Structure",
-          "next_url": "/code-examples/",
-          "next_label": "Code Examples"
-        },
-        "content": "<h2 id=\"voice\">Voice</h2><p>Write the way you'd explain something to a colleague at a coffee shop. Friendly, specific, never condescending. If you wouldn't say it out loud, don't put it on the page.</p><h2 id=\"structure\">Structure</h2><p>Each page should answer one question. Use H2 headings for the steps, and keep paragraphs to three or four sentences. Long pages tire readers; split them.</p><h2 id=\"callouts\">Callouts</h2><p>Three flavors only — note, tip, warning. Reach for them sparingly; if every paragraph is a callout, none of them are.</p><div class=\"callout callout--warning\"><div class=\"callout__icon\">!</div><div class=\"callout__body\"><h4>Don't overdo it</h4><p>Two callouts per page is plenty. Three is a smell.</p></div></div>"
-      },
-      {
-        "title": "Code Examples",
-        "slug": "code-examples",
-        "document_type": "html",
-        "excerpt": "Warm, dark code blocks with lightweight token highlighting.",
-        "status": "published",
-        "meta": {
-          "category": "Guides",
-          "chapter": "Chapter 5",
-          "prev_url": "/writing/",
-          "prev_label": "Writing Content",
-          "next_url": "/theming/",
-          "next_label": "Theming"
-        },
-        "content": "<h2 id=\"basic\">Basic block</h2><p>Wrap any block of code in the <code>.code-block</code> shell. The chrome above the snippet is decorative; the copy button appears on hover.</p><div class=\"code-block\"><div class=\"code-block__chrome\"><div class=\"code-block__dots\"><span></span><span></span><span></span></div><span class=\"code-block__name\">app.ts</span></div><pre class=\"code-block__code\"><code><span class=\"tok-keyword\">import</span> { <span class=\"tok-fn\">createApp</span> } <span class=\"tok-keyword\">from</span> <span class=\"tok-string\">\"loomis\"</span>;\n\n<span class=\"tok-keyword\">const</span> app = <span class=\"tok-fn\">createApp</span>({ name: <span class=\"tok-string\">\"docs\"</span> });\napp.<span class=\"tok-fn\">listen</span>(<span class=\"tok-string\">3000</span>);</code></pre></div><h2 id=\"highlighting\">Syntax highlighting</h2><p>Highlighting is just CSS classes — no client-side parser required. Wrap tokens in <code>.tok-keyword</code>, <code>.tok-fn</code>, <code>.tok-string</code>, or <code>.tok-comment</code> to color them.</p><h2 id=\"inline\">Inline code</h2><p>Use <code>backticks</code> for short snippets inside a sentence. They render with a warm chalk background and the terracotta accent.</p>"
-      },
-      {
-        "title": "Theming",
-        "slug": "theming",
-        "document_type": "html",
-        "excerpt": "HSL tokens, swatches, and how to rebrand.",
-        "status": "published",
-        "meta": {
-          "category": "Guides",
-          "chapter": "Chapter 6",
-          "prev_url": "/code-examples/",
-          "prev_label": "Code Examples",
-          "next_url": "/components/",
-          "next_label": "Components"
-        },
-        "content": "<h2 id=\"tokens\">Tokens</h2><p>Every color is an HSL token in <code>assets/style.css</code>. Light and dark themes share the same names — only the values change under <code>html.dark</code>.</p><div class=\"code-block\"><div class=\"code-block__chrome\"><div class=\"code-block__dots\"><span></span><span></span><span></span></div><span class=\"code-block__name\">style.css</span></div><pre class=\"code-block__code\"><code><span class=\"tok-keyword\">:root</span> {\n  --canvas: <span class=\"tok-fn\">hsl</span>(<span class=\"tok-string\">45 22% 93%</span>);\n  --ink-dark: <span class=\"tok-fn\">hsl</span>(<span class=\"tok-string\">18 8% 21%</span>);\n  --tab-terracotta: <span class=\"tok-fn\">hsl</span>(<span class=\"tok-string\">11 43% 58%</span>);\n}</code></pre></div><h2 id=\"swatches\">Swatches</h2><p>The palette has three accents — terracotta, sage, and ochre — used for the three sidebar groups, the three callout flavors, and the link/active states.</p><h2 id=\"custom\">Customizing</h2><p>To rebrand, change the three <code>--tab-*</code> tokens at the top of <code>style.css</code>. Everything that uses them — sidebar accents, callouts, links — updates in one move.</p><div class=\"callout callout--note\"><div class=\"callout__icon\">i</div><div class=\"callout__body\"><h4>Stay in HSL</h4><p>HSL makes it easy to dial saturation and lightness without rebuilding the palette from scratch.</p></div></div>"
-      },
-      {
-        "title": "Components",
-        "slug": "components",
-        "document_type": "html",
-        "excerpt": "Reference for the building blocks that ship with the starter.",
-        "status": "published",
-        "meta": {
-          "category": "Reference",
-          "chapter": "Chapter 7",
-          "prev_url": "/theming/",
-          "prev_label": "Theming",
-          "next_url": "/changelog/",
-          "next_label": "Changelog"
-        },
-        "content": "<h2 id=\"layout\">DocsLayout</h2><p>The page shell. Renders the sidebar, header (category + title + intro), prose area, optional table of contents, and prev/next pagination.</p><div class=\"code-block\"><div class=\"code-block__chrome\"><div class=\"code-block__dots\"><span></span><span></span><span></span></div><span class=\"code-block__name\">props</span></div><pre class=\"code-block__code\"><code><span class=\"tok-keyword\">type</span> <span class=\"tok-fn\">Props</span> = {\n  category: <span class=\"tok-fn\">string</span>;\n  chapter?: <span class=\"tok-fn\">string</span>;\n  title: <span class=\"tok-fn\">string</span>;\n  intro: <span class=\"tok-fn\">string</span>;\n  toc?: <span class=\"tok-fn\">TocItem</span>[];\n}</code></pre></div><h2 id=\"prose\">Prose primitives</h2><p>Use <code>P</code>, <code>H2</code>, <code>H3</code>, and <code>InlineCode</code> instead of raw HTML so the editorial styling stays consistent. Headings accept an <code>id</code> so the table of contents can scroll to them.</p><h2 id=\"callouts\">Callout</h2><p>Three variants: <code>note</code>, <code>tip</code>, and <code>warning</code>. Each maps to one of the palette accents.</p><div class=\"callout callout--tip\"><div class=\"callout__icon\">i</div><div class=\"callout__body\"><h4>Composition matters</h4><p>These primitives are intentionally tiny — they're meant to be copied, extended, and remixed for your own voice.</p></div></div>"
-      },
-      {
-        "title": "Changelog",
-        "slug": "changelog",
-        "document_type": "html",
-        "excerpt": "Every release, what changed, and why.",
-        "status": "published",
-        "meta": {
-          "category": "Reference",
-          "chapter": "Chapter 8",
-          "prev_url": "/components/",
-          "prev_label": "Components"
-        },
-        "content": "<h2 id=\"v1-1\">v1.1.0 — May 2026</h2><ul><li>Mobile-friendly sidebar with overlay drawer.</li><li>Command-palette search (⌘K) across pages and sections.</li><li>Deep-paper night mode with a smooth toggle.</li></ul><h2 id=\"v1-0\">v1.0.0 — March 2026</h2><ul><li>First public release.</li><li>Editorial Mentor palette, Lora + Outfit type system.</li><li>Sidebar, TOC, callouts, code blocks, pagination.</li></ul>"
-      },
-      {
-        "title": "Cookie Policy",
-        "slug": "cookie-policy",
+        "content": "# Getting Started\n\nDocs2 is a sidebar documentation theme. It keeps sections visible while each page focuses on document content.\n\n## Source Tree\n\nA Build Pages source tree can mix ordinary Markdown files with directory index pages:\n\n```txt\ndocuments/\n  index.md\n  getting-started.md\n  guides/\n    markdown.md\n    configuration.md\n  markdown-examples/\n    index.md\n  .zeropress/\n    config.json\npublic/\n  favicon.png\n```\n\nThe ordinary file `guides/markdown.md` is published as a page route under `/guides/markdown`. The directory index file `markdown-examples/index.md` is published as `/markdown-examples/`.\n\n## Build Command\n\nUse the bundled `docs2` theme:\n\n```bash\nnpx --yes @zeropress/build-pages --source ./documents --destination ./_site --public-dir ./public --theme docs2\n```\n\nThe generated site is static HTML and can be deployed to static hosting providers.\n\n## Sidebar Model\n\nDocs2 renders `menus.primary` as grouped sidebar navigation:\n\n```json\n{\n  \"menus\": {\n    \"primary\": {\n      \"name\": \"Primary Menu\",\n      \"items\": [\n        {\n          \"title\": \"GET STARTED\",\n          \"url\": \"/\",\n          \"children\": [\n            { \"title\": \"Overview\", \"url\": \"/\" },\n            { \"title\": \"Getting Started\", \"url\": \"/getting-started\" }\n          ]\n        },\n        {\n          \"title\": \"GUIDES\",\n          \"url\": \"/guides/markdown\",\n          \"children\": [\n            {\n              \"title\": \"Markdown\",\n              \"url\": \"/guides/markdown\",\n              \"children\": [\n                { \"title\": \"Markdown Examples\", \"url\": \"/markdown-examples/\" }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  }\n}\n```\n\nTop-level items become groups. Child links become pages, and one additional child level can be rendered beneath a page link.\n",
         "document_type": "markdown",
-        "excerpt": "How Loomis uses cookies on this site.",
-        "status": "published",
+        "excerpt": "Docs2 is a sidebar documentation theme. It keeps sections visible while each page focuses on document content.",
+        "status": "published"
+      },
+      {
+        "title": "Configuration",
+        "slug": "guides-configuration",
+        "path": "guides/configuration",
+        "updated_at_iso": "2026-06-20T10:05:23+09:00",
         "meta": {
-          "category": "Legal"
+          "source_markdown_url": "/guides/configuration.md"
         },
-        "content": "## What we use\n\nA single preference cookie remembers your dark-mode choice. That's it.\n\n## How to opt out\n\nClear site data in your browser at any time. The site continues to work without it."
+        "content": "# Configuration\n\nThis page collects the small amount of configuration used by the preview site.\n\n## Theme\n\nThe site uses the bundled docs2 theme:\n\n```bash\n--theme docs2\n```\n\nThe canonical theme ID is:\n\n```txt\nzeropress.docs2\n```\n\n## Site Indexing\n\nThis preview intentionally opts out of site indexing:\n\n```json\n{\n  \"site\": {\n    \"indexing\": false\n  }\n}\n```\n\nThis is appropriate for theme previews and fixture sites. It is not a privacy or access-control feature.\n\n## Search\n\nDocs2 supports ZeroPress native static search. The preview enables it so the command palette can demonstrate the search UI:\n\n```json\n{\n  \"site\": {\n    \"search\": true\n  }\n}\n```\n\n## Collection Order\n\nThe preview uses a small collection so the previous and next links can show the intended reading order:\n\n```json\n{\n  \"collections\": {\n    \"preview\": {\n      \"title\": \"Get Started\",\n      \"items\": [\n        \"index.md\",\n        \"getting-started.md\"\n      ]\n    },\n    \"guides\": {\n      \"title\": \"Guides\",\n      \"items\": [\n        \"guides/markdown.md\",\n        \"markdown-examples/index.md\"\n      ]\n    },\n    \"reference\": {\n      \"title\": \"Reference\",\n      \"items\": [\n        \"guides/configuration.md\"\n      ]\n    }\n  }\n}\n```\n\n## Related Sites\n\n- <a href=\"https://zeropress.page/\" target=\"_blank\">ZeroPress Theme Previews</a>\n- <a href=\"https://build-pages.zeropress.dev/\" target=\"_blank\">Build Pages Documentation</a>\n- <a href=\"https://zeropress.dev/theme-authoring/\" target=\"_blank\">Theme Authoring Guide</a>\n",
+        "document_type": "markdown",
+        "excerpt": "This page collects the small amount of configuration used by the preview site.",
+        "status": "published"
+      },
+      {
+        "title": "Markdown",
+        "slug": "guides-markdown",
+        "path": "guides/markdown",
+        "updated_at_iso": "2026-06-20T10:05:23+09:00",
+        "meta": {
+          "source_markdown_url": "/guides/markdown.md"
+        },
+        "content": "# Markdown\n\nBuild Pages is designed for ordinary Markdown source trees. Keep links between documents source-relative so they work in editors, Git hosting UIs, and the generated site.\n\n## Source-Relative Links\n\nThis page links to a directory index page with a normal Markdown path:\n\n```md\n[Markdown Examples](../markdown-examples/index.md)\n```\n\nOpen [Markdown Examples](/markdown-examples/) to see how the generated docs2 theme renders headings, tables, alerts, code blocks, media elements, and Mermaid diagrams.\n\nThe source path stays useful before the site is built, and Build Pages rewrites it to the generated page URL during prebuild.\n\n## Document Routes\n\nThis preview intentionally contains two common route shapes:\n\n| Source file | Generated route |\n| --- | --- |\n| `getting-started.md` | `/getting-started` |\n| `guides/markdown.md` | `/guides/markdown` |\n| `markdown-examples/index.md` | `/markdown-examples/` |\n\nUse ordinary files when the source tree already has category directories. Use `index.md` when a directory itself is the page.\n\n## Public Assets\n\nPublic assets live outside the Markdown source tree. A source-relative asset link can still point to a file under the public directory when that is convenient for repository browsing.\n\n```md\n![Site icon](../../public/favicon.png)\n```\n\nBuild Pages rewrites source-relative public asset links only when the target file exists under the configured public directory.\n\n## Next Step\n\nReview the small [configuration reference](/guides/configuration) used by this preview site.\n",
+        "document_type": "markdown",
+        "excerpt": "Build Pages is designed for ordinary Markdown source trees. Keep links between documents source-relative so they work in editors, Git hosting UIs, and the generated site.",
+        "status": "published"
+      },
+      {
+        "title": "Docs2 Theme Preview",
+        "slug": "index",
+        "path": "index",
+        "updated_at_iso": "2026-06-20T10:05:23+09:00",
+        "meta": {
+          "source_markdown_url": "/index.md"
+        },
+        "content": "# Docs2 Theme Preview\n\nThis site previews `zeropress.docs2`, the sidebar documentation theme bundled with `@zeropress/build-pages`.\n\nDocs2 is designed for larger documentation sites, product manuals, and technical guides where grouped sidebar navigation makes the site easier to scan.\n\n## What This Preview Shows\n\n- grouped sidebar navigation\n- one nested child level under a sidebar page\n- static search UI\n- generated page table of contents\n- updated dates and source Markdown links\n- collection-based previous and next links that stop at group boundaries\n- Markdown rendering for tables, alerts, code blocks, and Mermaid fences\n\n## When Docs2 Fits\n\nUse docs2 when a documentation site needs grouped navigation, a command palette search experience, per-page table of contents, and a predictable previous/next reading flow.\n\nFor smaller sites where a top navigation bar is enough, use `zeropress.docs1` instead.\n\n> [!NOTE]\n> This preview asks crawlers not to index it and is maintained as a theme preview.\n\n## Start Here\n\nRead [Getting Started](/getting-started) for the intended site shape, open the [Markdown guide](/guides/markdown) for source-link examples, or inspect [Markdown Examples](/markdown-examples/) to see the theme's rendering behavior.\n",
+        "document_type": "markdown",
+        "excerpt": "This site previews zeropress.docs2, the sidebar documentation theme bundled with @zeropress/build-pages.",
+        "status": "published"
       },
       {
         "title": "Privacy Policy",
-        "slug": "privacy-policy",
-        "document_type": "markdown",
-        "excerpt": "What we collect, why, and your rights.",
-        "status": "published",
+        "slug": "legal-privacy",
+        "path": "legal/privacy",
+        "updated_at_iso": "2026-06-15T00:00:00+09:00",
         "meta": {
-          "category": "Legal"
+          "source_markdown_url": "/legal/privacy.md"
         },
-        "content": "## Overview\n\nLoomis Docs is a static site. We don't collect personal data.\n\n## Logs\n\nThe hosting provider may log standard request metadata (IP, user agent) for abuse prevention. We don't read it."
+        "content": "\n# Privacy Policy\n\nThis placeholder Privacy Policy page demonstrates how a small documentation site can include ordinary privacy information in the footer.\n\n## Information Collection\n\nThis preview does not define a real data collection policy. Replace this section with the information your site collects and why it is collected.\n\n## Cookies And Analytics\n\nIf the published site uses cookies, analytics, forms, or external services, describe those services here.\n\n## Contact\n\nReplace this section with the appropriate privacy contact information for the published site.\n",
+        "document_type": "markdown",
+        "excerpt": "This placeholder Privacy Policy page demonstrates how a small documentation site can include ordinary privacy information in the footer.",
+        "status": "published"
       },
       {
-        "title": "Terms",
-        "slug": "terms",
-        "document_type": "markdown",
-        "excerpt": "The agreement between you and Loomis.",
-        "status": "published",
+        "title": "Terms of Use",
+        "slug": "legal-terms",
+        "path": "legal/terms",
+        "updated_at_iso": "2026-06-15T00:00:00+09:00",
         "meta": {
-          "category": "Legal"
+          "source_markdown_url": "/legal/terms.md"
         },
-        "content": "## Use\n\nLoomis Docs is provided as-is. Use it freely for your own documentation projects.\n\n## License\n\nMIT."
+        "content": "\n# Terms of Use\n\nThis placeholder Terms of Use page demonstrates how a small documentation site can include ordinary legal pages in the footer.\n\n## Use Of The Site\n\nThis preview site is provided for demonstration purposes. The content is informational and may change without notice.\n\n## No Warranty\n\nThe site is provided as-is. It does not provide legal, financial, security, or operational advice.\n\n## Contact\n\nReplace this section with the appropriate contact information for the published site.\n",
+        "document_type": "markdown",
+        "excerpt": "This placeholder Terms of Use page demonstrates how a small documentation site can include ordinary legal pages in the footer.",
+        "status": "published"
+      },
+      {
+        "title": "Markdown Examples",
+        "slug": "markdown-examples",
+        "path": "markdown-examples/index",
+        "updated_at_iso": "2026-06-20T10:05:23+09:00",
+        "meta": {
+          "source_markdown_url": "/markdown-examples/index.md"
+        },
+        "content": "# Markdown Examples\n\nThis page is a rendering fixture for `zeropress.docs2`. Use it to check typography, spacing, code highlighting, tables, task lists, media elements, alerts, and Mermaid progressive enhancement.\n\n## Paragraphs, Emphasis, And Links\n\nMarkdown paragraphs should read like normal document prose. Inline emphasis such as **strong text**, _emphasized text_, ~~struck text~~, and `inline code` should remain easy to scan inside a sentence.\n\nInternal Markdown links are source-relative. For example, [the configuration page](/guides/configuration) links to another source Markdown file and is rewritten during build.\n\nThis page itself is written as `markdown-examples/index.md`, so it is published as a directory-style page at `/markdown-examples/`.\n\n## Heading Hierarchy\n\nHeadings become anchorable sections. Docs2 renders a page table of contents when the Markdown page has enough headings.\n\n### Third-Level Heading\n\nThird-level headings should appear subordinate to section headings but remain visible enough for long pages.\n\n#### Fourth-Level Heading\n\nFourth-level headings are useful for compact implementation details.\n\n## Lists\n\nUnordered lists are useful for short related facts:\n\n- Markdown files are discovered from the source directory.\n- The page route is derived from the source path unless front matter overrides it.\n- Public files are copied from the public directory.\n\nOrdered lists are useful for procedures:\n\n1. Create Markdown files.\n2. Add optional `.zeropress/config.json`.\n3. Run Build Pages.\n4. Deploy the generated output.\n\nTask lists are supported:\n\n- [x] Render GitHub-style task lists\n- [x] Keep checked items visible\n- [ ] Review the generated output\n- [ ] Deploy to a static host\n\n## GitHub-Style Alerts\n\n> [!NOTE]\n> Use alerts for short, high-signal notes.\n\n> [!TIP]\n> Keep small docs front-matter-light when the default route and title behavior already matches the document.\n\n> [!IMPORTANT]\n> `status: draft` means the Markdown file is not generated as a page.\n\n> [!WARNING]\n> `discoverability: delist` is not access control. The page still exists at its URL.\n\n> [!CAUTION]\n> Do not put private content in a static site just because it is omitted from menus or search.\n\n## Tables\n\nTables are useful for compact comparisons.\n\n| Feature | Source | Output |\n| --- | --- | --- |\n| Page title | Front matter or first H1 | `page.title` |\n| Description | Front matter `description` | `page.excerpt` |\n| Route | Source path or front matter `path` | HTML route |\n| Source copy | `copy-markdown-source` | Public `.md` link |\n\nAlignment markers are preserved as table cell classes.\n\n| Left | Center | Right |\n| :--- | :---: | ---: |\n| route | page title | 1 |\n| public file | copied asset | 24 |\n| generated HTML | output route | 128 |\n\n## Fenced Code Blocks\n\nFenced code blocks keep language classes. When the language is recognized by ZeroPress's Markdown renderer, syntax highlighting is applied during build.\n\n```json\n{\n  \"version\": \"0.1\",\n  \"site\": {\n    \"title\": \"My Docs\",\n    \"description\": \"Documentation built with ZeroPress.\"\n  }\n}\n```\n\n```js\nexport async function build() {\n  const result = await runBuildPages({\n    source: \"./documents\",\n    destination: \"./_site\"\n  });\n\n  return result.files;\n}\n```\n\nUnknown or plain text fences still render as code blocks.\n\n```txt\ndocuments/\n  index.md\n  markdown-examples/\n    index.md\n```\n\n## Mermaid Fence\n\nMermaid fences remain readable source without JavaScript. Docs2 progressively enhances them into diagrams when JavaScript is available.\n\n```mermaid\nflowchart LR\n  source[\"Markdown source\"] --> build[\"Build Pages\"]\n  build --> data[\"preview-data.json\"]\n  data --> site[\"Static HTML output\"]\n```\n\n## Escaping And Raw Text\n\nUse code spans for literal template syntax: `{{site.title}}`, `{{page.title}}`, and `{{#if page.updated_at_iso}}`.\n\n```html\n{{#if page.collection_cursor.next}}\n  <a href=\"{{page.collection_cursor.next.url}}\">\n    {{page.collection_cursor.next.title}}\n  </a>\n{{/if}}\n```\n\n## YouTube video\n\nZeroPress allows a safe subset of raw HTML inside Markdown, so you can embed a YouTube video directly:\n\n<iframe width=\"560\" height=\"315\" src=\"https://www.youtube-nocookie.com/embed/UYmvFzDuO5k\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>\n\n## Native Media\n\nRaw HTML media elements can embed site-owned video and audio files. The source-relative public paths below are rewritten to `/media/...` during the Build Pages prebuild.\n\n<video controls muted playsinline poster=\"/media/video-poster.jpg\" width=\"640\">\n  <source src=\"/media/video.mp4\" type=\"video/mp4\">\n  <track src=\"/media/captions-en.vtt\" kind=\"captions\" srclang=\"en\" label=\"English\" default>\n</video>\n\n<audio controls preload=\"metadata\">\n  <source src=\"/media/audio.mp3\" type=\"audio/mpeg\">\n</audio>\n\n## Compact Review Checklist\n\n- Headings have clear hierarchy and enough spacing.\n- Tables are readable on narrow screens.\n- Code blocks scroll horizontally without moving the copy button.\n- Alerts are visually distinct but not louder than page headings.\n- The page remains useful when JavaScript is disabled.\n",
+        "document_type": "markdown",
+        "excerpt": "This page is a rendering fixture for zeropress.docs2. Use it to check typography, spacing, code highlighting, tables, task lists, media elements, alerts, and Mermaid progressive enhancement.",
+        "status": "published"
       }
     ],
     "categories": [],
     "tags": []
   },
   "menus": {
-    "foundations": {
-      "name": "Foundations",
+    "primary": {
+      "name": "Primary Menu",
       "items": [
         {
-          "title": "Introduction",
+          "title": "GET STARTED",
           "url": "/",
+          "type": "custom",
+          "target": "_self",
+          "meta": {
+            "accent": "blue"
+          },
+          "children": [
+            {
+              "title": "Overview",
+              "url": "/",
+              "type": "custom",
+              "target": "_self",
+              "children": []
+            },
+            {
+              "title": "Getting Started",
+              "url": "/getting-started",
+              "type": "custom",
+              "target": "_self",
+              "children": []
+            }
+          ]
+        },
+        {
+          "title": "GUIDES",
+          "url": "/guides/markdown",
+          "type": "custom",
+          "target": "_self",
+          "meta": {
+            "accent": "sage"
+          },
+          "children": [
+            {
+              "title": "Markdown",
+              "url": "/guides/markdown",
+              "type": "custom",
+              "target": "_self",
+              "children": [
+                {
+                  "title": "Markdown Examples",
+                  "url": "/markdown-examples/",
+                  "type": "custom",
+                  "target": "_self",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "REFERENCE",
+          "url": "/guides/configuration",
+          "type": "custom",
+          "target": "_self",
+          "meta": {
+            "accent": "gold"
+          },
+          "children": [
+            {
+              "title": "Configuration",
+              "url": "/guides/configuration",
+              "type": "custom",
+              "target": "_self",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "name": "Footer Menu",
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/legal/privacy",
           "type": "custom",
           "target": "_self",
           "children": []
         },
         {
-          "title": "Installation",
-          "url": "/installation/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Project Structure",
-          "url": "/structure/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    },
-    "guides": {
-      "name": "Guides",
-      "items": [
-        {
-          "title": "Writing Content",
-          "url": "/writing/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Code Examples",
-          "url": "/code-examples/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Theming",
-          "url": "/theming/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    },
-    "reference": {
-      "name": "Reference",
-      "items": [
-        {
-          "title": "Components",
-          "url": "/components/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Changelog",
-          "url": "/changelog/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    },
-    "legal": {
-      "name": "Legal",
-      "items": [
-        {
-          "title": "Cookie Policy",
-          "url": "/cookie-policy/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Privacy Policy",
-          "url": "/privacy-policy/",
-          "type": "page",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Terms",
-          "url": "/terms/",
-          "type": "page",
+          "title": "Terms of Use",
+          "url": "/legal/terms",
+          "type": "custom",
           "target": "_self",
           "children": []
         }
       ]
     }
   },
-  "widgets": {}
+  "widgets": {},
+  "collections": {
+    "get_started": {
+      "title": "Get Started",
+      "items": [
+        {
+          "type": "page",
+          "slug": "index"
+        },
+        {
+          "type": "page",
+          "slug": "getting-started"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Guides",
+      "items": [
+        {
+          "type": "page",
+          "slug": "guides-markdown"
+        },
+        {
+          "type": "page",
+          "slug": "markdown-examples"
+        }
+      ]
+    },
+    "reference": {
+      "title": "Reference",
+      "items": [
+        {
+          "type": "page",
+          "slug": "guides-configuration"
+        }
+      ]
+    }
+  }
 }

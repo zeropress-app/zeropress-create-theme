@@ -1,50 +1,24 @@
 {
   "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
-  "name": "Loomis Editorial Docs",
+  "name": "ZeroPress Docs (Sidebar)",
   "namespace": "zeropress",
-  "slug": "docs3-editorial",
-  "version": "0.6.0",
+  "slug": "docs2",
+  "version": "0.6.12",
   "license": "MIT",
   "runtime": "0.6",
-  "description": "Editorial Mentor docs theme. Warm paper-and-ink palette, Lora display + Outfit body, grouped colored sidebar, command-palette search, deep-paper dark mode.",
+  "description": "Sidebar documentation theme for larger Build Pages sites. Includes command palette search, two-level sidebar groups, page TOC, collection cursor pager, updated dates, and Mermaid progressive enhancement.",
   "features": {
-    "comments": false,
-    "post_index": false
+    "post_index": false,
+    "search": true
   },
   "menu_slots": {
-    "foundations": {
-      "title": "Foundations",
-      "description": "First sidebar group, terracotta accent"
+    "primary": {
+      "title": "Primary",
+      "description": "Primary documentation navigation rendered as a sidebar. Top-level items become collapsible groups; up to two child levels are rendered as page links."
     },
-    "guides": {
-      "title": "Guides",
-      "description": "Second sidebar group, sage accent"
-    },
-    "reference": {
-      "title": "Reference",
-      "description": "Third sidebar group, ochre accent"
-    },
-    "legal": {
-      "title": "Legal",
-      "description": "Footer legal link list"
-    }
-  },
-  "site_meta": {
-    "brand_word": {
-      "title": "Brand wordmark",
-      "description": "Wordmark shown in sidebar and mobile top bar.",
-      "type": "string",
-      "default": "Loomis Docs"
-    },
-    "version_label": {
-      "title": "Version label",
-      "description": "Small version chip next to the wordmark in the desktop header.",
-      "type": "string"
-    },
-    "github_url": {
-      "title": "GitHub URL",
-      "description": "Optional GitHub link in the header.",
-      "type": "string"
+    "footer": {
+      "title": "Footer",
+      "description": "Footer link list"
     }
   }
 }

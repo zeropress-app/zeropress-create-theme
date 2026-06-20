@@ -1,21 +1,41 @@
 <footer class="site-footer">
+  {{#if site.newsletter.enabled}}
   <section class="footer-cta">
     <div class="shell footer-cta__inner">
       <div class="footer-cta__copy">
         <p class="section-kicker">Newsletter</p>
-        <h2>A quiet letter, now and then.</h2>
+        <h2>{{#if site.newsletter.title}}{{site.newsletter.title}}{{#else}}Subscribe{{/if}}</h2>
         <p>
-          Occasional notes from the margins — new essays, things worth reading,
-          and the small observations that don't fit anywhere else.
+          {{#if site.newsletter.description}}{{site.newsletter.description}}{{#else}}Get updates by email.{{/if}}
         </p>
       </div>
-      <div class="newsletter-form newsletter-form--wide" role="group" aria-label="Newsletter sign-up">
-        <label class="sr-only" for="newsletter-email">Email address</label>
-        <input id="newsletter-email" type="email" placeholder="your@email.com" inputmode="email" disabled>
-        <button type="button" disabled>Subscribe</button>
+      <div class="newsletter-actions" role="group" aria-label="Newsletter sign-up">
+        {{#if site.newsletter.embed_url}}
+        <button class="newsletter-button newsletter-button--modal" type="button" data-newsletter-open>
+          {{#if site.newsletter.button_label}}{{site.newsletter.button_label}}{{#else}}Subscribe{{/if}}
+        </button>
+        {{/if}}
+        {{#if site.newsletter.signup_url}}
+        <a class="newsletter-button newsletter-button--link" href="{{site.newsletter.signup_url}}" target="_blank" rel="noreferrer noopener" data-newsletter-fallback>
+          {{#if site.newsletter.button_label}}{{site.newsletter.button_label}}{{#else}}Subscribe{{/if}}
+        </a>
+        {{/if}}
       </div>
     </div>
   </section>
+  {{#if site.newsletter.embed_url}}
+  <div class="newsletter-modal" data-newsletter-modal hidden>
+    <div class="newsletter-modal__backdrop" data-newsletter-close></div>
+    <section class="newsletter-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="newsletter-modal-title">
+      <div class="newsletter-modal__header">
+        <h2 id="newsletter-modal-title">{{#if site.newsletter.title}}{{site.newsletter.title}}{{#else}}Subscribe{{/if}}</h2>
+        <button class="newsletter-modal__close" type="button" aria-label="Close newsletter sign-up" data-newsletter-close>×</button>
+      </div>
+      <iframe class="newsletter-modal__frame" src="{{site.newsletter.embed_url}}" title="Newsletter sign-up" loading="lazy"></iframe>
+    </section>
+  </div>
+  {{/if}}
+  {{/if}}
 
   <div class="footer-meta">
     <div class="shell footer-meta__inner">
@@ -29,7 +49,7 @@
     </div>
     <div class="shell footer-quote">
       <p>
-        {{#if site.footer.copyright_text}}{{site.footer.copyright_text}}. {{/if}}Browse <a href="/archive/">the archive</a>{{#if site.url}}, <a href="/feed.xml">the feed</a>, or <a href="/sitemap.xml">the sitemap</a>{{/if}}.{{#if site.footer.attribution}} Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a>.{{/if}}
+        {{#if site.footer.copyright_text}}{{site.footer.copyright_text}}. {{/if}}Browse <a href="/archive/">the archive</a>{{#if site.url}}, <a href="/feed.xml">the feed</a>, or <a href="/sitemap.xml">the sitemap</a>{{/if}}.{{#if site.footer.attribution}} Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a>{{/if}}
       </p>
     </div>
   </div>

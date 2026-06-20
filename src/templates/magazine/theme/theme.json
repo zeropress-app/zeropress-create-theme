@@ -3,7 +3,7 @@
   "name": "The Margin",
   "namespace": "zeropress",
   "slug": "theme-magazine2",
-  "version": "0.6.0",
+  "version": "0.6.12",
   "license": "MIT",
   "runtime": "0.6",
   "description": "Clean modern editorial magazine. Instrument Serif + Inter, drop-cap long reads, dark mode toggle, reading-progress bar, category archive, legal pages.",

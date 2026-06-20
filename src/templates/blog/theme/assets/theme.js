@@ -654,10 +654,63 @@ function initArticleContentLinks(root = document) {
   });
 }
 
+function initNewsletterIsland(root = document) {
+  const modal = root.querySelector("[data-newsletter-modal]");
+  const openButtons = Array.from(root.querySelectorAll("[data-newsletter-open]"))
+    .filter((element) => element instanceof HTMLButtonElement);
+
+  if (!(modal instanceof HTMLElement) || openButtons.length === 0) {
+    return;
+  }
+
+  if (modal.dataset.newsletterReady === "true") {
+    return;
+  }
+  modal.dataset.newsletterReady = "true";
+
+  const closeTargets = Array.from(modal.querySelectorAll("[data-newsletter-close]"));
+  const closeButton = modal.querySelector(".newsletter-modal__close");
+  let lastFocused = null;
+
+  const openModal = (trigger) => {
+    lastFocused = trigger instanceof HTMLElement ? trigger : document.activeElement;
+    modal.hidden = false;
+    document.documentElement.classList.add("newsletter-modal-open");
+
+    if (closeButton instanceof HTMLButtonElement) {
+      closeButton.focus();
+    }
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    document.documentElement.classList.remove("newsletter-modal-open");
+
+    if (lastFocused instanceof HTMLElement) {
+      lastFocused.focus();
+    }
+  };
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", () => openModal(button));
+  });
+
+  closeTargets.forEach((target) => {
+    target.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) {
+      closeModal();
+    }
+  });
+}
+
 function applyPageEnhancements(root = document) {
   updateFeaturedPosts(root);
   initComments(root);
   initArticleContentLinks(root);
+  initNewsletterIsland(root);
   initNavigationState();
 }
 

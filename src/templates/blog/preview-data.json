@@ -18,7 +18,15 @@
     "datetime_display": "static",
     "date_style": "medium",
     "time_style": "none",
-    "disallow_comments": false
+    "disallow_comments": false,
+    "newsletter": {
+      "enabled": true,
+      "title": "A quiet letter, now and then.",
+      "description": "Occasional notes from the margins: new essays, things worth reading, and the small observations that do not fit anywhere else.",
+      "button_label": "Subscribe",
+      "signup_url": "https://example.com/newsletter",
+      "embed_url": "/newsletter.html"
+    }
   },
   "content": {
     "authors": [

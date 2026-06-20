@@ -1,0 +1,8 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.500
+ZeroPress can publish Markdown pages with native media.
+
+00:00:02.500 --> 00:00:05.000
+Captions are provided with a standard WebVTT track.
+

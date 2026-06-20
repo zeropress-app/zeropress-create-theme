@@ -3,7 +3,7 @@
   "name": "Minimal 2",
   "namespace": "zeropress",
   "slug": "theme-minimal2",
-  "version": "0.6.0",
+  "version": "0.6.12",
   "license": "MIT",
   "runtime": "0.6",
   "description": "Quiet, content-first blog theme. Pure CSS prefers-color-scheme dark mode, serif body / sans headings, lightweight comments island.",
