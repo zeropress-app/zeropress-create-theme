@@ -70,7 +70,7 @@ The npm package is `@zeropress/create-theme`, and the installed binary is
 The package intentionally ships only five built-in starters:
 
 - `minimal`: quiet content-first starter.
-- `blog`: editorial blog starter with menus, widgets, posts, categories, and tags.
+- `blog`: editorial blog starter with menus, widgets, posts, categories, tags, comments, and a newsletter CTA.
 - `docs`: documentation starter with pages, navigation, and Markdown-friendly prose.
 - `portfolio`: portfolio starter using site metadata and named collections.
 - `magazine`: editorial magazine starter with curated landing sections.
@@ -84,6 +84,7 @@ belong in the ZeroPress theme catalog and admin runtime install flow.
 my-portfolio/
   package.json
   preview-data.json
+  public/                 # optional, included by starters that need trusted public HTML/assets
   theme/
     theme.json
     layout.html
@@ -108,8 +109,8 @@ Generated `package.json` includes:
     "dev": "zeropress-theme dev ./theme --data ./preview-data.json"
   },
   "dependencies": {
-    "@zeropress/build": "0.6.1",
-    "@zeropress/theme": "0.6.1"
+    "@zeropress/build": "0.6.12",
+    "@zeropress/theme": "0.6.12"
   }
 }
 ```

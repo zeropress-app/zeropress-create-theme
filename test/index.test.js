@@ -47,7 +47,7 @@ test('run prints help and exits cleanly with no args', async () => {
 
   assert.equal(logs.some((line) => line.includes('Usage:')), true);
   assert.equal(logs.some((line) => line.includes('npx @zeropress/create-theme --name <slug> --template <template>')), true);
-  assert.equal(logs.some((line) => line.includes('theme/, preview-data.json, and package.json')), true);
+  assert.equal(logs.some((line) => line.includes('theme/, preview-data.json, optional public/, and package.json')), true);
 });
 
 test('run prints help and exits cleanly with --help', async () => {
@@ -137,8 +137,8 @@ test('run scaffolds a buildable v0.6 starter project', async () => {
     assert.equal(starterPackage.scripts.build, 'npm run clean && zeropress-build ./theme --data ./preview-data.json --out ./dist');
     assert.equal(starterPackage.scripts.dev, 'zeropress-theme dev ./theme --data ./preview-data.json');
     assert.deepEqual(starterPackage.dependencies, {
-      '@zeropress/build': '0.6.1',
-      '@zeropress/theme': '0.6.1',
+      '@zeropress/build': '0.6.12',
+      '@zeropress/theme': '0.6.12',
     });
     assert.equal(logs.some((line) => line.includes('Template: portfolio')), true);
     assert.equal(logs.some((line) => line.includes('Next: npm install && npm run build')), true);
@@ -182,6 +182,14 @@ for (const template of templates) {
       ], { cwd: projectDir });
 
       await fs.access(path.join(projectDir, 'dist', 'index.html'));
+
+      if (template === 'blog') {
+        await fs.access(path.join(projectDir, 'public', 'newsletter.html'));
+        await fs.access(path.join(projectDir, 'dist', 'newsletter.html'));
+        const html = await fs.readFile(path.join(projectDir, 'dist', 'index.html'), 'utf8');
+        assert.match(html, /data-newsletter-open/);
+        assert.match(html, /src="\/newsletter\.html"/);
+      }
     });
   });
 }

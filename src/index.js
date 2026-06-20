@@ -15,8 +15,8 @@ const DEFAULT_NAMESPACE = 'my-company';
 const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
 const DEFAULT_THEME_SCHEMA = 'https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json';
-const ZEROPRESS_BUILD_VERSION = '0.6.1';
-const ZEROPRESS_THEME_VERSION = '0.6.1';
+const ZEROPRESS_BUILD_VERSION = '0.6.12';
+const ZEROPRESS_THEME_VERSION = '0.6.12';
 const MANIFEST_ORDERED_KEYS = new Set(['$schema', 'name', 'namespace', 'slug', 'version', 'license', 'runtime']);
 const require = createRequire(import.meta.url);
 const { version: PACKAGE_VERSION } = require('../package.json');
@@ -71,7 +71,7 @@ Options:
 
 Notes:
   - creates a new starter project in the current working directory
-  - generated output includes theme/, preview-data.json, and package.json
+  - generated output includes theme/, preview-data.json, optional public/, and package.json
   - generated theme.json uses the current ZeroPress runtime contract`);
 }
 
@@ -149,6 +149,7 @@ async function scaffoldTheme(targetDir, options) {
   const { slug, template } = options;
   const templateDir = path.join(TEMPLATE_ROOT, template);
   const themeSourceDir = path.join(templateDir, 'theme');
+  const publicSourceDir = path.join(templateDir, 'public');
   const previewDataSourcePath = path.join(templateDir, 'preview-data.json');
   let stat;
 
@@ -166,6 +167,9 @@ async function scaffoldTheme(targetDir, options) {
   }
 
   await fs.cp(themeSourceDir, path.join(targetDir, 'theme'), { recursive: true });
+  if (await isDirectory(publicSourceDir)) {
+    await fs.cp(publicSourceDir, path.join(targetDir, 'public'), { recursive: true });
+  }
   await fs.copyFile(previewDataSourcePath, path.join(targetDir, 'preview-data.json'));
   await writeStarterPackageJson(targetDir, slug);
 
@@ -179,6 +183,18 @@ async function scaffoldTheme(targetDir, options) {
   };
   await updateThemeManifest(path.join(targetDir, 'theme', 'theme.json'), manifest);
   await validateScaffoldedTheme(path.join(targetDir, 'theme'));
+}
+
+async function isDirectory(targetPath) {
+  try {
+    const stat = await fs.stat(targetPath);
+    return stat.isDirectory();
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return false;
+    }
+    throw error;
+  }
 }
 
 async function writeStarterPackageJson(targetDir, slug) {
