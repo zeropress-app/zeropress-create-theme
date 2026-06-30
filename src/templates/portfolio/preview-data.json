@@ -238,28 +238,24 @@
         {
           "title": "Work",
           "url": "/work/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "About",
           "url": "/about/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Typography",
           "url": "/typography/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Contact",
           "url": "/contact/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }
@@ -271,21 +267,18 @@
         {
           "title": "GitHub",
           "url": "https://github.com",
-          "type": "custom",
           "target": "_blank",
           "children": []
         },
         {
           "title": "LinkedIn",
           "url": "https://linkedin.com",
-          "type": "custom",
           "target": "_blank",
           "children": []
         },
         {
           "title": "X",
           "url": "https://x.com",
-          "type": "custom",
           "target": "_blank",
           "children": []
         }
@@ -297,21 +290,18 @@
         {
           "title": "Privacy",
           "url": "/legal/privacy/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Terms",
           "url": "/legal/terms/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Cookies",
           "url": "/legal/cookies/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }

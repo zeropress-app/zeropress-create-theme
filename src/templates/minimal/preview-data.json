@@ -176,21 +176,18 @@
         {
           "title": "Posts",
           "url": "/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "About",
           "url": "/about/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Archive",
           "url": "/archive/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }
@@ -202,14 +199,12 @@
         {
           "title": "About",
           "url": "/about/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Archive",
           "url": "/archive/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }

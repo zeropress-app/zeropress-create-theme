@@ -423,42 +423,36 @@
         {
           "title": "Culture",
           "url": "/categories/culture/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Design",
           "url": "/categories/design/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Technology",
           "url": "/categories/technology/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Travel",
           "url": "/categories/travel/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Food",
           "url": "/categories/food/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Archive",
           "url": "/archive/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }
@@ -470,21 +464,18 @@
         {
           "title": "About",
           "url": "/about/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Archive",
           "url": "/archive/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Feed",
           "url": "/feed.xml",
-          "type": "custom",
           "target": "_self",
           "children": []
         }
@@ -496,21 +487,18 @@
         {
           "title": "Privacy Policy",
           "url": "/privacy-policy/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Cookie Policy",
           "url": "/cookie-policy/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Terms of Service",
           "url": "/terms-of-service/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }

@@ -34,6 +34,6 @@
     "@zeropress/theme-validator": "0.6.5"
   },
   "devDependencies": {
-    "@zeropress/build": "0.6.12"
+    "@zeropress/build": "0.6.13"
   }
 }

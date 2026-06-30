@@ -364,35 +364,30 @@
         {
           "title": "Home",
           "url": "/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Archive",
           "url": "/archive/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Categories",
           "url": "/categories/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "About",
           "url": "/about/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Contact",
           "url": "/contact/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }
@@ -404,35 +399,30 @@
         {
           "title": "About",
           "url": "/about/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Contact",
           "url": "/contact/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Cookie Policy",
           "url": "/cookie-policy/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Privacy",
           "url": "/privacy/",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Terms",
           "url": "/terms/",
-          "type": "custom",
           "target": "_self",
           "children": []
         }

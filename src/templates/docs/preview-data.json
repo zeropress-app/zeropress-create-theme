@@ -142,7 +142,6 @@
         {
           "title": "GET STARTED",
           "url": "/",
-          "type": "custom",
           "target": "_self",
           "meta": {
             "accent": "blue"
@@ -151,14 +150,12 @@
             {
               "title": "Overview",
               "url": "/",
-              "type": "custom",
               "target": "_self",
               "children": []
             },
             {
               "title": "Getting Started",
               "url": "/getting-started",
-              "type": "custom",
               "target": "_self",
               "children": []
             }
@@ -167,7 +164,6 @@
         {
           "title": "GUIDES",
           "url": "/guides/markdown",
-          "type": "custom",
           "target": "_self",
           "meta": {
             "accent": "sage"
@@ -176,13 +172,11 @@
             {
               "title": "Markdown",
               "url": "/guides/markdown",
-              "type": "custom",
               "target": "_self",
               "children": [
                 {
                   "title": "Markdown Examples",
                   "url": "/markdown-examples/",
-                  "type": "custom",
                   "target": "_self",
                   "children": []
                 }
@@ -193,7 +187,6 @@
         {
           "title": "REFERENCE",
           "url": "/guides/configuration",
-          "type": "custom",
           "target": "_self",
           "meta": {
             "accent": "gold"
@@ -202,7 +195,6 @@
             {
               "title": "Configuration",
               "url": "/guides/configuration",
-              "type": "custom",
               "target": "_self",
               "children": []
             }
@@ -216,14 +208,12 @@
         {
           "title": "Privacy Policy",
           "url": "/legal/privacy",
-          "type": "custom",
           "target": "_self",
           "children": []
         },
         {
           "title": "Terms of Use",
           "url": "/legal/terms",
-          "type": "custom",
           "target": "_self",
           "children": []
         }
