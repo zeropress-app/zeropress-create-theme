@@ -109,8 +109,8 @@ Generated `package.json` includes:
     "dev": "zeropress-theme dev ./theme --data ./preview-data.json"
   },
   "dependencies": {
-    "@zeropress/build": "0.6.12",
-    "@zeropress/theme": "0.6.12"
+    "@zeropress/build": "^0.6.0",
+    "@zeropress/theme": "^0.6.0"
   }
 }
 ```

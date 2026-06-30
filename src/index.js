@@ -15,8 +15,7 @@ const DEFAULT_NAMESPACE = 'my-company';
 const DEFAULT_VERSION = '0.1.0';
 const DEFAULT_LICENSE = 'MIT';
 const DEFAULT_THEME_SCHEMA = 'https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json';
-const ZEROPRESS_BUILD_VERSION = '0.6.12';
-const ZEROPRESS_THEME_VERSION = '0.6.12';
+const ZEROPRESS_RUNTIME_DEPENDENCY_RANGE = `^${DEFAULT_RUNTIME}.0`;
 const MANIFEST_ORDERED_KEYS = new Set(['$schema', 'name', 'namespace', 'slug', 'version', 'license', 'runtime']);
 const require = createRequire(import.meta.url);
 const { version: PACKAGE_VERSION } = require('../package.json');
@@ -209,8 +208,8 @@ async function writeStarterPackageJson(targetDir, slug) {
       dev: 'zeropress-theme dev ./theme --data ./preview-data.json',
     },
     dependencies: {
-      '@zeropress/build': ZEROPRESS_BUILD_VERSION,
-      '@zeropress/theme': ZEROPRESS_THEME_VERSION,
+      '@zeropress/build': ZEROPRESS_RUNTIME_DEPENDENCY_RANGE,
+      '@zeropress/theme': ZEROPRESS_RUNTIME_DEPENDENCY_RANGE,
     },
   };
 

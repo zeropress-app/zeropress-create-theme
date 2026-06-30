@@ -137,8 +137,8 @@ test('run scaffolds a buildable v0.6 starter project', async () => {
     assert.equal(starterPackage.scripts.build, 'npm run clean && zeropress-build ./theme --data ./preview-data.json --out ./dist');
     assert.equal(starterPackage.scripts.dev, 'zeropress-theme dev ./theme --data ./preview-data.json');
     assert.deepEqual(starterPackage.dependencies, {
-      '@zeropress/build': '0.6.12',
-      '@zeropress/theme': '0.6.12',
+      '@zeropress/build': '^0.6.0',
+      '@zeropress/theme': '^0.6.0',
     });
     assert.equal(logs.some((line) => line.includes('Template: portfolio')), true);
     assert.equal(logs.some((line) => line.includes('Next: npm install && npm run build')), true);
