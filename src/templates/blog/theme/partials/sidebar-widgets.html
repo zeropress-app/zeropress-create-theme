@@ -60,14 +60,8 @@
       <p class="section-kicker">Widget</p>
       {{#if widget.title}}<h2>{{widget.title}}</h2>{{/if}}
       <div class="widget-search">
-        {{#if widget.title}}
-          <label class="sr-only" for="{{widget.dom_id}}">{{widget.title}}</label>
-        {{#else}}
-          <label class="sr-only" for="{{widget.dom_id}}">Search</label>
-        {{/if}}
         <div class="search-theme-wrapper">
-          <input id="{{widget.dom_id}}" class="search-input" type="search" placeholder="{{widget.placeholder}}" autocomplete="off" enterkeyhint="search" disabled>
-          <button class="widget-search-button" type="button">{{widget.button_label}}</button>
+          <button class="widget-search-button" type="button" data-cmdk-open disabled>{{widget.button_label}}</button>
         </div>
       </div>
     </section>
@@ -84,5 +78,5 @@
         </div>
       </div>
     </section>
-  {{/if_eq}}
+  {{/if}}
 {{/for}}

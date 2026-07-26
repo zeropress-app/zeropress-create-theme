@@ -1,4 +1,4 @@
-<article class="page-shell page-shell--narrow" {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>
+<article class="page-shell page-shell--narrow" {{#if site.search.enabled}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if}}{{/if}}>
   <p class="eyebrow mono">Contact</p>
   <h1 class="page-title">Let's talk.</h1>
   <p class="page-lede">The best way to reach me is by email. I read everything and reply within a few days.</p>
@@ -7,7 +7,7 @@
     {{#if site.meta.contact_email}}
       <a class="contact-block__email serif" href="mailto:{{site.meta.contact_email}}">{{site.meta.contact_email}}</a>
     {{/if}}
-    <p class="contact-block__press muted">For press inquiries, please write to <a href="mailto:press@junpark.studio">press@junpark.studio</a>.</p>
+    <p class="contact-block__press muted">Use the address above for project and press inquiries.</p>
   </div>
 
   <dl class="contact-meta">

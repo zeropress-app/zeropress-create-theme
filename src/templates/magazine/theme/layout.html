@@ -15,7 +15,7 @@
   </head>
   <body class="theme-body">
     <a class="skip-link" href="#content">Skip to content</a>
-    {{#if_eq route.type "post"}}{{partial:reading-progress}}{{/if_eq}}
+    {{#if_eq route.type "post"}}{{partial:reading-progress}}{{/if}}
     {{slot:header}}
     <main id="content" class="site-main">
       {{slot:content}}

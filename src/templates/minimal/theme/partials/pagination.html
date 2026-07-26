@@ -8,7 +8,7 @@
             <span class="pagination__gap" aria-hidden="true">…</span>
           {{#else_if_eq page.kind "page"}}
             <a href="{{page.url}}" class="pagination__page {{#if page.current}}is-current{{/if}}">{{page.number}}</a>
-          {{/if_eq}}
+          {{/if}}
         {{/for}}
       </span>
       {{#if pagination.has_next}}<a class="pagination__edge" href="{{pagination.next_url}}">Next →</a>{{#else}}<span class="pagination__edge is-disabled">Next →</span>{{/if}}

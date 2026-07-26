@@ -1,11 +1,11 @@
 {
-  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
-  "name": "Jun Park Portfolio",
+  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json",
+  "name": "Alex Example Portfolio",
   "namespace": "zeropress",
   "slug": "theme-portfolio2",
   "version": "0.6.12",
   "license": "MIT",
-  "runtime": "0.6",
+  "runtime": "0.7",
   "description": "Clean personal portfolio. Instrument Serif headlines, Inter body, JetBrains Mono metadata. Sticky header with theme toggle and social links, work index + case-study detail pages, typography specimen, and a three-document legal section.",
   "features": {
     "comments": false,

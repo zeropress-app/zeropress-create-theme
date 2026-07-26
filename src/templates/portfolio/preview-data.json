@@ -1,10 +1,10 @@
 {
-  "$schema": "https://schemas.zeropress.dev/preview-data/v0.6/schema.json",
-  "version": "0.6",
-  "generator": "portfolio2-mock",
-  "generated_at": "2026-05-13T09:00:00Z",
+  "$schema": "https://schemas.zeropress.dev/preview-data/v0.7/schema.json",
+  "version": "0.7",
+  "generator": "zeropress-create-theme",
+  "generated_at": "2026-07-15T09:00:00Z",
   "site": {
-    "title": "Jun Park",
+    "title": "Alex Example",
     "description": "Independent product designer and developer based in Seoul.",
     "url": "",
     "locale": "en-US",
@@ -15,31 +15,29 @@
       "paginate": false
     },
     "footer": {
-      "copyright_text": "2026 Jun Park",
+      "copyright_text": "2026 Alex Example",
       "attribution": true
     },
     "meta": {
-      "author_name": "Jun Park",
-      "author_short_name": "Jun Park",
+      "author_name": "Alex Example",
+      "author_short_name": "Alex Example",
       "hero_eyebrow": "Independent designer · Seoul",
       "hero_headline": "I design quiet, useful interfaces for ambitious teams shaping the next decade of software.",
-      "hero_lede": "Hi, I'm Jun — an independent product designer and developer based in Seoul. For the last decade I've helped startups and established teams ship calm, considered software. Currently leading design at a small fintech, and taking on a few outside projects each year.",
+      "hero_lede": "Hi, I'm Alex — an independent product designer and developer based in Seoul. For the last decade I've helped startups and established teams ship calm, considered software. Currently leading design at a small fintech, and taking on a few outside projects each year.",
       "currently_text": "Lead designer at Northwind. Writing weekly at Field Notes.",
       "available_text": "One advisory engagement opening in Q3 2026.",
-      "contact_email": "hello@junpark.studio"
+      "contact_email": "hello@example.com"
     },
-    "media_base_url": "",
+    "media_origin": "",
     "posts_per_page": 10,
-    "datetime_display": "static",
     "date_style": "medium",
-    "time_style": "none",
-    "disallow_comments": true
+    "time_style": "none"
   },
   "content": {
     "authors": [
       {
-        "id": "auth-jun",
-        "display_name": "Jun Park"
+        "id": "auth-alex",
+        "display_name": "Alex Example"
       }
     ],
     "posts": [],
@@ -57,9 +55,9 @@
         "title": "About",
         "slug": "about",
         "path": "about",
-        "content": "I'm Jun, a product designer and developer based in Seoul. For the last decade I've worked with founders and small teams to ship software that respects the people using it.\n\nMy background is in industrial design — I trained in Milan before moving into screens. I think about software the way I was taught to think about objects: scale, weight, material, and the way it sits in someone's hand.\n\nOutside of client work I write a small newsletter on the craft of interface design, and I keep an irregular reading list of essays I find useful.\n\n## Working notes\n\n| Practice | Rhythm |\n| --- | --- |\n| Product strategy | Weekly critique |\n| Interface systems | Design and implementation |\n| Writing | Field notes and essays |\n\n- [x] Keep the work quiet and useful.\n- [ ] Publish the next field note.\n\n> [!NOTE]\n> This page intentionally includes table, task list, and alert Markdown so the portfolio prose styles can be verified.",
+        "content": "I'm Alex, a product designer and developer based in Seoul. For the last decade I've worked with founders and small teams to ship software that respects the people using it.\n\nMy background is in industrial design — I trained in Milan before moving into screens. I think about software the way I was taught to think about objects: scale, weight, material, and the way it sits in someone's hand.\n\nOutside of client work I write a small newsletter on the craft of interface design, and I keep an irregular reading list of essays I find useful.\n\n## Working notes\n\n| Practice | Rhythm |\n| --- | --- |\n| Product strategy | Weekly critique |\n| Interface systems | Design and implementation |\n| Writing | Field notes and essays |\n\n- [x] Keep the work quiet and useful.\n- [ ] Publish the next field note.\n\n> [!NOTE]\n> This page intentionally includes table, task list, and alert Markdown so the portfolio prose styles can be verified.",
         "document_type": "markdown",
-        "excerpt": "About Jun Park, an independent product designer based in Seoul.",
+        "excerpt": "About Alex Example, an independent product designer based in Seoul.",
         "status": "published"
       },
       {
@@ -77,7 +75,7 @@
         "path": "contact",
         "content": "Contact information.",
         "document_type": "plaintext",
-        "excerpt": "Get in touch with Jun Park about a project or collaboration.",
+        "excerpt": "Get in touch with Alex Example about a project or collaboration.",
         "status": "published"
       },
       {
@@ -192,7 +190,7 @@
         "title": "Privacy Policy",
         "slug": "privacy",
         "path": "legal/privacy",
-        "content": "This Privacy Policy describes how junpark.studio (\"we\", \"our\") collects, uses, and shares information about you when you visit this website. This is a sample document for a portfolio site and should not be relied upon as legal advice.\n\n## 1. Information we collect\n\nWe collect a minimal amount of information necessary to operate the site. This includes anonymous analytics data such as the pages you visit, your approximate location at the country level, and the device and browser you use.\n\n## 2. How we use your information\n\n- To understand which pages are most useful to visitors.\n- To detect, prevent, and respond to abuse or technical issues.\n- To respond to messages you send us through the contact page.\n\n## 3. Sharing\n\nWe do not sell your personal information. We share data only with service providers who help us run the site, and only as needed to perform their work for us.\n\n## 4. Your rights\n\nDepending on where you live, you may have the right to access, correct, or delete the personal information we hold about you. To exercise these rights, email privacy@junpark.studio.\n\n## 5. Contact\n\nIf you have any questions about this policy, please write to privacy@junpark.studio.",
+        "content": "This Privacy Policy describes how example.com (\"we\", \"our\") collects, uses, and shares information about you when you visit this website. This is a sample document for a portfolio site and should not be relied upon as legal advice.\n\n## 1. Information we collect\n\nWe collect a minimal amount of information necessary to operate the site. This includes anonymous analytics data such as the pages you visit, your approximate location at the country level, and the device and browser you use.\n\n## 2. How we use your information\n\n- To understand which pages are most useful to visitors.\n- To detect, prevent, and respond to abuse or technical issues.\n- To respond to messages you send us through the contact page.\n\n## 3. Sharing\n\nWe do not sell your personal information. We share data only with service providers who help us run the site, and only as needed to perform their work for us.\n\n## 4. Your rights\n\nDepending on where you live, you may have the right to access, correct, or delete the personal information we hold about you. To exercise these rights, email privacy@example.com.\n\n## 5. Contact\n\nIf you have any questions about this policy, please write to privacy@example.com.",
         "document_type": "markdown",
         "excerpt": "How we handle your data.",
         "status": "published",
@@ -205,7 +203,7 @@
         "title": "Terms of Service",
         "slug": "terms",
         "path": "legal/terms",
-        "content": "These Terms of Service govern your use of junpark.studio. By accessing the site you agree to these terms. This is a sample document provided as part of a portfolio template.\n\n## 1. Use of the site\n\nYou may browse and read the content on this site for personal, non-commercial use. You may not scrape, republish, or use the content to train machine-learning models without prior written consent.\n\n## 2. Intellectual property\n\nAll written content, project case studies, photographs, and design work are © Jun Park unless otherwise noted. Client work is shown with permission and remains the property of the respective clients.\n\n## 3. Disclaimer\n\nThe site is provided \"as is\" without warranties of any kind. We make no guarantees about the accuracy or completeness of the information published here.\n\n## 4. Limitation of liability\n\nTo the fullest extent permitted by law, we are not liable for any indirect or consequential damages arising from your use of the site.\n\n## 5. Changes\n\nWe may update these terms from time to time. The date at the top of the page indicates when the terms were last revised.\n\n## 6. Governing law\n\nThese terms are governed by the laws of the Republic of Korea.",
+        "content": "These Terms of Service govern your use of example.com. By accessing the site you agree to these terms. This is a sample document provided as part of a portfolio template.\n\n## 1. Use of the site\n\nYou may browse and read the content on this site for personal, non-commercial use. You may not scrape, republish, or use the content to train machine-learning models without prior written consent.\n\n## 2. Intellectual property\n\nAll written content, project case studies, photographs, and design work are © Alex Example unless otherwise noted. Client work is shown with permission and remains the property of the respective clients.\n\n## 3. Disclaimer\n\nThe site is provided \"as is\" without warranties of any kind. We make no guarantees about the accuracy or completeness of the information published here.\n\n## 4. Limitation of liability\n\nTo the fullest extent permitted by law, we are not liable for any indirect or consequential damages arising from your use of the site.\n\n## 5. Changes\n\nWe may update these terms from time to time. The date at the top of the page indicates when the terms were last revised.\n\n## 6. Governing law\n\nThese terms are governed by the laws of the Republic of Korea.",
         "document_type": "markdown",
         "excerpt": "The terms that govern use of this site.",
         "status": "published",
@@ -218,7 +216,7 @@
         "title": "Cookie Policy",
         "slug": "cookies",
         "path": "legal/cookies",
-        "content": "This Cookie Policy explains how junpark.studio uses cookies and similar technologies when you visit the site. This is a sample document for a portfolio template.\n\n## 1. What are cookies\n\nCookies are small text files placed on your device when you visit a website. They are widely used to make sites work, or work more efficiently, and to provide information to the site owner.\n\n## 2. Cookies we use\n\n- **Essential** — required for the site to function, such as remembering your light or dark mode preference.\n- **Analytics** — anonymous, aggregated statistics about how visitors use the site. No personal identifiers are stored.\n\n## 3. Managing cookies\n\nMost browsers let you refuse or delete cookies. Doing so may affect parts of the site, such as your saved theme preference.\n\n## 4. Third parties\n\nWe do not use third-party advertising cookies. Any analytics provider we use is contractually required to handle data on our behalf only.\n\n## 5. Contact\n\nQuestions about cookies can be sent to privacy@junpark.studio.",
+        "content": "This Cookie Policy explains how example.com uses cookies and similar technologies when you visit the site. This is a sample document for a portfolio template.\n\n## 1. What are cookies\n\nCookies are small text files placed on your device when you visit a website. They are widely used to make sites work, or work more efficiently, and to provide information to the site owner.\n\n## 2. Cookies we use\n\n- **Essential** — required for the site to function, such as remembering your light or dark mode preference.\n- **Analytics** — anonymous, aggregated statistics about how visitors use the site. No personal identifiers are stored.\n\n## 3. Managing cookies\n\nMost browsers let you refuse or delete cookies. Doing so may affect parts of the site, such as your saved theme preference.\n\n## 4. Third parties\n\nWe do not use third-party advertising cookies. Any analytics provider we use is contractually required to handle data on our behalf only.\n\n## 5. Contact\n\nQuestions about cookies can be sent to privacy@example.com.",
         "document_type": "markdown",
         "excerpt": "How we use cookies on this site.",
         "status": "published",
@@ -314,15 +312,15 @@
       "items": [
         {
           "type": "page",
-          "slug": "northwind-banking"
+          "path": "work/northwind-banking"
         },
         {
           "type": "page",
-          "slug": "field-notes-cms"
+          "path": "work/field-notes-cms"
         },
         {
           "type": "page",
-          "slug": "atlas-type-foundry"
+          "path": "work/atlas-type-foundry"
         }
       ]
     },
@@ -331,27 +329,27 @@
       "items": [
         {
           "type": "page",
-          "slug": "northwind-banking"
+          "path": "work/northwind-banking"
         },
         {
           "type": "page",
-          "slug": "field-notes-cms"
+          "path": "work/field-notes-cms"
         },
         {
           "type": "page",
-          "slug": "atlas-type-foundry"
+          "path": "work/atlas-type-foundry"
         },
         {
           "type": "page",
-          "slug": "marlow-coffee"
+          "path": "work/marlow-coffee"
         },
         {
           "type": "page",
-          "slug": "harbor-health"
+          "path": "work/harbor-health"
         },
         {
           "type": "page",
-          "slug": "meridian-os"
+          "path": "work/meridian-os"
         }
       ]
     }

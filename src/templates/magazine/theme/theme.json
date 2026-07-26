@@ -1,11 +1,11 @@
 {
-  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
+  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json",
   "name": "The Margin",
   "namespace": "zeropress",
   "slug": "theme-magazine2",
   "version": "0.6.12",
   "license": "MIT",
-  "runtime": "0.6",
+  "runtime": "0.7",
   "description": "Clean modern editorial magazine. Instrument Serif + Inter, drop-cap long reads, dark mode toggle, reading-progress bar, category archive, legal pages.",
   "features": {
     "comments": false,
@@ -35,38 +35,32 @@
     "issue_label": {
       "title": "Issue label",
       "description": "Small label above the masthead title (e.g. Issue No. 47).",
-      "type": "string",
-      "default": "Issue No. 47 — May 2026"
+      "type": "string"
     },
     "masthead_title": {
       "title": "Masthead headline",
       "description": "The large editorial headline on the home page.",
-      "type": "string",
-      "default": "Slow looks. Long reads."
+      "type": "string"
     },
     "masthead_lede": {
       "title": "Masthead lede",
       "description": "Short paragraph beneath the masthead headline.",
-      "type": "string",
-      "default": "A magazine for the things that don't fit in a feed."
+      "type": "string"
     },
     "section_label": {
       "title": "Latest section label",
       "description": "Eyebrow above the latest grid.",
-      "type": "string",
-      "default": "Latest"
+      "type": "string"
     },
     "archive_cta_eyebrow": {
       "title": "Archive CTA eyebrow",
       "description": "Eyebrow above the bottom category strip.",
-      "type": "string",
-      "default": "Browse the Archive"
+      "type": "string"
     },
     "archive_cta_title": {
       "title": "Archive CTA title",
       "description": "Heading above the bottom category strip.",
-      "type": "string",
-      "default": "Find your next long read"
+      "type": "string"
     }
   },
   "collection_slots": {

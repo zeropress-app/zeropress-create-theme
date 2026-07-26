@@ -1,7 +1,7 @@
 <article class="page">
   <header class="page__header">
     <p class="eyebrow">Page</p>
-    {{#if_eq page.document_type "plaintext"}}<h1 class="page__title">{{page.title}}</h1>{{/if_eq}}
+    {{#if_eq page.document_type "plaintext"}}<h1 class="page__title">{{page.title}}</h1>{{/if}}
   </header>
-  <div class="page__body prose-editorial" {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{page.html}}</div>
+  <div class="page__body prose-editorial" {{#if site.search.enabled}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if}}{{/if}}>{{page.html}}</div>
 </article>

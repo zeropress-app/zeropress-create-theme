@@ -609,7 +609,7 @@
   function highlightMatches(text, terms) {
     if (!text || !terms || !terms.length) return escapeHtml(text || '');
     var escaped = escapeHtml(text);
-    // Sort longest first so "build-pages" matches before "build".
+    // Sort longest first so "documentation" matches before "document".
     var sorted = terms.slice().sort(function (a, b) { return b.length - a.length; });
     var pattern = sorted.map(escapeRegExp).join('|');
     var rx = new RegExp('(' + pattern + ')', 'gi');

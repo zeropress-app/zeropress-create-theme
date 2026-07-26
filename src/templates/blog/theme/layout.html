@@ -19,5 +19,30 @@
       {{slot:content}}
     </main>
     {{slot:footer}}
+    {{#if site.search.enabled}}
+      <div class="cmdk" data-cmdk hidden>
+        <div class="cmdk__backdrop" data-cmdk-close></div>
+        <div class="cmdk__panel" role="dialog" aria-modal="true" aria-label="Search writing">
+          <div class="cmdk__field">
+            <span class="cmdk__icon" aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              data-cmdk-input
+              role="combobox"
+              aria-label="Search writing"
+              aria-expanded="false"
+              aria-controls="cmdk-results"
+              aria-autocomplete="list"
+              placeholder="Search writing..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+            <kbd class="cmdk__kbd">esc</kbd>
+          </div>
+          <ul class="cmdk__list" id="cmdk-results" role="listbox" aria-label="Search results" data-cmdk-list></ul>
+          <p class="cmdk__empty" data-cmdk-empty hidden>Type to search.</p>
+        </div>
+      </div>
+    {{/if}}
   </body>
 </html>

@@ -10,7 +10,7 @@
     </div>
   </header>
 
-  <div class="prose" {{#if site.search}}{{#if_neq post.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>{{post.html}}</div>
+  <div class="prose" {{#if site.search.enabled}}{{#if_neq post.discoverability "delist"}}data-pagefind-body{{/if}}{{/if}}>{{post.html}}</div>
 
   {{#if post.tags}}
     <div class="post__tags">
@@ -45,7 +45,7 @@
 
   <hr class="post__rule">
 
-  {{#if post.comments_enabled}}
+  {{#if comments.enabled}}
     {{partial:comments-island}}
   {{/if}}
 </article>

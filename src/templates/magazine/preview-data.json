@@ -1,8 +1,8 @@
 {
-  "$schema": "https://schemas.zeropress.dev/preview-data/v0.6/schema.json",
-  "version": "0.6",
-  "generator": "the-margin-magazine2-mock",
-  "generated_at": "2026-05-13T09:00:00Z",
+  "$schema": "https://schemas.zeropress.dev/preview-data/v0.7/schema.json",
+  "version": "0.7",
+  "generator": "zeropress-create-theme",
+  "generated_at": "2026-07-15T09:00:00Z",
   "site": {
     "title": "The Margin",
     "description": "A magazine for the things that don't fit in a feed.",
@@ -21,12 +21,10 @@
       "archive_cta_eyebrow": "Browse the Archive",
       "archive_cta_title": "Find your next long read"
     },
-    "media_base_url": "",
+    "media_origin": "",
     "posts_per_page": 9,
-    "datetime_display": "static",
     "date_style": "medium",
-    "time_style": "none",
-    "disallow_comments": true
+    "time_style": "none"
   },
   "content": {
     "authors": [
@@ -64,7 +62,6 @@
         "author_id": "auth-marsh",
         "featured_image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "culture"
         ],
@@ -85,7 +82,6 @@
         "author_id": "auth-okafor",
         "featured_image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "culture"
         ],
@@ -106,7 +102,6 @@
         "author_id": "auth-pereira",
         "featured_image": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "design"
         ],
@@ -127,7 +122,6 @@
         "author_id": "auth-vasquez",
         "featured_image": "https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "travel"
         ],
@@ -148,7 +142,6 @@
         "author_id": "auth-okafor",
         "featured_image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "technology"
         ],
@@ -169,7 +162,6 @@
         "author_id": "auth-ito",
         "featured_image": "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "food"
         ],
@@ -190,7 +182,6 @@
         "author_id": "auth-marsh",
         "featured_image": "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "design"
         ],
@@ -210,7 +201,6 @@
         "author_id": "auth-vasquez",
         "featured_image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "travel"
         ],
@@ -230,7 +220,6 @@
         "author_id": "auth-pereira",
         "featured_image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=1600&q=80",
         "status": "published",
-        "allow_comments": false,
         "category_slugs": [
           "culture"
         ],

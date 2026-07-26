@@ -1,15 +1,15 @@
 {
-  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
+  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json",
   "name": "Margin Notes",
   "namespace": "zeropress",
   "slug": "theme-blog2",
   "version": "0.6.12",
   "license": "MIT",
-  "runtime": "0.6",
+  "runtime": "0.7",
   "description": "Quiet two-column personal blog with Fraunces serif headings and Inter body. Title, tagline, top menu, theme toggle, sidebar with blog info and recent posts, post detail with TOC and threaded comments.",
   "features": {
     "comments": true,
-    "newsletter": true
+    "search": true
   },
   "menu_slots": {
     "primary": {

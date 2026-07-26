@@ -1,8 +1,8 @@
 {
-  "$schema": "https://schemas.zeropress.dev/preview-data/v0.6/schema.json",
-  "version": "0.6",
-  "generator": "minimal2-poc",
-  "generated_at": "2026-05-13T09:00:00Z",
+  "$schema": "https://schemas.zeropress.dev/preview-data/v0.7/schema.json",
+  "version": "0.7",
+  "generator": "zeropress-create-theme",
+  "generated_at": "2026-07-15T09:00:00Z",
   "site": {
     "title": "minimal",
     "description": "A quiet corner of the internet — notes on writing, tools, and the work in between.",
@@ -13,12 +13,10 @@
       "copyright_text": "minimal — built quietly.",
       "attribution": true
     },
-    "media_base_url": "",
+    "media_origin": "",
     "posts_per_page": 10,
-    "datetime_display": "static",
     "date_style": "medium",
-    "time_style": "none",
-    "disallow_comments": false
+    "time_style": "none"
   },
   "content": {
     "authors": [
@@ -39,7 +37,6 @@
         "updated_at_iso": "2026-05-10T09:00:00Z",
         "author_id": "33333333-3333-4333-8333-333333333333",
         "status": "published",
-        "allow_comments": true,
         "category_slugs": [
           "notes"
         ],
@@ -59,7 +56,6 @@
         "updated_at_iso": "2026-05-07T09:00:00Z",
         "author_id": "33333333-3333-4333-8333-333333333333",
         "status": "published",
-        "allow_comments": true,
         "category_slugs": [
           "essays"
         ],
@@ -79,7 +75,6 @@
         "updated_at_iso": "2026-05-03T09:00:00Z",
         "author_id": "33333333-3333-4333-8333-333333333333",
         "status": "published",
-        "allow_comments": true,
         "category_slugs": [
           "notes"
         ],
@@ -99,7 +94,6 @@
         "updated_at_iso": "2026-04-28T09:00:00Z",
         "author_id": "33333333-3333-4333-8333-333333333333",
         "status": "published",
-        "allow_comments": true,
         "category_slugs": [
           "essays"
         ],

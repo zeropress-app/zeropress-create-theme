@@ -1,6 +1,10 @@
 const THEME_KEY = "zeropress-theme";
+const SEARCH_ADAPTER_URL = "/_zeropress/search.js";
+const SEARCH_LIMIT = 8;
 
 document.documentElement.classList.add("js");
+
+let searchAdapterPromise = null;
 
 function getStorage(type) {
   try {
@@ -87,552 +91,6 @@ function initNavigationState() {
   });
 }
 
-function parsePositiveInteger(value) {
-  if (typeof value !== "string" || value.trim() === "") {
-    return 0;
-  }
-
-  const normalizedValue = value.trim();
-  if (!/^\d+$/.test(normalizedValue)) {
-    return 0;
-  }
-
-  const parsed = Number.parseInt(normalizedValue, 10);
-  if (!Number.isInteger(parsed) || parsed <= 0) {
-    return 0;
-  }
-
-  return parsed;
-}
-
-function parseCommentPostPublicId(element) {
-  if (!(element instanceof HTMLElement)) {
-    return 0;
-  }
-
-  return parsePositiveInteger(element.dataset.zpCommentsPost || "");
-}
-
-function buildCommentTree(comments) {
-  const map = new Map();
-  const roots = [];
-
-  comments.forEach((comment) => {
-    map.set(comment.id, {
-      ...comment,
-      children: [],
-    });
-  });
-
-  comments.forEach((comment) => {
-    const node = map.get(comment.id);
-    if (!node) {
-      return;
-    }
-
-    if (comment.parent_id && map.has(comment.parent_id)) {
-      map.get(comment.parent_id).children.push(node);
-      return;
-    }
-
-    roots.push(node);
-  });
-
-  return roots;
-}
-
-function reportCommentsContractError(message, details = "") {
-  console.error("[ZeroPress Comments]", message, details);
-}
-
-function getCommentInitials(name) {
-  const parts = String(name || "")
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean);
-
-  if (parts.length === 0) {
-    return "";
-  }
-
-  return parts
-    .slice(0, 2)
-    .map((part) => part.charAt(0).toUpperCase())
-    .join("");
-}
-
-function getCommentTemplate(scope, attribute, label) {
-  const template = scope.querySelector(`template[${attribute}]`);
-  if (!(template instanceof HTMLTemplateElement)) {
-    reportCommentsContractError(`Missing required ${label} template.`, attribute);
-    return null;
-  }
-
-  return template;
-}
-
-function resolveCommentsTemplates(mount) {
-  const scope = mount.closest(".comments-block");
-  if (!(scope instanceof HTMLElement)) {
-    reportCommentsContractError("Comments mount is missing a .comments-block scope.");
-    return null;
-  }
-
-  const shell = getCommentTemplate(scope, "data-zp-comments-shell", "comments shell");
-  const form = getCommentTemplate(scope, "data-zp-comments-form", "comments form");
-  const replyForm = getCommentTemplate(scope, "data-zp-comment-reply-form", "comment reply form");
-  const item = getCommentTemplate(scope, "data-zp-comment-item", "comment item");
-  const empty = getCommentTemplate(scope, "data-zp-comments-empty", "comments empty state");
-  const error = getCommentTemplate(scope, "data-zp-comment-error", "comment error state");
-  const success = getCommentTemplate(scope, "data-zp-comment-success", "comment success state");
-
-  if (!shell || !form || !replyForm || !item || !empty || !error || !success) {
-    return null;
-  }
-
-  return { shell, form, replyForm, item, empty, error, success };
-}
-
-function cloneTemplateFragment(template) {
-  return template.content.cloneNode(true);
-}
-
-function getCommentRole(container, role) {
-  const target = container.querySelector(`[data-role="${role}"]`);
-  return target instanceof HTMLElement ? target : null;
-}
-
-function getRequiredCommentRole(container, role, contextLabel) {
-  const target = getCommentRole(container, role);
-  if (!target) {
-    reportCommentsContractError(`Missing required ${role} role in ${contextLabel}.`);
-    return null;
-  }
-
-  return target;
-}
-
-function validateCommentFormFragment(fragment, options = {}) {
-  const { parentId = "" } = options;
-  const form = fragment.querySelector("[data-zp-comment-form]");
-  if (!(form instanceof HTMLFormElement)) {
-    reportCommentsContractError("Comments form template must contain <form data-zp-comment-form>.");
-    return null;
-  }
-
-  const requiredFieldNames = [
-    "author_name",
-    "author_email",
-    "content",
-    "parent_id",
-    "website",
-  ];
-
-  for (const name of requiredFieldNames) {
-    const field = form.querySelector(`[name="${name}"]`);
-    if (!(field instanceof HTMLElement)) {
-      reportCommentsContractError(`Comments form template is missing required field: ${name}.`);
-      return null;
-    }
-  }
-
-  const parentIdField = form.querySelector('[name="parent_id"]');
-  if (parentIdField instanceof HTMLInputElement) {
-    parentIdField.value = parentId;
-  }
-
-  return form;
-}
-
-function createCommentFeedbackFragment(templates, errors, successMessage) {
-  const fragment = document.createDocumentFragment();
-
-  if (Array.isArray(errors) && errors.length > 0) {
-    errors.forEach((errorMessage) => {
-      const errorFragment = cloneTemplateFragment(templates.error);
-      const messageTarget = getRequiredCommentRole(errorFragment, "message", "comment error template");
-      if (!messageTarget) {
-        return;
-      }
-
-      messageTarget.textContent = String(errorMessage || "");
-      fragment.append(errorFragment);
-    });
-    return fragment;
-  }
-
-  if (successMessage) {
-    const successFragment = cloneTemplateFragment(templates.success);
-    const messageTarget = getRequiredCommentRole(successFragment, "message", "comment success template");
-    if (!messageTarget) {
-      return fragment;
-    }
-
-    messageTarget.textContent = successMessage;
-    fragment.append(successFragment);
-  }
-
-  return fragment;
-}
-
-function createReplyFormFragment(node, templates) {
-  const fragment = cloneTemplateFragment(templates.replyForm);
-  const form = validateCommentFormFragment(fragment, {
-    parentId: String(node.id || ""),
-  });
-
-  if (!form) {
-    return null;
-  }
-
-  return fragment;
-}
-
-function createCommentItemFragment(node, templates, replyState) {
-  const fragment = cloneTemplateFragment(templates.item);
-  const authorTarget = getRequiredCommentRole(fragment, "author", "comment item template");
-  const dateTarget = getRequiredCommentRole(fragment, "date", "comment item template");
-  const contentTarget = getRequiredCommentRole(fragment, "content", "comment item template");
-  const replyFormTarget = getRequiredCommentRole(fragment, "reply-form", "comment item template");
-  const repliesTarget = getRequiredCommentRole(fragment, "replies", "comment item template");
-
-  if (!authorTarget || !dateTarget || !contentTarget || !replyFormTarget || !repliesTarget) {
-    return null;
-  }
-
-  authorTarget.textContent = String(node.author_name || "");
-  dateTarget.textContent = String(node.created_at || "");
-  if (dateTarget instanceof HTMLTimeElement) {
-    dateTarget.dateTime = String(node.created_at || "");
-  }
-
-  contentTarget.textContent = String(node.content || "");
-
-  const avatarTarget = getCommentRole(fragment, "avatar");
-  if (avatarTarget) {
-    avatarTarget.textContent = getCommentInitials(node.author_name);
-  }
-
-  const itemRoot = fragment.querySelector('[data-role="comment-item"]');
-  if (itemRoot instanceof HTMLElement) {
-    itemRoot.dataset.commentId = String(node.id || "");
-  }
-
-  const replyButton = fragment.querySelector('[data-action="reply"]');
-  if (replyButton instanceof HTMLButtonElement) {
-    const isReplyOpen = replyState.activeCommentId === String(node.id || "");
-    replyButton.dataset.replyCommentId = String(node.id || "");
-    replyButton.dataset.replyOpen = isReplyOpen ? "true" : "false";
-    replyButton.textContent = isReplyOpen ? "Cancel" : "Reply";
-    replyButton.setAttribute("aria-expanded", isReplyOpen ? "true" : "false");
-  }
-
-  if (replyState.activeCommentId === String(node.id || "")) {
-    const replyFormFragment = createReplyFormFragment(node, templates);
-    if (replyFormFragment) {
-      replyFormTarget.append(replyFormFragment);
-    }
-  }
-
-  if (Array.isArray(node.children) && node.children.length > 0) {
-    node.children.forEach((childNode) => {
-      const childFragment = createCommentItemFragment(childNode, templates, replyState);
-      if (childFragment) {
-        repliesTarget.append(childFragment);
-      }
-    });
-  }
-
-  return fragment;
-}
-
-function createCommentListFragment(comments, templates, replyState) {
-  if (!Array.isArray(comments) || comments.length === 0) {
-    return cloneTemplateFragment(templates.empty);
-  }
-
-  const fragment = document.createDocumentFragment();
-  buildCommentTree(comments).forEach((rootNode) => {
-    const itemFragment = createCommentItemFragment(rootNode, templates, replyState);
-    if (itemFragment) {
-      fragment.append(itemFragment);
-    }
-  });
-
-  return fragment;
-}
-
-function createCommentsShellFragment(templates, options) {
-  const {
-    comments,
-    errors = [],
-    successMessage = "",
-    showForm = true,
-    showList = true,
-    replyState = { activeCommentId: null },
-  } = options;
-
-  const shellFragment = cloneTemplateFragment(templates.shell);
-  const feedbackTarget = getRequiredCommentRole(shellFragment, "feedback", "comments shell template");
-  const formTarget = getRequiredCommentRole(shellFragment, "form", "comments shell template");
-  const listTarget = getRequiredCommentRole(shellFragment, "list", "comments shell template");
-
-  if (!feedbackTarget || !formTarget || !listTarget) {
-    return null;
-  }
-
-  const countTarget = getCommentRole(shellFragment, "count");
-  if (countTarget) {
-    countTarget.textContent = String(Array.isArray(comments) ? comments.length : 0);
-  }
-
-  feedbackTarget.replaceChildren(createCommentFeedbackFragment(templates, errors, successMessage));
-
-  if (showForm) {
-    const formFragment = cloneTemplateFragment(templates.form);
-    const form = validateCommentFormFragment(formFragment, {
-      parentId: "",
-    });
-    if (!form) {
-      return null;
-    }
-    formTarget.replaceChildren(formFragment);
-  } else {
-    formTarget.replaceChildren();
-  }
-
-  if (showList) {
-    listTarget.replaceChildren(createCommentListFragment(comments, templates, replyState));
-  } else {
-    listTarget.replaceChildren();
-  }
-  return shellFragment;
-}
-
-async function readJsonResponse(response) {
-  try {
-    return await response.json();
-  } catch {
-    return null;
-  }
-}
-
-function getCommentsEndpoint(publicId) {
-  return `/api/comments?post=${encodeURIComponent(String(publicId))}`;
-}
-
-function initComments(root = document) {
-  const mounts = Array.from(root.querySelectorAll("[data-zp-comments]"))
-    .filter((element) => element instanceof HTMLElement)
-    .filter((element) => element.dataset.commentsReady !== "true");
-
-  if (mounts.length === 0) {
-    return;
-  }
-
-  mounts.forEach((mount) => {
-    mount.dataset.commentsReady = "true";
-    const publicId = parseCommentPostPublicId(mount);
-    if (!publicId) {
-      return;
-    }
-
-    const templates = resolveCommentsTemplates(mount);
-    if (!templates) {
-      mount.hidden = true;
-      mount.replaceChildren();
-      return;
-    }
-
-    let currentComments = [];
-    const replyState = {
-      activeCommentId: null,
-    };
-
-    const focusReplyForm = (commentId) => {
-      if (!commentId) {
-        return;
-      }
-
-      const commentItems = Array.from(mount.querySelectorAll('[data-role="comment-item"]'))
-        .filter((element) => element instanceof HTMLElement);
-      const targetItem = commentItems.find((element) => element.dataset.commentId === commentId);
-      if (!(targetItem instanceof HTMLElement)) {
-        return;
-      }
-
-      const textarea = targetItem.querySelector('.zp-comment__reply-slot textarea[name="content"]');
-      if (textarea instanceof HTMLTextAreaElement) {
-        textarea.focus();
-      }
-    };
-
-    const renderLoadedState = (options = {}) => {
-      const {
-        errors = [],
-        successMessage = "",
-        focusReplyCommentId = "",
-      } = options;
-      const shellFragment = createCommentsShellFragment(templates, {
-        comments: currentComments,
-        errors,
-        successMessage,
-        showForm: true,
-        replyState,
-      });
-      if (!shellFragment) {
-        mount.hidden = true;
-        mount.replaceChildren();
-        return;
-      }
-
-      mount.replaceChildren(shellFragment);
-      mount.hidden = false;
-      bindCommentInteractions();
-
-      if (focusReplyCommentId) {
-        queueMicrotask(() => {
-          focusReplyForm(focusReplyCommentId);
-        });
-      }
-    };
-
-    const renderErrorState = (message) => {
-      const shellFragment = createCommentsShellFragment(templates, {
-        comments: [],
-        errors: [message],
-        showForm: false,
-        showList: false,
-      });
-      if (!shellFragment) {
-        mount.hidden = true;
-        mount.replaceChildren();
-        return;
-      }
-
-      mount.replaceChildren(shellFragment);
-      mount.hidden = false;
-    };
-
-    const loadComments = async (options = {}) => {
-      const response = await fetch(getCommentsEndpoint(publicId), {
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      const payload = await readJsonResponse(response);
-
-      if (!response.ok || !payload?.ok) {
-        renderErrorState(payload?.message || "Comments are temporarily unavailable.");
-        return;
-      }
-
-      currentComments = Array.isArray(payload.comments) ? payload.comments : [];
-      if (
-        replyState.activeCommentId &&
-        !currentComments.some((comment) => String(comment.id || "") === replyState.activeCommentId)
-      ) {
-        replyState.activeCommentId = null;
-      }
-      renderLoadedState({
-        successMessage: options.successMessage || "",
-      });
-    };
-
-    const bindCommentInteractions = () => {
-      const replyButtons = Array.from(mount.querySelectorAll('[data-action="reply"]'))
-        .filter((element) => element instanceof HTMLButtonElement);
-
-      replyButtons.forEach((button) => {
-        if (button.dataset.replyReady === "true") {
-          return;
-        }
-
-        button.dataset.replyReady = "true";
-        button.addEventListener("click", () => {
-          const commentId = String(button.dataset.replyCommentId || "");
-          if (!commentId) {
-            return;
-          }
-
-          const isAlreadyOpen = replyState.activeCommentId === commentId;
-          replyState.activeCommentId = isAlreadyOpen ? null : commentId;
-          renderLoadedState({
-            focusReplyCommentId: isAlreadyOpen ? "" : commentId,
-          });
-        });
-      });
-
-      const cancelButtons = Array.from(mount.querySelectorAll('[data-action="cancel-reply"]'))
-        .filter((element) => element instanceof HTMLButtonElement);
-
-      cancelButtons.forEach((button) => {
-        if (button.dataset.cancelReplyReady === "true") {
-          return;
-        }
-
-        button.dataset.cancelReplyReady = "true";
-        button.addEventListener("click", () => {
-          replyState.activeCommentId = null;
-          renderLoadedState();
-        });
-      });
-
-      const forms = Array.from(mount.querySelectorAll("[data-zp-comment-form]"))
-        .filter((element) => element instanceof HTMLFormElement);
-
-      forms.forEach((form) => {
-        if (form.dataset.commentFormReady === "true") {
-          return;
-        }
-
-        form.dataset.commentFormReady = "true";
-        form.addEventListener("submit", async (event) => {
-          event.preventDefault();
-
-          const parentIdField = form.querySelector('[name="parent_id"]');
-          const parentId = parentIdField instanceof HTMLInputElement ? parentIdField.value.trim() : "";
-
-          const response = await fetch(getCommentsEndpoint(publicId), {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-            },
-            body: new FormData(form),
-          });
-          const payload = await readJsonResponse(response);
-
-          if (!response.ok || !payload?.ok) {
-            replyState.activeCommentId = parentId || null;
-            renderLoadedState({
-              errors: Array.isArray(payload?.errors) && payload.errors.length > 0
-                ? payload.errors
-                : [payload?.message || "Something went wrong. Please try again."],
-              focusReplyCommentId: parentId,
-            });
-            return;
-          }
-
-          replyState.activeCommentId = null;
-
-          if (payload.requires_approval === false) {
-            await loadComments({
-              successMessage: payload.message || "Your comment has been posted.",
-            });
-            return;
-          }
-
-          renderLoadedState({
-            successMessage: payload.message || "Your comment has been submitted and is awaiting moderation.",
-          });
-        });
-      });
-    };
-
-    void loadComments();
-  });
-}
-
 function initArticleContentLinks(root = document) {
   root.querySelectorAll(".article-content a[href]").forEach((link) => {
     if (link.dataset.articleLinkReady === "true") {
@@ -706,12 +164,298 @@ function initNewsletterIsland(root = document) {
   });
 }
 
+function loadSearchAdapter() {
+  if (!searchAdapterPromise) {
+    searchAdapterPromise = import(SEARCH_ADAPTER_URL);
+  }
+
+  return searchAdapterPromise;
+}
+
+function isEditableTarget(target) {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  return target.isContentEditable
+    || target.matches("input, textarea, select")
+    || Boolean(target.closest("[contenteditable='true']"));
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function toPlainText(value) {
+  if (!value) {
+    return "";
+  }
+
+  const template = document.createElement("template");
+  template.innerHTML = String(value);
+  return (template.content.textContent || "").trim();
+}
+
+function getSearchExcerpt(row) {
+  return String(row?.plain_excerpt || "").trim() || toPlainText(row?.excerpt);
+}
+
+function tokenizeSearchQuery(query) {
+  return Array.from(new Set(
+    String(query || "")
+      .toLowerCase()
+      .split(/\s+/)
+      .map((value) => value.trim())
+      .filter((value) => value.length >= 2),
+  ));
+}
+
+function highlightMatches(text, terms) {
+  if (!text || !terms.length) {
+    return escapeHtml(text || "");
+  }
+
+  const pattern = terms
+    .slice()
+    .sort((left, right) => right.length - left.length)
+    .map(escapeRegExp)
+    .join("|");
+
+  return escapeHtml(text).replace(new RegExp(`(${pattern})`, "gi"), "<mark>$1</mark>");
+}
+
+function normalizeSearchResultUrl(value) {
+  try {
+    const url = new URL(value, window.location.origin);
+    if (url.origin !== window.location.origin) {
+      return null;
+    }
+
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return null;
+  }
+}
+
+function initSearch() {
+  const palette = document.querySelector("[data-cmdk]");
+  if (!(palette instanceof HTMLElement) || palette.dataset.cmdkReady === "true") {
+    return;
+  }
+  palette.dataset.cmdkReady = "true";
+
+  const input = palette.querySelector("[data-cmdk-input]");
+  const list = palette.querySelector("[data-cmdk-list]");
+  const empty = palette.querySelector("[data-cmdk-empty]");
+  if (!(input instanceof HTMLInputElement) || !(list instanceof HTMLElement) || !(empty instanceof HTMLElement)) {
+    return;
+  }
+
+  const openButtons = Array.from(document.querySelectorAll("[data-cmdk-open]"))
+    .filter((button) => button instanceof HTMLButtonElement);
+
+  openButtons.forEach((button) => {
+    button.disabled = false;
+    button.removeAttribute("aria-disabled");
+  });
+
+  let previousFocus = null;
+  let renderTicket = 0;
+
+  const setEmpty = (message) => {
+    empty.textContent = message;
+    empty.hidden = false;
+    input.setAttribute("aria-expanded", "false");
+    input.removeAttribute("aria-activedescendant");
+  };
+
+  const clearActive = () => {
+    list.querySelectorAll("a").forEach((item) => {
+      item.classList.remove("is-active");
+      item.setAttribute("aria-selected", "false");
+    });
+    input.removeAttribute("aria-activedescendant");
+  };
+
+  const setActiveOption = (item) => {
+    clearActive();
+    if (!(item instanceof HTMLAnchorElement)) {
+      return;
+    }
+
+    item.classList.add("is-active");
+    item.setAttribute("aria-selected", "true");
+    input.setAttribute("aria-activedescendant", item.id);
+  };
+
+  const renderResults = (rows, terms) => {
+    list.replaceChildren();
+    let firstResult = null;
+
+    rows.forEach((row) => {
+      const url = normalizeSearchResultUrl(row.url);
+      if (!url) {
+        return;
+      }
+
+      const item = document.createElement("li");
+      item.setAttribute("role", "presentation");
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.className = "cmdk__result";
+      link.id = `cmdk-option-${list.children.length}`;
+      link.setAttribute("role", "option");
+      link.setAttribute("aria-selected", "false");
+
+      const title = row.meta?.title || url;
+      const excerpt = getSearchExcerpt(row);
+      link.innerHTML = `<span class="cmdk__result-title">${highlightMatches(title, terms)}</span>`
+        + (excerpt
+          ? `<span class="cmdk__result-excerpt">${highlightMatches(excerpt, terms)}</span>`
+          : "");
+
+      item.appendChild(link);
+      list.appendChild(item);
+      firstResult ||= link;
+    });
+
+    if (!firstResult) {
+      setEmpty("No matches.");
+      return;
+    }
+
+    empty.hidden = true;
+    input.setAttribute("aria-expanded", "true");
+    setActiveOption(firstResult);
+  };
+
+  const render = (query) => {
+    const ticket = ++renderTicket;
+    const normalizedQuery = String(query || "").trim();
+    list.replaceChildren();
+
+    if (!normalizedQuery) {
+      setEmpty("Type to search.");
+      return;
+    }
+
+    setEmpty("Searching...");
+    const terms = tokenizeSearchQuery(normalizedQuery);
+
+    loadSearchAdapter()
+      .then((api) => api.search(normalizedQuery, { limit: SEARCH_LIMIT }))
+      .then((searchResult) => Promise.all(
+        (searchResult?.results || []).map((result) => result.data()),
+      ))
+      .then((rows) => {
+        if (ticket !== renderTicket) {
+          return;
+        }
+
+        renderResults(rows, terms);
+      })
+      .catch((error) => {
+        if (ticket !== renderTicket) {
+          return;
+        }
+
+        console.warn("[ZeroPress Search] Search is unavailable.", error);
+        list.replaceChildren();
+        setEmpty("Search index is unavailable.");
+      });
+  };
+
+  const open = () => {
+    if (palette.hidden) {
+      previousFocus = document.activeElement;
+    }
+
+    palette.hidden = false;
+    input.value = "";
+    render("");
+    window.setTimeout(() => input.focus(), 10);
+  };
+
+  const close = () => {
+    palette.hidden = true;
+    if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+      previousFocus.focus();
+    }
+    previousFocus = null;
+  };
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", open);
+  });
+
+  palette.querySelectorAll("[data-cmdk-close]").forEach((element) => {
+    element.addEventListener("click", close);
+  });
+
+  input.addEventListener("input", () => render(input.value));
+
+  document.addEventListener("keydown", (event) => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+      event.preventDefault();
+      palette.hidden ? open() : close();
+      return;
+    }
+
+    if (event.key === "Escape" && !palette.hidden) {
+      close();
+      return;
+    }
+
+    if (!palette.hidden && (event.key === "ArrowDown" || event.key === "ArrowUp")) {
+      event.preventDefault();
+      const items = Array.from(list.querySelectorAll("a"));
+      if (!items.length) {
+        return;
+      }
+
+      let index = items.findIndex((item) => item.classList.contains("is-active"));
+      index = event.key === "ArrowDown"
+        ? (index + 1) % items.length
+        : (index - 1 + items.length) % items.length;
+      setActiveOption(items[index]);
+      items[index].scrollIntoView({ block: "nearest" });
+      return;
+    }
+
+    if (!palette.hidden && event.key === "Enter") {
+      const active = list.querySelector("a.is-active");
+      if (active instanceof HTMLAnchorElement) {
+        event.preventDefault();
+        window.location.href = active.href;
+      }
+      return;
+    }
+
+    if (palette.hidden && event.key === "/" && !event.metaKey && !event.ctrlKey && !event.altKey) {
+      if (!isEditableTarget(event.target)) {
+        event.preventDefault();
+        open();
+      }
+    }
+  });
+}
+
 function applyPageEnhancements(root = document) {
   updateFeaturedPosts(root);
-  initComments(root);
   initArticleContentLinks(root);
   initNewsletterIsland(root);
   initNavigationState();
+  initSearch();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

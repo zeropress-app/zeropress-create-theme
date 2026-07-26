@@ -15,21 +15,17 @@
         {{menu:primary}}
       </nav>
 
-      <div class="header-search">
-        <label class="sr-only" for="site-search">Search site</label>
-        <div class="search-theme-wrapper">
-          <input
-            id="site-search"
-            class="search-input"
-            type="search"
-            placeholder="Search writing…"
-            autocomplete="off"
-            enterkeyhint="search"
-            disabled
-          >
-          <span class="search-shortcut" aria-hidden="true">/</span>
+      {{#if site.search.enabled}}
+        <div class="header-search">
+          <div class="search-theme-wrapper">
+            <button class="search-open-button" type="button" data-cmdk-open aria-label="Search writing" disabled>
+              <span aria-hidden="true">⌕</span>
+              <span>Search writing</span>
+              <kbd>/</kbd>
+            </button>
+          </div>
         </div>
-      </div>
+      {{/if}}
     </div>
   </div>
 </header>
