@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 import { run } from '../src/index.js';
+import { toTerminalSafeText } from '../src/terminal.js';
 
 run(process.argv.slice(2)).catch((error) => {
-  console.error(colorizeError(`[zeropress-create-theme] ${error.message}`));
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(colorizeError(`[zeropress-create-theme] ${toTerminalSafeText(message)}`));
   process.exit(1);
 });
 

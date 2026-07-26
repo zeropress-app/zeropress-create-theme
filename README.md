@@ -4,7 +4,7 @@
 ![license](https://img.shields.io/npm/l/%40zeropress%2Fcreate-theme)
 ![node](https://img.shields.io/node/v/%40zeropress%2Fcreate-theme)
 
-Public ZeroPress starter generator for Theme Runtime v0.6.
+Public ZeroPress starter generator for Theme Runtime v0.7 and Preview Data v0.7.
 
 This package creates a buildable ZeroPress starter project for the
 `preview-data.json + theme/` workflow. The five starter templates are bundled
@@ -21,10 +21,10 @@ Generated starter projects use:
 
 Public contract references:
 
-- [Theme Runtime v0.6 Spec](https://zeropress.dev/spec/theme-runtime-v0.6.html)
-- [Theme Runtime v0.6 Schema](https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json)
-- [Preview Data v0.6 Spec](https://zeropress.dev/spec/preview-data-v0.6.html)
-- [Preview Data v0.6 Schema](https://schemas.zeropress.dev/preview-data/v0.6/schema.json)
+- [Theme Runtime v0.7 Spec](https://zeropress.dev/reference/theme-runtime/specs/v0.7/)
+- [Theme Runtime v0.7 Schema](https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json)
+- [Preview Data v0.7 Spec](https://zeropress.dev/reference/preview-data/specs/v0.7/)
+- [Preview Data v0.7 Schema](https://schemas.zeropress.dev/preview-data/v0.7/schema.json)
 
 ## Quick Start
 
@@ -32,19 +32,17 @@ Public contract references:
 npx @zeropress/create-theme --name my-portfolio --template portfolio
 cd my-portfolio
 npm install
+npm run dev
+```
+
+The development server prints the local preview URL and watches the generated
+theme and Preview Data. To produce static output later:
+
+```bash
 npm run build
 ```
 
 The build output is written to `dist/`.
-
-For local preview while developing the theme:
-
-```bash
-npm run dev
-```
-
-After editing the generated theme, use `npm run build` to produce static output
-with `@zeropress/build`.
 
 ## Usage
 
@@ -71,18 +69,20 @@ The package intentionally ships only five built-in starters:
 
 - `minimal`: quiet content-first starter.
 - `blog`: editorial blog starter with menus, widgets, posts, categories, tags, comments, and a newsletter CTA.
-- `docs`: documentation starter with pages, navigation, and Markdown-friendly prose.
+- `docs`: documentation starter with pages, navigation, search, and Markdown-friendly Preview Data content.
 - `portfolio`: portfolio starter using site metadata and named collections.
 - `magazine`: editorial magazine starter with curated landing sections.
 
-Remote theme catalog downloads are not part of this package. Additional themes
-belong in the ZeroPress theme catalog and admin runtime install flow.
+Remote theme catalogs and runtime theme installation are not supported. Create
+another starter locally, or copy an existing generated project, when you need an
+additional theme.
 
 ## Generated Project
 
 ```text
 my-portfolio/
   package.json
+  .gitignore
   preview-data.json
   public/                 # optional, included by starters that need trusted public HTML/assets
   theme/
@@ -91,55 +91,64 @@ my-portfolio/
     index.html
     post.html
     page.html
-    archive.html
-    category.html
-    tag.html
+    archive.html             # optional, template-dependent
+    category.html            # optional, template-dependent
+    tag.html                 # optional, template-dependent
     404.html
     partials/
     assets/
 ```
 
+The generated `.gitignore` excludes `node_modules/` and the reproducible
+`dist/` build output. Commit the generated lockfile when you install
+dependencies.
+
 Generated `package.json` includes:
 
 ```json
 {
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "clean": "rm -rf ./dist",
-    "build": "npm run clean && zeropress-build ./theme --data ./preview-data.json --out ./dist",
+    "build": "zeropress-build ./theme --data ./preview-data.json --out ./dist --empty-out-dir",
     "dev": "zeropress-theme dev ./theme --data ./preview-data.json"
   },
   "dependencies": {
-    "@zeropress/build": "^0.6.0",
-    "@zeropress/theme": "^0.6.0"
+    "@zeropress/build": "^0.7.2",
+    "@zeropress/theme": "^0.7.0"
   }
 }
 ```
 
+The build is assembled in a sibling staging directory. ZeroPress replaces
+`dist/` only after the new build succeeds, so no shell-specific or evaluated
+cleanup script is needed.
+
 Generated `theme/theme.json` is rewritten with:
 
-- `$schema: "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json"`
-- `runtime: "0.6"`
+- `$schema: "https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json"`
+- `runtime: "0.7"`
 - `namespace: "my-company"`
 - `slug` and `name` from `--name`
 - `version: "0.1.0"`
 
 Update `namespace`, `name`, and demo fixture content before publishing a theme.
 
+Generated templates use the effective Theme Runtime feature objects: check `site.search.enabled`, `site.feed.enabled`, `site.archive.enabled`, and `site.comments.enabled`, and use `site.feed.url` or `site.archive.url` only in the enabled branch.
+Preview Data preferences use the same `{ "enabled": boolean }` shape; omitting search, feed, or archive requests the enabled default.
+
 ## Validation
 
 The generated theme is validated immediately with
 [`@zeropress/theme-validator`](https://www.npmjs.com/package/@zeropress/theme-validator).
 
+Generation is staged in a temporary sibling directory and committed only after
+validation succeeds. The requested target may be absent or an existing empty
+real directory; symbolic-link targets and non-empty directories are rejected.
+Human-readable diagnostics escape terminal control and directional characters.
+
 The package test suite validates and builds every bundled starter.
-
-## Legacy Package
-
-The old unscoped package name, `create-zeropress-theme`, is retained only as a
-compatibility notice. New usage should prefer:
-
-```bash
-npx @zeropress/create-theme
-```
 
 ## License
 
