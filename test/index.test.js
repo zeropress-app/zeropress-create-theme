@@ -147,7 +147,7 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
     assert.equal(Object.hasOwn(previewData.site, 'media_base_url'), false);
     assert.equal(starterPackage.private, true);
     assert.deepEqual(starterPackage.engines, {
-      node: '>=22.12.0',
+      node: '>=22.22.0',
     });
     assert.equal(Object.hasOwn(starterPackage.scripts, 'clean'), false);
     assert.equal(

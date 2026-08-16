@@ -285,7 +285,7 @@ async function writeStarterPackageJson(targetDir, slug) {
     version: DEFAULT_VERSION,
     type: 'module',
     engines: {
-      node: '>=22.12.0',
+      node: '>=22.22.0',
     },
     scripts: {
       build: 'zeropress-build ./theme --data ./preview-data.json --out ./dist --empty-out-dir',
