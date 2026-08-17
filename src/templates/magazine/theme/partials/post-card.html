@@ -10,7 +10,7 @@
         {{#for category in post.categories}}{{#if loop.first}}<span>{{category.name}}</span>{{/if}}{{/for}}
       </div>
       <h3 class="card__title">{{post.title}}</h3>
-      {{#if partial.show_excerpt}}{{#if post.excerpt}}<p class="card__dek">{{post.excerpt}}</p>{{/if}}{{/if}}
+      {{#if partial.show_excerpt}}{{#if post.summary}}<p class="card__dek">{{post.summary}}</p>{{/if}}{{/if}}
       <div class="card__byline">
         {{#if post.author.display_name}}<span>By {{post.author.display_name}}</span>{{/if}}
         {{#if post.reading_time}}<span>· {{post.reading_time}}</span>{{/if}}

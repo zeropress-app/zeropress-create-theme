@@ -19,7 +19,7 @@
               Cover Story
             </span>
             <h2 class="hero__title">{{post.title}}</h2>
-            {{#if post.excerpt}}<p class="hero__dek">{{post.excerpt}}</p>{{/if}}
+            {{#if post.summary}}<p class="hero__dek">{{post.summary}}</p>{{/if}}
             <p class="hero__byline">
               {{#if post.author.display_name}}By {{post.author.display_name}} · {{/if}}{{post.reading_time}}
             </p>
@@ -36,7 +36,7 @@
               Cover Story
             </span>
             <h2 class="hero__title">{{post.title}}</h2>
-            {{#if post.excerpt}}<p class="hero__dek">{{post.excerpt}}</p>{{/if}}
+            {{#if post.summary}}<p class="hero__dek">{{post.summary}}</p>{{/if}}
             <p class="hero__byline">
               {{#if post.author.display_name}}By {{post.author.display_name}} · {{/if}}{{post.reading_time}}
             </p>

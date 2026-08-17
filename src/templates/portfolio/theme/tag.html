@@ -4,7 +4,7 @@
   {{#if posts.items}}
     <ul class="plain post-index">
       {{#for post in posts.items}}
-        <li><a href="{{post.url}}"><strong>{{post.title}}</strong></a>{{#if post.excerpt}}<p class="muted">{{post.excerpt}}</p>{{/if}}</li>
+        <li><a href="{{post.url}}"><strong>{{post.title}}</strong></a>{{#if post.summary}}<p class="muted">{{post.summary}}</p>{{/if}}</li>
       {{/for}}
     </ul>
   {{/if}}

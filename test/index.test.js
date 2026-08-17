@@ -255,6 +255,47 @@ for (const template of templates) {
   });
 }
 
+test('bundled starter themes use runtime summaries for listings and authored excerpts for detail ledes', async () => {
+  const listingFiles = [
+    ['blog', 'partials/post-list-item.html', 'post'],
+    ['magazine', 'index.html', 'post'],
+    ['magazine', 'partials/post-card.html', 'post'],
+    ['minimal', 'index.html', 'post'],
+    ['minimal', 'category.html', 'post'],
+    ['minimal', 'tag.html', 'post'],
+    ['portfolio', 'category.html', 'post'],
+    ['portfolio', 'tag.html', 'post'],
+    ['portfolio', 'partials/project-card.html', 'project'],
+    ['portfolio', 'partials/work-row.html', 'project'],
+  ];
+
+  for (const [template, relativePath, alias] of listingFiles) {
+    const source = await fs.readFile(
+      new URL(`../src/templates/${template}/theme/${relativePath}`, import.meta.url),
+      'utf8',
+    );
+    assert.match(source, new RegExp(`\\{\\{#if ${alias}\\.summary\\}\\}`));
+    assert.match(source, new RegExp(`\\{\\{${alias}\\.summary\\}\\}`));
+    assert.doesNotMatch(source, new RegExp(`\\{\\{${alias}\\.excerpt\\}\\}`));
+  }
+
+  const detailFiles = [
+    ['blog', 'post.html', 'post'],
+    ['magazine', 'post.html', 'post'],
+    ['portfolio', 'post.html', 'post'],
+    ['portfolio', 'page.html', 'page'],
+  ];
+
+  for (const [template, relativePath, alias] of detailFiles) {
+    const source = await fs.readFile(
+      new URL(`../src/templates/${template}/theme/${relativePath}`, import.meta.url),
+      'utf8',
+    );
+    assert.match(source, new RegExp(`\\{\\{#if ${alias}\\.excerpt\\}\\}`));
+    assert.match(source, new RegExp(`\\{\\{${alias}\\.excerpt\\}\\}`));
+  }
+});
+
 for (const template of ['blog', 'minimal']) {
   test(`${template} starter uses the route-level comments island contract`, async () => {
     const templateRoot = new URL(`../src/templates/${template}/theme/`, import.meta.url);
