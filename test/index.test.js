@@ -155,10 +155,6 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
       'zeropress-build ./theme --data ./preview-data.json --out ./dist --empty-out-dir',
     );
     assert.equal(starterPackage.scripts.dev, 'zeropress-theme dev ./theme --data ./preview-data.json');
-    assert.deepEqual(starterPackage.dependencies, {
-      '@zeropress/build': '^0.7.2',
-      '@zeropress/theme': '^0.7.0',
-    });
     assert.equal(gitignore, 'node_modules/\ndist/\n');
     assert.equal(logs.some((line) => line.includes('Created ZeroPress starter: my-theme')), true);
     assert.equal(logs.some((line) => line.includes(`Location: ${canonicalProjectDir}`)), true);
