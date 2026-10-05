@@ -31,9 +31,10 @@
     "node": ">=22.22.0"
   },
   "dependencies": {
-    "@zeropress/theme-validator": "0.7.3"
+    "@zeropress/theme-validator": "0.7.4"
   },
   "devDependencies": {
-    "@zeropress/build": "0.7.3"
+    "@zeropress/build": "0.7.6",
+    "jsdom": "29.1.1"
   }
 }
