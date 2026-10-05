@@ -102,3 +102,47 @@ for (const template of ['blog', 'magazine', 'minimal', 'portfolio']) {
     });
   });
 }
+
+for (const template of ['blog', 'minimal']) {
+  test(`${template} renders comments and their scripts only on enabled routes`, async () => {
+    await withTempCwd(async (root) => {
+      const data = syntheticPublication();
+      data.site.comments = { enabled: true, provider: 'wordpress', api_base_url: 'https://comments.example/wp-json/wp/v2' };
+      data.content.posts.forEach((post, index) => { post.allow_comments = index === 0; });
+      data.content.pages.forEach((page, index) => { page.allow_comments = index === 0; });
+      const routes = [
+        { route: '', enabled: false },
+        ...data.content.posts.map((post) => ({ route: `posts/${post.slug}`, enabled: post.allow_comments, type: 'post', id: post.public_id })),
+        ...data.content.pages.slice(0, 2).map((page) => ({ route: page.slug, enabled: page.allow_comments, type: 'page', id: page.public_id })),
+      ];
+      for (const enabled of [true, false]) {
+        data.site.comments.enabled = enabled;
+        const output = path.join(root, String(enabled));
+        await runBuild(path.join(packageRoot, 'src', 'templates', template, 'theme'), data, output);
+        for (const route of routes) {
+          await readDocument(output, route.route, (document) => {
+            const expected = enabled && route.enabled;
+            const island = document.querySelector('[data-zp-comments]');
+            assert.equal(Boolean(island), expected, route.route);
+            for (const script of ['comment.js', 'comment-data.js']) {
+              const name = script.slice(0, -3);
+              const sourcePattern = new RegExp(`/assets/${name}(?:\\.[a-f0-9]+)?\\.js$`, 'u');
+              assert.equal([...document.querySelectorAll('script[src]')].some(
+                (element) => sourcePattern.test(element.getAttribute('src')),
+              ), expected, route.route);
+            }
+            if (!expected) return;
+            assert.equal(island.dataset.zpCommentsTargetType, route.type);
+            assert.equal(island.dataset.zpCommentsTargetPublicId, String(route.id));
+            assert.equal(island.dataset.zpCommentsProvider, data.site.comments.provider);
+            assert.equal(island.dataset.zpCommentsApiBaseUrl, data.site.comments.api_base_url);
+            const shell = document.querySelector('template[data-zp-comments-shell]').content;
+            assert.ok(shell.querySelector('[data-role="pagination"] [data-action="load-more"]'));
+            const form = document.querySelector('template[data-zp-comments-form]').content;
+            assert.equal(form.querySelector('[aria-hidden="true"] input[name="website"]').tabIndex, -1);
+          });
+        }
+      }
+    });
+  });
+}
