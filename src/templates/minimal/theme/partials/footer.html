@@ -15,6 +15,10 @@
     </nav>
   </div>
   <script defer src="/assets/theme.js"></script>
+  {{#if site.search.enabled}}
+    {{partial:search-dialog}}
+    <script defer src="/assets/search.js"></script>
+  {{/if}}
   {{#if comments.enabled}}<script defer src="/assets/comment-data.js"></script>
   <script defer src="/assets/comment.js"></script>{{/if}}
 </footer>

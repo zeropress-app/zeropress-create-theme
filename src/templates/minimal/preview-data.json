@@ -14,7 +14,7 @@
       "attribution": true
     },
     "media_origin": "",
-    "posts_per_page": 10,
+    "posts_per_page": 3,
     "date_style": "medium",
     "time_style": "none"
   },
@@ -107,7 +107,7 @@
       {
         "title": "About",
         "slug": "about",
-        "content": "minimal is a small, content-first blog template — a quiet corner of the internet for essays, notes, and the occasional travelogue.\n\n## What it is\n\nA starter for people who want to write more and tweak their site less. No tracking, no popups, no urgency.\n\n## How it's built\n\nServed as static HTML by ZeroPress. Light and dark themes follow your system preference automatically. Comments are a tiny client-side island — perfect for a POC, easy to swap for a real backend later.",
+        "content": "minimal is a small blog template for essays, notes, and the work in between.\n\n## Reading and finding your way\n\nBrowse recent posts, explore the archive, or search posts and pages. The layout uses a single column, and light and dark colors follow your system preference.\n\n## Comments\n\nConnect ZeroPress Edge or WordPress to let readers leave comments and replies. Comments appear only on posts and pages where they are enabled. With ZeroPress Edge, you can also offer optional email sign-in.",
         "document_type": "markdown",
         "excerpt": "About the minimal blog template.",
         "status": "published"
