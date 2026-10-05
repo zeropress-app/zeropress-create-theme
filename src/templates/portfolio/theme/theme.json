@@ -6,7 +6,7 @@
   "version": "0.7.3",
   "license": "MIT",
   "runtime": "0.7",
-  "description": "Clean personal portfolio. Instrument Serif headlines, Inter body, JetBrains Mono metadata. Sticky header with theme toggle and social links, work index + case-study detail pages, typography specimen, and a three-document legal section.",
+  "description": "Clean personal portfolio. System serif headlines, sans-serif body, and monospace metadata. Sticky header with theme toggle and social links, work index + case-study detail pages, typography specimen, and a three-document legal section.",
   "features": {
     "comments": false,
     "post_index": false

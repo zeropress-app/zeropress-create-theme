@@ -8,8 +8,8 @@
   --rule: #e5e2dc;
   --accent: #b54328;
   --pill-bg: #ffffff;
-  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --sans: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --serif: ui-serif, Georgia, Cambria, "Times New Roman", "AppleMyungjo", "Batang", serif;
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --maxw: 1200px;
   --reading: 680px;
   --gap: 1.5rem;
@@ -452,3 +452,87 @@ a:hover { color: var(--accent); }
   .post-nav { grid-template-columns: 1fr; }
   .post-nav__link.end { text-align: left; }
 }
+/* WordPress-compatible authored image alignment. */
+.prose-editorial::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.prose-editorial img.alignleft {
+  float: left;
+  margin: 0 1.5rem 1rem 0;
+}
+
+.prose-editorial img.aligncenter {
+  display: block;
+  clear: both;
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.prose-editorial img.alignright {
+  float: right;
+  margin: 0 0 1rem 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .prose-editorial img.alignleft,
+  .prose-editorial img.alignright {
+    display: block;
+    clear: both;
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+/* Code tokens emitted by the shared content renderer. */
+.prose-editorial pre {
+  --syntax-keyword: #7e22ce;
+  --syntax-string: #166534;
+  --syntax-number: #9a3412;
+  --syntax-title: #1d4ed8;
+  --syntax-comment: #57534e;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height: 1.65;
+  tab-size: 2;
+}
+.prose-editorial pre code {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  padding: 0;
+}
+[data-theme="dark"] .prose-editorial pre {
+  --syntax-keyword: #d8b4fe;
+  --syntax-string: #86efac;
+  --syntax-number: #fdba74;
+  --syntax-title: #93c5fd;
+  --syntax-comment: #a8a29e;
+}
+.prose-editorial pre .hljs-keyword,
+.prose-editorial pre .hljs-literal,
+.prose-editorial pre .hljs-selector-tag { color: var(--syntax-keyword); }
+.prose-editorial pre .hljs-string,
+.prose-editorial pre .hljs-regexp,
+.prose-editorial pre .hljs-template-tag,
+.prose-editorial pre .hljs-template-variable { color: var(--syntax-string); }
+.prose-editorial pre .hljs-number,
+.prose-editorial pre .hljs-symbol,
+.prose-editorial pre .hljs-bullet,
+.prose-editorial pre .hljs-attr,
+.prose-editorial pre .hljs-attribute { color: var(--syntax-number); }
+.prose-editorial pre .hljs-title,
+.prose-editorial pre .hljs-section,
+.prose-editorial pre .hljs-built_in,
+.prose-editorial pre .hljs-type,
+.prose-editorial pre .hljs-name,
+.prose-editorial pre .hljs-selector-id,
+.prose-editorial pre .hljs-selector-class { color: var(--syntax-title); }
+.prose-editorial pre .hljs-comment,
+.prose-editorial pre .hljs-quote,
+.prose-editorial pre .hljs-meta { color: var(--syntax-comment); }
+.prose-editorial pre .hljs-emphasis { font-style: italic; }
+.prose-editorial pre .hljs-strong { font-weight: 700; }
