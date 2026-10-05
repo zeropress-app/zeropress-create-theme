@@ -7,6 +7,9 @@
     "title": "Alex Example",
     "description": "Independent product designer and developer based in Seoul.",
     "url": "",
+    "robots": {
+      "allow_indexing": false
+    },
     "locale": "en-US",
     "timezone": "Asia/Seoul",
     "post_index": {

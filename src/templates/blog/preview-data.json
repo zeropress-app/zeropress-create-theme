@@ -7,6 +7,9 @@
     "title": "Margin Notes",
     "description": "Quiet writing on craft, code, and the everyday.",
     "url": "",
+    "robots": {
+      "allow_indexing": false
+    },
     "locale": "en-US",
     "timezone": "UTC",
     "footer": {

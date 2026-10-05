@@ -7,6 +7,9 @@
     "title": "The Margin",
     "description": "A magazine for the things that don't fit in a feed.",
     "url": "",
+    "robots": {
+      "allow_indexing": false
+    },
     "locale": "en-US",
     "timezone": "UTC",
     "footer": {

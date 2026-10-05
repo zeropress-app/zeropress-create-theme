@@ -7,6 +7,9 @@
     "title": "minimal",
     "description": "A quiet corner of the internet — notes on writing, tools, and the work in between.",
     "url": "",
+    "robots": {
+      "allow_indexing": false
+    },
     "locale": "en-US",
     "timezone": "UTC",
     "footer": {
