@@ -1,7 +1,5 @@
 <section class="narrow-intro">
-  <p class="eyebrow">Latest writing</p>
-  <h1>Recent essays &amp; notes</h1>
-  <p class="lede">A clean editorial layout for essays, notes, references, and the small observations in between.</p>
+  <h1>Latest posts</h1>
 </section>
 <section class="content-grid home-grid">
   <div class="posts-area">
@@ -12,7 +10,9 @@
     </div>
     {{partial:pagination}}
   </div>
-  <aside class="sidebar-stack">
-    {{partial:sidebar-widgets}}
-  </aside>
+  {{#if widgets.sidebar.items}}
+    <aside class="sidebar-stack">
+      {{partial:sidebar-widgets}}
+    </aside>
+  {{/if}}
 </section>

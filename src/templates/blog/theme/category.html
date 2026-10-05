@@ -12,7 +12,9 @@
     </div>
     {{partial:pagination}}
   </div>
-  <aside class="sidebar-stack">
-    {{partial:sidebar-widgets}}
-  </aside>
+  {{#if widgets.sidebar.items}}
+    <aside class="sidebar-stack">
+      {{partial:sidebar-widgets}}
+    </aside>
+  {{/if}}
 </section>

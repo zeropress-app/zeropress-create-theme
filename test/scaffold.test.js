@@ -134,22 +134,38 @@ for (const template of templates) {
       );
 
       if (template === 'blog') {
-        await fs.access(path.join(projectDir, 'public', 'newsletter.html'));
-        await fs.access(path.join(projectDir, 'dist', 'newsletter.html'));
+        assert.equal(previewData.site.newsletter.embed_url, '/zp_newsletter/');
+        const newsletterFile = 'zp_newsletter/index.html';
+        for (const folder of ['zp_form', 'zp_newsletter']) {
+          for (const file of ['index.html', 'style.css', 'app.js', 'config.json']) {
+            const source = await fs.readFile(path.join(projectDir, 'public', folder, file));
+            const output = await fs.readFile(path.join(projectDir, 'dist', folder, file));
+            assert.deepEqual(output, source);
+          }
+        }
         await fs.access(path.join(projectDir, 'dist', '_zeropress', 'search.js'));
         const html = await fs.readFile(path.join(projectDir, 'dist', 'index.html'), 'utf8');
-        const newsletter = await fs.readFile(path.join(projectDir, 'public', 'newsletter.html'), 'utf8');
-        const themeScript = await fs.readFile(path.join(projectDir, 'theme', 'assets', 'theme.js'), 'utf8');
-        assert.equal(themeJson.features.search, true);
-        assert.match(html, /data-newsletter-open/);
-        assert.match(html, /src="\/newsletter\.html"/);
-        assert.match(html, /data-cmdk-open/);
-        assert.match(html, /data-cmdk-input/);
-        assert.match(themeScript, /\/_zeropress\/search\.js/);
-        assert.match(themeScript, /api\.search\(normalizedQuery/);
-        assert.doesNotMatch(newsletter, /<form\b|buttondown\.com|action=/);
-        assert.match(newsletter, /This placeholder does not submit data\./);
-        assert.match(newsletter, /<button type="button" disabled>/);
+        const newsletter = await fs.readFile(path.join(projectDir, 'public', newsletterFile), 'utf8');
+        const home = new JSDOM(html);
+        const subscription = new JSDOM(newsletter);
+        try {
+          assert.equal(themeJson.features.search, true);
+          const document = home.window.document;
+          assert.ok(document.querySelector('[data-newsletter-open]'));
+          assert.ok(document.querySelector('iframe[src="/zp_newsletter/"]'));
+          assert.ok([...document.querySelectorAll('.post-excerpt')].some(
+            (element) => element.textContent.trim() === 'A body-derived summary for the blog listing.',
+          ));
+          assert.ok(document.querySelector('[data-cmdk-open]'));
+          assert.ok(document.querySelector('[data-cmdk-input]'));
+          const formDocument = subscription.window.document;
+          assert.ok(formDocument.querySelector('form[data-newsletter-form]'));
+          assert.equal(formDocument.querySelector('[data-newsletter-controls]').disabled, true);
+          assert.equal(formDocument.querySelector('[data-newsletter-submit]').disabled, true);
+        } finally {
+          home.window.close();
+          subscription.window.close();
+        }
       }
 
       if (template === 'docs') {
