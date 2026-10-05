@@ -10,7 +10,7 @@
         <a class="post-card" href="{{post.url}}">
           <div class="post-card__row">
             <h2 class="post-card__title">{{post.title}}</h2>
-            <time class="post-card__date" datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+            <time class="post-card__date" datetime="{{post.published_at_iso}}" title="{{post.published_at_iso}}" data-zp-local-date-time>{{post.published_at}}</time>
           </div>
           {{#if post.summary}}<p class="post-card__excerpt">{{post.summary}}</p>{{/if}}
           {{#if post.tags}}

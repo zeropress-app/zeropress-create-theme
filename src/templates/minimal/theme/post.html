@@ -5,7 +5,7 @@
     <h1 class="post__title">{{post.title}}</h1>
     <div class="post__meta">
       {{#if post.author.display_name}}<span>{{post.author.display_name}}</span><span aria-hidden="true">·</span>{{/if}}
-      <time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+      <time datetime="{{post.published_at_iso}}" title="{{post.published_at_iso}}" data-zp-local-date-time>{{post.published_at}}</time>
       {{#if post.reading_time}}<span aria-hidden="true">·</span><span>{{post.reading_time}}</span>{{/if}}
     </div>
   </header>

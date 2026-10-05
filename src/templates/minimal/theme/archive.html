@@ -10,7 +10,7 @@
         {{#for post in group.items}}
           <li class="archive-list__item">
             <a href="{{post.url}}">{{post.title}}</a>
-            <time datetime="{{post.published_at_iso}}">{{post.published_at}}</time>
+            <time datetime="{{post.published_at_iso}}" title="{{post.published_at_iso}}" data-zp-local-date-time>{{post.published_at}}</time>
           </li>
         {{/for}}
       </ul>
