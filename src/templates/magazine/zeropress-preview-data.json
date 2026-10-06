@@ -7,27 +7,27 @@
     "title": "The Margin",
     "description": "A magazine for the things that don't fit in a feed.",
     "url": "",
+    "media_origin": "",
+    "locale": "en-US",
+    "posts_per_page": 9,
+    "date_style": "medium",
+    "time_style": "none",
+    "timezone": "UTC",
     "robots": {
       "allow_indexing": false
     },
-    "locale": "en-US",
-    "timezone": "UTC",
     "footer": {
       "copyright_text": "© 2026 The Margin.",
       "attribution": true
     },
     "meta": {
-      "issue_label": "Issue No. 47 — May 2026",
-      "masthead_title": "Slow looks. Long reads.",
-      "masthead_lede": "A magazine for the things that don't fit in a feed.",
-      "section_label": "Latest",
       "archive_cta_eyebrow": "Browse the Archive",
-      "archive_cta_title": "Find your next long read"
-    },
-    "media_origin": "",
-    "posts_per_page": 9,
-    "date_style": "medium",
-    "time_style": "none"
+      "archive_cta_title": "Find your next long read",
+      "issue_label": "Issue No. 47 — May 2026",
+      "masthead_lede": "A magazine for the things that don't fit in a feed.",
+      "masthead_title": "Slow looks. Long reads.",
+      "section_label": "Latest"
+    }
   },
   "content": {
     "authors": [
@@ -352,6 +352,134 @@
       }
     ]
   },
+  "menus": {
+    "footer": {
+      "name": "Footer",
+      "items": [
+        {
+          "title": "About",
+          "url": "/about/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Feed",
+          "url": "/feed.xml",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "legal": {
+      "name": "Legal",
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Cookie Policy",
+          "url": "/cookie-policy/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Terms of Service",
+          "url": "/terms-of-service/",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
+    "primary": {
+      "name": "Primary",
+      "items": [
+        {
+          "title": "Culture",
+          "url": "/categories/culture/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Design",
+          "url": "/categories/design/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Technology",
+          "url": "/categories/technology/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Travel",
+          "url": "/categories/travel/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Food",
+          "url": "/categories/food/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Archive",
+          "url": "/archive/",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    }
+  },
+  "widgets": {
+    "sidebar": {
+      "name": "Sidebar",
+      "items": [
+        {
+          "type": "text",
+          "title": "About this issue",
+          "settings": {
+            "content": "**Issue No. 47.** Nine pieces on slow lunches, lobby reading, and what the algorithm hides.",
+            "document_type": "markdown"
+          }
+        },
+        {
+          "type": "recent-posts",
+          "title": "Recent dispatches",
+          "settings": {
+            "limit": 5,
+            "show_date": true
+          }
+        },
+        {
+          "type": "categories",
+          "title": "Sections",
+          "settings": {
+            "hierarchical": false,
+            "show_count": true
+          }
+        },
+        {
+          "type": "tags",
+          "title": "Topics",
+          "settings": {
+            "limit": 14,
+            "show_count": false
+          }
+        }
+      ]
+    }
+  },
   "collections": {
     "cover-story": {
       "title": "Cover Story",
@@ -404,134 +532,6 @@
         {
           "type": "post",
           "slug": "on-repairing-things"
-        }
-      ]
-    }
-  },
-  "menus": {
-    "primary": {
-      "name": "Primary",
-      "items": [
-        {
-          "title": "Culture",
-          "url": "/categories/culture/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Design",
-          "url": "/categories/design/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Technology",
-          "url": "/categories/technology/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Travel",
-          "url": "/categories/travel/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Food",
-          "url": "/categories/food/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Archive",
-          "url": "/archive/",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    },
-    "footer": {
-      "name": "Footer",
-      "items": [
-        {
-          "title": "About",
-          "url": "/about/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Archive",
-          "url": "/archive/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Feed",
-          "url": "/feed.xml",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    },
-    "legal": {
-      "name": "Legal",
-      "items": [
-        {
-          "title": "Privacy Policy",
-          "url": "/privacy-policy/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Cookie Policy",
-          "url": "/cookie-policy/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Terms of Service",
-          "url": "/terms-of-service/",
-          "target": "_self",
-          "children": []
-        }
-      ]
-    }
-  },
-  "widgets": {
-    "sidebar": {
-      "name": "Sidebar",
-      "items": [
-        {
-          "type": "text",
-          "title": "About this issue",
-          "settings": {
-            "document_type": "markdown",
-            "content": "**Issue No. 47.** Nine pieces on slow lunches, lobby reading, and what the algorithm hides."
-          }
-        },
-        {
-          "type": "recent-posts",
-          "title": "Recent dispatches",
-          "settings": {
-            "limit": 5,
-            "show_date": true
-          }
-        },
-        {
-          "type": "categories",
-          "title": "Sections",
-          "settings": {
-            "show_count": true,
-            "hierarchical": false
-          }
-        },
-        {
-          "type": "tags",
-          "title": "Topics",
-          "settings": {
-            "limit": 14,
-            "show_count": false
-          }
         }
       ]
     }

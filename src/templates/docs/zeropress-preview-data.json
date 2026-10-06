@@ -8,11 +8,17 @@
     "description": "A documentation starter built from Preview Data and a ZeroPress theme.",
     "url": "",
     "media_origin": "",
+    "search": {
+      "enabled": true
+    },
     "locale": "en-US",
-    "timezone": "UTC",
     "posts_per_page": 10,
     "date_style": "medium",
     "time_style": "none",
+    "timezone": "UTC",
+    "robots": {
+      "allow_indexing": false
+    },
     "permalinks": {
       "output_style": "html-extension",
       "posts": "/posts/:slug/",
@@ -26,12 +32,6 @@
     },
     "post_index": {
       "enabled": false
-    },
-    "search": {
-      "enabled": true
-    },
-    "robots": {
-      "allow_indexing": false
     },
     "footer": {
       "copyright_text": "My Documentation"
@@ -91,6 +91,23 @@
     "tags": []
   },
   "menus": {
+    "footer": {
+      "name": "Footer Menu",
+      "items": [
+        {
+          "title": "Getting Started",
+          "url": "/getting-started",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Configuration",
+          "url": "/guides/configuration",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
     "primary": {
       "name": "Primary Menu",
       "items": [
@@ -154,23 +171,6 @@
               "children": []
             }
           ]
-        }
-      ]
-    },
-    "footer": {
-      "name": "Footer Menu",
-      "items": [
-        {
-          "title": "Getting Started",
-          "url": "/getting-started",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Configuration",
-          "url": "/guides/configuration",
-          "target": "_self",
-          "children": []
         }
       ]
     }

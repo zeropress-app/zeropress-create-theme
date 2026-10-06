@@ -13,6 +13,7 @@ inside the npm package.
 It uses directly:
 
 - [@zeropress/theme-validator](https://www.npmjs.com/package/@zeropress/theme-validator) to validate generated theme output
+- [@zeropress/preview-data-validator](https://www.npmjs.com/package/@zeropress/preview-data-validator) to order Preview Data keys consistently with Studio and WXR imports
 
 Generated starter projects use:
 
@@ -192,6 +193,9 @@ Generated Preview Data and `theme/theme.json` include versioned SchemaStore
 `$schema` URLs for editor completion and validation.
 Build and dev commands also accept other Preview Data filenames through `--data`.
 
+Generated Preview Data uses the shared canonical key order, two-space indentation,
+and a final newline. Object key ordering preserves values and array order.
+
 The generated `.gitignore` excludes `node_modules/` and the reproducible
 `dist/` build output. Commit the generated lockfile when you install
 dependencies.
@@ -242,6 +246,8 @@ real directory; symbolic-link targets and non-empty directories are rejected.
 Human-readable diagnostics escape terminal control and directional characters.
 
 The package test suite validates and builds every bundled starter.
+In this repository, `npm run format:preview-data` formats the bundled samples
+with the same key order used for generated Preview Data.
 
 ## License
 

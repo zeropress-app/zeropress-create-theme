@@ -5,6 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { fileURLToPath } from 'node:url';
+import { canonicalizePreviewDataKeyOrder } from '@zeropress/preview-data-validator';
 import { JSDOM } from 'jsdom';
 import { run } from '../src/index.js';
 
@@ -92,9 +94,15 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
 });
 
 for (const template of templates) {
-  test(`${template} source Preview Data identifies create-theme as its generator`, async () => {
-    const previewData = JSON.parse(
-      await fs.readFile(new URL(`../src/templates/${template}/zeropress-preview-data.json`, import.meta.url), 'utf8'),
+  test(`${template} source Preview Data uses canonical formatting and identifies its generator`, async () => {
+    const source = await fs.readFile(
+      new URL(`../src/templates/${template}/zeropress-preview-data.json`, import.meta.url), 'utf8',
+    );
+    const previewData = JSON.parse(source);
+    assert.equal(
+      source,
+      `${JSON.stringify(canonicalizePreviewDataKeyOrder(previewData), null, 2)}\n`,
+      'Run npm run format:preview-data to format the bundled samples.',
     );
     assert.equal(previewData.generator, 'zeropress-create-theme');
     assert.equal(typeof previewData.generated_at, 'string');
@@ -116,6 +124,7 @@ for (const template of templates) {
       assert.equal(previewData.$schema, 'https://www.schemastore.org/zeropress-preview-data-0.7.json');
       assert.equal(previewData.generator, 'zeropress-create-theme');
       assert.equal(Number.isNaN(Date.parse(previewData.generated_at)), false);
+      assert.equal(JSON.stringify(previewData), JSON.stringify(canonicalizePreviewDataKeyOrder(previewData)));
 
       if (template === 'blog') {
         previewData.content.posts[0].excerpt = '';
@@ -198,6 +207,30 @@ for (const template of templates) {
     });
   });
 }
+
+test('run canonicalizes disordered source keys while preserving values and array order', async (t) => {
+  const sourcePath = fileURLToPath(new URL('../src/templates/minimal/zeropress-preview-data.json', import.meta.url));
+  const source = JSON.parse(await fs.readFile(sourcePath, 'utf8'));
+  const reverseKeys = (value) => {
+    if (Array.isArray(value)) return value.map(reverseKeys);
+    if (value === null || typeof value !== 'object') return value;
+    return Object.fromEntries(Object.entries(value).reverse().map(([key, child]) => [key, reverseKeys(child)]));
+  };
+  const disordered = reverseKeys(source);
+  const readFile = fs.readFile;
+  t.mock.method(fs, 'readFile', async (file, ...args) => (
+    file === sourcePath ? JSON.stringify(disordered) : readFile(file, ...args)
+  ));
+
+  await withTempCwd(async (tempDir) => {
+    await run(['--name', 'ordered-starter', '--template', 'minimal']);
+    const output = await fs.readFile(path.join(tempDir, 'ordered-starter', 'zeropress-preview-data.json'), 'utf8');
+    const generated = JSON.parse(output);
+    const expected = { ...disordered, generated_at: generated.generated_at };
+    assert.deepEqual(generated, expected);
+    assert.equal(output, `${JSON.stringify(canonicalizePreviewDataKeyOrder(expected), null, 2)}\n`);
+  });
+});
 
 test('run rejects a symbolic-link target without writing through it', async () => {
   await withTempCwd(async (tempDir) => {

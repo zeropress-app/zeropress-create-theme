@@ -7,11 +7,15 @@
     "title": "Alex Example",
     "description": "Independent product designer and developer based in Seoul.",
     "url": "",
+    "media_origin": "",
+    "locale": "en-US",
+    "posts_per_page": 10,
+    "date_style": "medium",
+    "time_style": "none",
+    "timezone": "Asia/Seoul",
     "robots": {
       "allow_indexing": false
     },
-    "locale": "en-US",
-    "timezone": "Asia/Seoul",
     "post_index": {
       "enabled": false,
       "path": "/writing",
@@ -24,17 +28,13 @@
     "meta": {
       "author_name": "Alex Example",
       "author_short_name": "Alex Example",
+      "available_text": "One advisory engagement opening in Q3 2026.",
+      "contact_email": "hello@example.com",
+      "currently_text": "Lead designer at Northwind. Writing weekly at Field Notes.",
       "hero_eyebrow": "Independent designer · Seoul",
       "hero_headline": "I design quiet, useful interfaces for ambitious teams shaping the next decade of software.",
-      "hero_lede": "Hi, I'm Alex — an independent product designer and developer based in Seoul. For the last decade I've helped startups and established teams ship calm, considered software. Currently leading design at a small fintech, and taking on a few outside projects each year.",
-      "currently_text": "Lead designer at Northwind. Writing weekly at Field Notes.",
-      "available_text": "One advisory engagement opening in Q3 2026.",
-      "contact_email": "hello@example.com"
-    },
-    "media_origin": "",
-    "posts_per_page": 10,
-    "date_style": "medium",
-    "time_style": "none"
+      "hero_lede": "Hi, I'm Alex — an independent product designer and developer based in Seoul. For the last decade I've helped startups and established teams ship calm, considered software. Currently leading design at a small fintech, and taking on a few outside projects each year."
+    }
   },
   "content": {
     "authors": [
@@ -89,15 +89,15 @@
         "document_type": "markdown",
         "excerpt": "Redesigning a 30-year-old banking platform for a new generation of customers.",
         "featured_image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80",
-        "status": "published",
         "meta": {
-          "page_type": "project",
           "client": "Northwind Financial",
-          "role": "Lead Product Designer",
-          "year": "2025",
           "date": "Jan 2025 – Present",
-          "stack_text": "Figma, React, TypeScript, SwiftUI, Storybook"
-        }
+          "page_type": "project",
+          "role": "Lead Product Designer",
+          "stack_text": "Figma, React, TypeScript, SwiftUI, Storybook",
+          "year": "2025"
+        },
+        "status": "published"
       },
       {
         "title": "Field Notes CMS",
@@ -107,15 +107,15 @@
         "document_type": "markdown",
         "excerpt": "A minimal headless CMS for journalists working in the field with intermittent connectivity.",
         "featured_image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80",
-        "status": "published",
         "meta": {
-          "page_type": "project",
           "client": "Field Notes Press",
-          "role": "Design & Engineering",
-          "year": "2024",
           "date": "Jun – Dec 2024",
-          "stack_text": "Next.js, TypeScript, SQLite, CRDTs, Tailwind"
-        }
+          "page_type": "project",
+          "role": "Design & Engineering",
+          "stack_text": "Next.js, TypeScript, SQLite, CRDTs, Tailwind",
+          "year": "2024"
+        },
+        "status": "published"
       },
       {
         "title": "Atlas Type Foundry",
@@ -125,15 +125,15 @@
         "document_type": "markdown",
         "excerpt": "Identity and storefront for an independent type foundry based in Seoul.",
         "featured_image": "https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&w=1600&q=80",
-        "status": "published",
         "meta": {
-          "page_type": "project",
           "client": "Atlas Type",
-          "role": "Brand Identity, Web",
-          "year": "2024",
           "date": "Mar – May 2024",
-          "stack_text": "Astro, Stripe, Sanity, GSAP"
-        }
+          "page_type": "project",
+          "role": "Brand Identity, Web",
+          "stack_text": "Astro, Stripe, Sanity, GSAP",
+          "year": "2024"
+        },
+        "status": "published"
       },
       {
         "title": "Marlow Coffee",
@@ -143,15 +143,15 @@
         "document_type": "markdown",
         "excerpt": "An e-commerce experience for a single-origin coffee roaster in Portland.",
         "featured_image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80",
-        "status": "published",
         "meta": {
-          "page_type": "project",
           "client": "Marlow Roasters",
-          "role": "Web, Packaging",
-          "year": "2023",
           "date": "Sep – Nov 2023",
-          "stack_text": "Shopify Hydrogen, React, Klaviyo"
-        }
+          "page_type": "project",
+          "role": "Web, Packaging",
+          "stack_text": "Shopify Hydrogen, React, Klaviyo",
+          "year": "2023"
+        },
+        "status": "published"
       },
       {
         "title": "Harbor Health",
@@ -161,15 +161,15 @@
         "document_type": "markdown",
         "excerpt": "A patient-first booking and records app for a network of community clinics.",
         "featured_image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
-        "status": "published",
         "meta": {
-          "page_type": "project",
           "client": "Harbor Health Co-op",
-          "role": "Product Design",
-          "year": "2023",
           "date": "Feb – Aug 2023",
-          "stack_text": "Figma, React, Radix UI, PostgreSQL"
-        }
+          "page_type": "project",
+          "role": "Product Design",
+          "stack_text": "Figma, React, Radix UI, PostgreSQL",
+          "year": "2023"
+        },
+        "status": "published"
       },
       {
         "title": "Meridian OS",
@@ -179,15 +179,15 @@
         "document_type": "markdown",
         "excerpt": "A cross-platform design system powering a suite of developer tools.",
         "featured_image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
-        "status": "published",
         "meta": {
-          "page_type": "project",
           "client": "Meridian Labs",
-          "role": "Design Systems Lead",
-          "year": "2022",
           "date": "May – Dec 2022",
-          "stack_text": "React, TypeScript, Style Dictionary, Storybook"
-        }
+          "page_type": "project",
+          "role": "Design Systems Lead",
+          "stack_text": "React, TypeScript, Style Dictionary, Storybook",
+          "year": "2022"
+        },
+        "status": "published"
       },
       {
         "title": "Privacy Policy",
@@ -196,11 +196,11 @@
         "content": "This Privacy Policy describes how example.com (\"we\", \"our\") collects, uses, and shares information about you when you visit this website. This is a sample document for a portfolio site and should not be relied upon as legal advice.\n\n## 1. Information we collect\n\nWe collect a minimal amount of information necessary to operate the site. This includes anonymous analytics data such as the pages you visit, your approximate location at the country level, and the device and browser you use.\n\n## 2. How we use your information\n\n- To understand which pages are most useful to visitors.\n- To detect, prevent, and respond to abuse or technical issues.\n- To respond to messages you send us through the contact page.\n\n## 3. Sharing\n\nWe do not sell your personal information. We share data only with service providers who help us run the site, and only as needed to perform their work for us.\n\n## 4. Your rights\n\nDepending on where you live, you may have the right to access, correct, or delete the personal information we hold about you. To exercise these rights, email privacy@example.com.\n\n## 5. Contact\n\nIf you have any questions about this policy, please write to privacy@example.com.",
         "document_type": "markdown",
         "excerpt": "How we handle your data.",
-        "status": "published",
         "meta": {
           "page_type": "legal",
           "updated": "May 1, 2026"
-        }
+        },
+        "status": "published"
       },
       {
         "title": "Terms of Service",
@@ -209,11 +209,11 @@
         "content": "These Terms of Service govern your use of example.com. By accessing the site you agree to these terms. This is a sample document provided as part of a portfolio template.\n\n## 1. Use of the site\n\nYou may browse and read the content on this site for personal, non-commercial use. You may not scrape, republish, or use the content to train machine-learning models without prior written consent.\n\n## 2. Intellectual property\n\nAll written content, project case studies, photographs, and design work are © Alex Example unless otherwise noted. Client work is shown with permission and remains the property of the respective clients.\n\n## 3. Disclaimer\n\nThe site is provided \"as is\" without warranties of any kind. We make no guarantees about the accuracy or completeness of the information published here.\n\n## 4. Limitation of liability\n\nTo the fullest extent permitted by law, we are not liable for any indirect or consequential damages arising from your use of the site.\n\n## 5. Changes\n\nWe may update these terms from time to time. The date at the top of the page indicates when the terms were last revised.\n\n## 6. Governing law\n\nThese terms are governed by the laws of the Republic of Korea.",
         "document_type": "markdown",
         "excerpt": "The terms that govern use of this site.",
-        "status": "published",
         "meta": {
           "page_type": "legal",
           "updated": "May 1, 2026"
-        }
+        },
+        "status": "published"
       },
       {
         "title": "Cookie Policy",
@@ -222,17 +222,40 @@
         "content": "This Cookie Policy explains how example.com uses cookies and similar technologies when you visit the site. This is a sample document for a portfolio template.\n\n## 1. What are cookies\n\nCookies are small text files placed on your device when you visit a website. They are widely used to make sites work, or work more efficiently, and to provide information to the site owner.\n\n## 2. Cookies we use\n\n- **Essential** — required for the site to function, such as remembering your light or dark mode preference.\n- **Analytics** — anonymous, aggregated statistics about how visitors use the site. No personal identifiers are stored.\n\n## 3. Managing cookies\n\nMost browsers let you refuse or delete cookies. Doing so may affect parts of the site, such as your saved theme preference.\n\n## 4. Third parties\n\nWe do not use third-party advertising cookies. Any analytics provider we use is contractually required to handle data on our behalf only.\n\n## 5. Contact\n\nQuestions about cookies can be sent to privacy@example.com.",
         "document_type": "markdown",
         "excerpt": "How we use cookies on this site.",
-        "status": "published",
         "meta": {
           "page_type": "legal",
           "updated": "May 1, 2026"
-        }
+        },
+        "status": "published"
       }
     ],
     "categories": [],
     "tags": []
   },
   "menus": {
+    "legal": {
+      "name": "Legal",
+      "items": [
+        {
+          "title": "Privacy",
+          "url": "/legal/privacy/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Terms",
+          "url": "/legal/terms/",
+          "target": "_self",
+          "children": []
+        },
+        {
+          "title": "Cookies",
+          "url": "/legal/cookies/",
+          "target": "_self",
+          "children": []
+        }
+      ]
+    },
     "primary": {
       "name": "Primary",
       "items": [
@@ -281,29 +304,6 @@
           "title": "X",
           "url": "https://x.com",
           "target": "_blank",
-          "children": []
-        }
-      ]
-    },
-    "legal": {
-      "name": "Legal",
-      "items": [
-        {
-          "title": "Privacy",
-          "url": "/legal/privacy/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Terms",
-          "url": "/legal/terms/",
-          "target": "_self",
-          "children": []
-        },
-        {
-          "title": "Cookies",
-          "url": "/legal/cookies/",
-          "target": "_self",
           "children": []
         }
       ]

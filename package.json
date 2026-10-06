@@ -25,12 +25,14 @@
     "theme"
   ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "format:preview-data": "node scripts/format-preview-data.mjs"
   },
   "engines": {
     "node": ">=22.22.0"
   },
   "dependencies": {
+    "@zeropress/preview-data-validator": "0.7.4",
     "@zeropress/theme-validator": "0.7.4"
   },
   "devDependencies": {

@@ -7,6 +7,7 @@ import {
   validateSlug,
   validateThemeFiles,
 } from '@zeropress/theme-validator';
+import { canonicalizePreviewDataKeyOrder } from '@zeropress/preview-data-validator';
 import { toTerminalSafeText } from './terminal.js';
 
 const TEMPLATES = new Set(['minimal', 'blog', 'magazine', 'docs', 'portfolio']);
@@ -259,7 +260,8 @@ async function writePreviewData(sourcePath, targetPath, generatedAt) {
   const raw = await fs.readFile(sourcePath, 'utf8');
   const previewData = JSON.parse(raw);
   previewData.generated_at = generatedAt;
-  await fs.writeFile(targetPath, `${JSON.stringify(previewData, null, 2)}\n`, 'utf8');
+  const orderedPreviewData = canonicalizePreviewDataKeyOrder(previewData);
+  await fs.writeFile(targetPath, `${JSON.stringify(orderedPreviewData, null, 2)}\n`, 'utf8');
 }
 
 async function writeStarterGitignore(targetDir) {

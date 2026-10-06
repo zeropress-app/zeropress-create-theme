@@ -7,19 +7,19 @@
     "title": "minimal",
     "description": "A quiet corner of the internet — notes on writing, tools, and the work in between.",
     "url": "",
+    "media_origin": "",
+    "locale": "en-US",
+    "posts_per_page": 3,
+    "date_style": "medium",
+    "time_style": "none",
+    "timezone": "UTC",
     "robots": {
       "allow_indexing": false
     },
-    "locale": "en-US",
-    "timezone": "UTC",
     "footer": {
       "copyright_text": "minimal — built quietly.",
       "attribution": true
-    },
-    "media_origin": "",
-    "posts_per_page": 3,
-    "date_style": "medium",
-    "time_style": "none"
+    }
   },
   "content": {
     "authors": [
@@ -167,15 +167,9 @@
     ]
   },
   "menus": {
-    "primary": {
-      "name": "Primary Menu",
+    "footer": {
+      "name": "Footer Menu",
       "items": [
-        {
-          "title": "Posts",
-          "url": "/",
-          "target": "_self",
-          "children": []
-        },
         {
           "title": "About",
           "url": "/about/",
@@ -190,9 +184,15 @@
         }
       ]
     },
-    "footer": {
-      "name": "Footer Menu",
+    "primary": {
+      "name": "Primary Menu",
       "items": [
+        {
+          "title": "Posts",
+          "url": "/",
+          "target": "_self",
+          "children": []
+        },
         {
           "title": "About",
           "url": "/about/",
