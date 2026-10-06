@@ -52,7 +52,7 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
     const gitignore = await fs.readFile(path.join(projectDir, '.gitignore'), 'utf8');
     const canonicalProjectDir = await fs.realpath(projectDir);
 
-    assert.equal(themeJson.$schema, 'https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json');
+    assert.equal(themeJson.$schema, 'https://www.schemastore.org/zeropress-theme-runtime-0.7.json');
     assert.equal(themeJson.name, 'my-theme');
     assert.equal(themeJson.namespace, 'my-company');
     assert.equal(themeJson.slug, 'my-theme');
@@ -60,7 +60,7 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
     assert.equal(themeJson.license, 'MIT');
     assert.equal(themeJson.runtime, '0.7');
     assert.equal(previewData.version, '0.7');
-    assert.equal(previewData.$schema, 'https://schemas.zeropress.dev/preview-data/v0.7/schema.json');
+    assert.equal(previewData.$schema, 'https://www.schemastore.org/zeropress-preview-data-0.7.json');
     assert.equal(previewData.generator, 'zeropress-create-theme');
     assert.equal(typeof previewData.generated_at, 'string');
     assert.equal(Date.parse(previewData.generated_at) >= startedAt, true);
@@ -110,6 +110,8 @@ for (const template of templates) {
       const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8'));
       assert.equal(themeJson.slug, slug);
       assert.equal(themeJson.runtime, '0.7');
+      assert.equal(themeJson.$schema, 'https://www.schemastore.org/zeropress-theme-runtime-0.7.json');
+      assert.equal(previewData.$schema, 'https://www.schemastore.org/zeropress-preview-data-0.7.json');
       assert.equal(previewData.generator, 'zeropress-create-theme');
       assert.equal(Number.isNaN(Date.parse(previewData.generated_at)), false);
 

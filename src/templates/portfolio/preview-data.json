@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.zeropress.dev/preview-data/v0.7/schema.json",
+  "$schema": "https://www.schemastore.org/zeropress-preview-data-0.7.json",
   "version": "0.7",
   "generator": "zeropress-create-theme",
   "generated_at": "2026-07-15T09:00:00Z",

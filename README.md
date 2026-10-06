@@ -188,6 +188,9 @@ my-portfolio/
     assets/
 ```
 
+Generated Preview Data and `theme/theme.json` include versioned SchemaStore
+`$schema` URLs for editor completion and validation.
+
 The generated `.gitignore` excludes `node_modules/` and the reproducible
 `dist/` build output. Commit the generated lockfile when you install
 dependencies.
@@ -216,7 +219,7 @@ cleanup script is needed.
 
 Generated `theme/theme.json` is rewritten with:
 
-- `$schema: "https://schemas.zeropress.dev/theme-runtime/v0.7/schema.json"`
+- `$schema: "https://www.schemastore.org/zeropress-theme-runtime-0.7.json"`
 - `runtime: "0.7"`
 - `namespace: "my-company"`
 - `slug` and `name` from `--name`
