@@ -7,7 +7,7 @@
 Public ZeroPress starter generator for Theme Runtime v0.7 and Preview Data v0.7.
 
 This package creates a buildable ZeroPress starter project for the
-`preview-data.json + theme/` workflow. The five starter templates are bundled
+`zeropress-preview-data.json + theme/` workflow. The five starter templates are bundled
 inside the npm package.
 
 It uses directly:
@@ -45,7 +45,7 @@ npm run build
 The build output is written to `dist/`.
 
 Sample content disallows crawling by default. After replacing it with your own
-content, set `site.robots.allow_indexing` to `true` in `preview-data.json` when
+content, set `site.robots.allow_indexing` to `true` in `zeropress-preview-data.json` when
 you are ready for search engines to crawl the site.
 
 ## Usage
@@ -172,7 +172,7 @@ when replacing the other files with updated copies.
 my-portfolio/
   package.json
   .gitignore
-  preview-data.json
+  zeropress-preview-data.json
   public/                 # optional, included by starters that need trusted public HTML/assets
   theme/
     theme.json
@@ -190,6 +190,7 @@ my-portfolio/
 
 Generated Preview Data and `theme/theme.json` include versioned SchemaStore
 `$schema` URLs for editor completion and validation.
+Build and dev commands also accept other Preview Data filenames through `--data`.
 
 The generated `.gitignore` excludes `node_modules/` and the reproducible
 `dist/` build output. Commit the generated lockfile when you install
@@ -203,8 +204,8 @@ Generated `package.json` includes:
     "node": ">=22.22.0"
   },
   "scripts": {
-    "build": "zeropress-build ./theme --data ./preview-data.json --out ./dist --empty-out-dir",
-    "dev": "zeropress-theme dev ./theme --data ./preview-data.json"
+    "build": "zeropress-build ./theme --data ./zeropress-preview-data.json --out ./dist --empty-out-dir",
+    "dev": "zeropress-theme dev ./theme --data ./zeropress-preview-data.json"
   },
   "dependencies": {
     "@zeropress/build": "^0.7.6",

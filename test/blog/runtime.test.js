@@ -44,7 +44,7 @@ test('legacy WordPress redirect only handles positive IDs on the home page with 
 
 test('blog renders site date settings and redirects to the same public URLs as the build', async () => {
   const templateRoot = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
-  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'zeropress-preview-data.json'), 'utf8'));
   data.site.date_style = 'full';
   data.site.time_style = 'short';
   const temporaryRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-blog-runtime-'));
@@ -82,7 +82,7 @@ test('blog renders site date settings and redirects to the same public URLs as t
 
 test('blog shares sidebar widgets across listings, posts with or without a TOC, and pages', async t => {
   const templateRoot = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
-  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'zeropress-preview-data.json'), 'utf8'));
   data.site.permalinks = { posts: '/writing/:public_id', output_style: 'directory' };
   data.site.search = { enabled: false };
   data.content.posts = data.content.posts.slice(0, 2);
@@ -133,7 +133,7 @@ test('blog shares sidebar widgets across listings, posts with or without a TOC, 
 
 test('the blog sample renders nested navigation, both authors, and locally served figures and covers', async t => {
   const templateRoot = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
-  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'zeropress-preview-data.json'), 'utf8'));
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-blog-sample-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const output = path.join(root, 'dist');
@@ -173,7 +173,7 @@ test('the blog sample renders nested navigation, both authors, and locally serve
 
 test('blog listing pages adapt to a Studio publication with no widgets or menus', async t => {
   const templateRoot = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
-  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'zeropress-preview-data.json'), 'utf8'));
   delete data.widgets;
   delete data.menus;
   delete data.site.newsletter;
@@ -197,7 +197,7 @@ test('blog listing pages adapt to a Studio publication with no widgets or menus'
 
 test('blog preserves accessible SVG controls when switching and restoring color themes', async t => {
   const templateRoot = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
-  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(templateRoot, 'zeropress-preview-data.json'), 'utf8'));
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-blog-icons-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const output = path.join(root, 'dist');

@@ -47,7 +47,7 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
     const completedAt = Date.now();
     const projectDir = path.join(tempDir, 'my-theme');
     const themeJson = JSON.parse(await fs.readFile(path.join(projectDir, 'theme', 'theme.json'), 'utf8'));
-    const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8'));
+    const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'zeropress-preview-data.json'), 'utf8'));
     const starterPackage = JSON.parse(await fs.readFile(path.join(projectDir, 'package.json'), 'utf8'));
     const gitignore = await fs.readFile(path.join(projectDir, '.gitignore'), 'utf8');
     const canonicalProjectDir = await fs.realpath(projectDir);
@@ -73,6 +73,7 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
     for (const command of ['build', 'dev']) {
       assert.equal(typeof starterPackage.scripts[command], 'string');
       assert.notEqual(starterPackage.scripts[command].trim(), '');
+      assert.match(starterPackage.scripts[command], /(?:^|\s)--data\s+\.\/zeropress-preview-data\.json(?:\s|$)/u, command);
     }
     for (const dependency of ['@zeropress/build', '@zeropress/theme']) {
       assert.equal(typeof starterPackage.dependencies[dependency], 'string', dependency);
@@ -93,7 +94,7 @@ test('run scaffolds a buildable v0.7 theme runtime with v0.7 preview data', asyn
 for (const template of templates) {
   test(`${template} source Preview Data identifies create-theme as its generator`, async () => {
     const previewData = JSON.parse(
-      await fs.readFile(new URL(`../src/templates/${template}/preview-data.json`, import.meta.url), 'utf8'),
+      await fs.readFile(new URL(`../src/templates/${template}/zeropress-preview-data.json`, import.meta.url), 'utf8'),
     );
     assert.equal(previewData.generator, 'zeropress-create-theme');
     assert.equal(typeof previewData.generated_at, 'string');
@@ -107,7 +108,8 @@ for (const template of templates) {
 
       const projectDir = path.join(tempDir, slug);
       const themeJson = JSON.parse(await fs.readFile(path.join(projectDir, 'theme', 'theme.json'), 'utf8'));
-      const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8'));
+      const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'zeropress-preview-data.json'), 'utf8'));
+      await assert.rejects(() => fs.access(path.join(projectDir, 'preview-data.json')), /ENOENT/);
       assert.equal(themeJson.slug, slug);
       assert.equal(themeJson.runtime, '0.7');
       assert.equal(themeJson.$schema, 'https://www.schemastore.org/zeropress-theme-runtime-0.7.json');
@@ -118,7 +120,7 @@ for (const template of templates) {
       if (template === 'blog') {
         previewData.content.posts[0].excerpt = '';
         previewData.content.posts[0].content = 'A body-derived summary for the blog listing.';
-        await fs.writeFile(path.join(projectDir, 'preview-data.json'), JSON.stringify(previewData), 'utf8');
+        await fs.writeFile(path.join(projectDir, 'zeropress-preview-data.json'), JSON.stringify(previewData), 'utf8');
       }
 
       await execFileAsync('npm', ['run', 'build'], { cwd: projectDir });
@@ -171,7 +173,7 @@ for (const template of templates) {
       }
 
       if (template === 'docs') {
-        const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8'));
+        const previewData = JSON.parse(await fs.readFile(path.join(projectDir, 'zeropress-preview-data.json'), 'utf8'));
         const homeHtml = await fs.readFile(path.join(projectDir, 'dist', 'index.html'), 'utf8');
         const allPageContent = previewData.content.pages.map((page) => page.content).join('\n');
 
@@ -185,7 +187,7 @@ for (const template of templates) {
       }
 
       if (template === 'portfolio') {
-        const previewDataRaw = await fs.readFile(path.join(projectDir, 'preview-data.json'), 'utf8');
+        const previewDataRaw = await fs.readFile(path.join(projectDir, 'zeropress-preview-data.json'), 'utf8');
         const contactPartial = await fs.readFile(
           path.join(projectDir, 'theme', 'partials', 'contact-info.html'),
           'utf8',

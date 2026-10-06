@@ -17,7 +17,7 @@ let html;
 let warnings;
 before(async () => {
   root = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-blog-menu-'));
-  const data = JSON.parse(await fs.readFile(path.join(template, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(template, 'zeropress-preview-data.json'), 'utf8'));
   data.menus = {
     primary: { name: 'Primary', items: [
       item('Writing', [item('Stories', [item('Reading', [item('Hidden')])]), item('Notes', [item('Today')])]),

@@ -212,7 +212,7 @@ test('an inferred newsletter still checks availability and supports retry', asyn
 
 test('blog supplies site-wide newsletter inference on home, archive, post, and page routes', async t => {
   const template = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
-  const data = JSON.parse(await fs.readFile(path.join(template, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(template, 'zeropress-preview-data.json'), 'utf8'));
   data.site.comments = { enabled: true, provider: 'zeropress', api_base_url: 'https://edge.example/api' };
   for (const post of [...data.content.posts, ...data.content.pages]) post.allow_comments = false;
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-blog-newsletter-'));

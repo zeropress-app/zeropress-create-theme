@@ -88,7 +88,7 @@ Options:
 
 Notes:
   - creates a new starter project in the current working directory
-  - generated output includes theme/, preview-data.json, optional public/, package.json, and .gitignore
+  - generated output includes theme/, zeropress-preview-data.json, optional public/, package.json, and .gitignore
   - generated theme.json uses the current ZeroPress runtime contract`);
 }
 
@@ -219,7 +219,7 @@ async function scaffoldTheme(targetDir, options) {
   const templateDir = path.join(TEMPLATE_ROOT, template);
   const themeSourceDir = path.join(templateDir, 'theme');
   const publicSourceDir = path.join(templateDir, 'public');
-  const previewDataSourcePath = path.join(templateDir, 'preview-data.json');
+  const previewDataSourcePath = path.join(templateDir, 'zeropress-preview-data.json');
   let stat;
 
   try {
@@ -239,7 +239,7 @@ async function scaffoldTheme(targetDir, options) {
   if (await isDirectory(publicSourceDir)) {
     await fs.cp(publicSourceDir, path.join(targetDir, 'public'), { recursive: true });
   }
-  await writePreviewData(previewDataSourcePath, path.join(targetDir, 'preview-data.json'), generatedAt);
+  await writePreviewData(previewDataSourcePath, path.join(targetDir, 'zeropress-preview-data.json'), generatedAt);
   await writeStarterGitignore(targetDir);
   await writeStarterPackageJson(targetDir, slug);
 
@@ -288,8 +288,8 @@ async function writeStarterPackageJson(targetDir, slug) {
       node: '>=22.22.0',
     },
     scripts: {
-      build: 'zeropress-build ./theme --data ./preview-data.json --out ./dist --empty-out-dir',
-      dev: 'zeropress-theme dev ./theme --data ./preview-data.json',
+      build: 'zeropress-build ./theme --data ./zeropress-preview-data.json --out ./dist --empty-out-dir',
+      dev: 'zeropress-theme dev ./theme --data ./zeropress-preview-data.json',
     },
     dependencies: {
       '@zeropress/build': ZEROPRESS_BUILD_DEPENDENCY_RANGE,

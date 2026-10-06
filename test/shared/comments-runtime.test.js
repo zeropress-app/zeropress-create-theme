@@ -12,7 +12,7 @@ after(() => fs.rm(temporary, { recursive: true, force: true }));
 const fixtures = await Promise.all(['blog', 'minimal'].map(async templateName => {
   const template = fileURLToPath(new URL(`../../src/templates/${templateName}/`, import.meta.url));
   const source = await fs.readFile(path.join(template, 'theme/assets/comment.js'), 'utf8');
-  const data = JSON.parse(await fs.readFile(path.join(template, 'preview-data.json'), 'utf8'));
+  const data = JSON.parse(await fs.readFile(path.join(template, 'zeropress-preview-data.json'), 'utf8'));
   data.site.comments = { enabled: true, provider: 'wordpress', api_base_url: 'https://comments.example/wp-json/wp/v2' };
   data.content.posts.forEach(post => { post.allow_comments = true; });
   const output = path.join(temporary, templateName);

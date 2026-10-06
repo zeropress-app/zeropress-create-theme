@@ -9,7 +9,7 @@ import { runBuild } from '@zeropress/build';
 
 const template = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
 const themeSource = await fs.readFile(path.join(template, 'theme/assets/theme.js'), 'utf8');
-const data = JSON.parse(await fs.readFile(path.join(template, 'preview-data.json'), 'utf8'));
+const data = JSON.parse(await fs.readFile(path.join(template, 'zeropress-preview-data.json'), 'utf8'));
 const item = (title, children = []) => ({ title, url: `/#${title.toLowerCase()}`, target: '_self', children });
 data.menus.primary.items = [item('Writing', [item('Stories', [item('Reading')])]), item('About')];
 const root = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-mobile-navigation-'));
