@@ -486,6 +486,8 @@ function createCommentsShellFragment(templates, options) {
     showList = true,
     commentCount = Array.isArray(comments) ? comments.length : 0,
     pagination = null,
+    originalUrl = null,
+    wordpressOrder = "desc",
     replyState = { activeCommentId: null },
     commentSettings = { threadComments: true, threadDepth: 2 },
     formDrafts = new Map(),
@@ -503,6 +505,7 @@ function createCommentsShellFragment(templates, options) {
   const countTarget = getCommentRole(shellFragment, "count");
   if (countTarget) {
     countTarget.textContent = String(commentCount);
+    countTarget.hidden = !showList;
   }
 
   const paginationTarget = getCommentRole(shellFragment, "pagination");
@@ -523,6 +526,20 @@ function createCommentsShellFragment(templates, options) {
   }
 
   feedbackTarget.replaceChildren(createCommentFeedbackFragment(templates, errors, successMessage));
+  if (originalUrl) {
+    const note = document.createElement('p');
+    note.className = 'zp-comments__wordpress-note';
+    if (pagination?.limited) {
+      note.append(`Showing ${wordpressOrder === 'asc' ? 'the oldest' : 'the latest'} ${pagination.loadedComments} comments. `);
+    }
+    const link = document.createElement('a');
+    link.href = originalUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'View all comments on WordPress';
+    note.append(link);
+    feedbackTarget.append(note);
+  }
 
   if (showForm) {
     const formFragment = cloneTemplateFragment(templates.form);
@@ -796,6 +813,7 @@ class CommentController {
     let currentPage = 1;
     let totalPages = 1;
     let totalComments = 0;
+    let wordpressPagination = {};
     let isLoadingMore = false;
     let hasLoadedComments = false;
     let identityState = createDefaultCommentIdentityState();
@@ -894,10 +912,13 @@ class CommentController {
           totalPages,
           totalComments,
           loading: isLoadingMore,
+          ...wordpressPagination,
         },
         showForm: true,
         replyState,
         commentSettings,
+        originalUrl: commentData.originalUrl,
+        wordpressOrder: commentData.order,
         formDrafts,
       });
       if (!shellFragment) {
@@ -926,6 +947,8 @@ class CommentController {
         showForm: false,
         showList: false,
         commentSettings,
+        originalUrl: commentData.originalUrl,
+        wordpressOrder: commentData.order,
       });
       if (!shellFragment) {
         mount.hidden = true;
@@ -960,6 +983,7 @@ class CommentController {
       currentPage = result.pagination?.currentPage || page;
       totalPages = result.pagination?.totalPages || currentPage;
       totalComments = result.pagination?.totalComments ?? currentComments.length;
+      wordpressPagination = { limited: result.pagination?.limited, loadedComments: result.pagination?.loadedComments };
       hasLoadedComments = true;
 
       if (

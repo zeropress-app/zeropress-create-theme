@@ -36,77 +36,111 @@ class CommentDataError extends Error {
   }
 }
 
+function wordPressOriginalUrl(config) {
+  const url = new URL(config.apiBaseUrl, window.location.origin);
+  if (!url.pathname.endsWith('/wp-json/wp/v2')) return null;
+  url.pathname = url.pathname.slice(0, -'wp-json/wp/v2'.length);
+  url.search = '';
+  url.searchParams.set(config.targetType === 'page' ? 'page_id' : 'p', String(config.targetPublicId));
+  url.hash = 'comments';
+  return url.href;
+}
+
+function wordPressHeaderInteger(headers, name) {
+  const value = headers?.get(name);
+  return typeof value === 'string' && /^\d+$/.test(value) && Number.isSafeInteger(Number(value))
+    ? Number(value) : null;
+}
+
+async function fetchWordPressJson(url, init = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(url, {
+      ...init, credentials: 'omit', headers: { Accept: 'application/json' }, signal: controller.signal,
+    });
+    const payload = await response.json().catch(() => null);
+    return { ok: response.ok, status: response.status, headers: response.headers, payload };
+  } catch {
+    throw new CommentDataError([init.method === 'POST'
+      ? 'The comment could not be confirmed. Check the original WordPress page before trying again.'
+      : 'Cannot reach WordPress comments. Try again or open the original WordPress page.']);
+  } finally { clearTimeout(timeout); }
+}
+
+function wordPressFailure(response, submitting = false) {
+  if (response.status === 401 || response.status === 403) return new CommentDataError([
+    submitting ? 'WordPress does not allow comments from this site. You can comment on the original WordPress page.'
+      : 'WordPress is not allowing this site to read comments. Open the original WordPress page.',
+  ]);
+  if (response.status === 429) return new CommentDataError(['WordPress is receiving too many requests. Please try again later.']);
+  // A failed or unreadable POST response may follow a successful remote write. Never replay it.
+  if (submitting && (response.ok || response.status >= 500)) return new CommentDataError([
+    'The comment could not be confirmed. Check the original WordPress page before trying again.',
+  ]);
+  const message = typeof response.payload?.message === 'string'
+    ? htmlToCommentText(response.payload.message).slice(0, 400) : '';
+  return new CommentDataError([message || 'Comments are temporarily unavailable. Open the original WordPress page.']);
+}
+
 class WordPressCommentData {
   constructor(config) {
+    const url = new URL(config.apiBaseUrl, window.location.origin);
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash
+      || !Number.isSafeInteger(Number(config.targetPublicId)) || Number(config.targetPublicId) <= 0) {
+      throw new CommentDataError(['The WordPress comment connection is invalid.']);
+    }
     this.provider = config.provider;
-    this.apiBaseUrl = config.apiBaseUrl;
+    this.apiBaseUrl = url.href.replace(/\/+$/, '');
     this.targetType = config.targetType;
-    this.targetPublicId = config.targetPublicId;
-    this.perPage = normalizePositiveInteger(config.perPage) || COMMENTS_PER_PAGE_DEFAULT;
-    this.order = normalizeCommentsOrder(config.order) || "desc";
+    this.targetPublicId = Number(config.targetPublicId);
+    this.perPage = Math.min(100, normalizePositiveInteger(config.perPage) || COMMENTS_PER_PAGE_DEFAULT);
+    this.order = normalizeCommentsOrder(config.order) || 'desc';
+    this.originalUrl = wordPressOriginalUrl(this);
   }
 
   async load() {
     const comments = [];
-
+    let total = null;
+    let limited = false;
     for (let page = 1; page <= WORDPRESS_COMMENTS_MAX_PAGES; page += 1) {
-      const response = await fetchJson(buildWordPressEndpoint(this, {
-        perPage: this.perPage,
-        page,
-        orderby: "date",
+      const response = await fetchWordPressJson(buildWordPressEndpoint(this, {
+        perPage: this.perPage, page, orderby: 'date_gmt',
       }));
-
-      if (!response.ok || !Array.isArray(response.payload)) {
-        throw createCommentDataError(response.payload, "Comments are temporarily unavailable.");
+      // Without CORS-exposed pagination headers, an exact full last page needs one probe.
+      if (page > 1 && response.status === 400 && response.payload?.code === 'rest_comment_invalid_page_number') break;
+      if (!response.ok || !Array.isArray(response.payload)) throw wordPressFailure(response);
+      if (response.payload.length > this.perPage || response.payload.some((item) =>
+        !Number.isSafeInteger(item?.id) || item.id <= 0 || typeof item.content?.rendered !== 'string'
+        || Number(item.post) !== this.targetPublicId)) {
+        throw new CommentDataError(['WordPress returned an unreadable comment. Open the original WordPress page.']);
       }
-
       comments.push(...normalizeWordPressComments(response.payload));
-      if (response.payload.length < this.perPage) {
-        break;
-      }
+      total = wordPressHeaderInteger(response.headers, 'X-WP-Total') ?? total;
+      const pages = wordPressHeaderInteger(response.headers, 'X-WP-TotalPages');
+      const exhausted = response.payload.length < this.perPage || (pages !== null && page >= pages)
+        || (total !== null && comments.length >= total);
+      if (exhausted) break;
+      if (page === WORDPRESS_COMMENTS_MAX_PAGES) limited = true;
     }
-
-    return {
-      comments,
-      pagination: {
-        currentPage: 1,
-        totalPages: 1,
-        totalComments: comments.length,
-      },
-    };
+    // Concurrent public comments can shift pages; do not display duplicate entries.
+    const unique = [...new Map(comments.map((comment) => [comment.id, comment])).values()];
+    return { comments: unique, pagination: {
+      currentPage: 1, totalPages: 1, totalComments: total ?? unique.length,
+      limited, loadedComments: unique.length,
+    } };
   }
 
   async submit(input) {
     const body = new FormData();
-    if (input.parentId) {
-      body.set("parent", input.parentId);
-    }
-    body.set("author_name", input.authorName);
-    body.set("author_email", input.authorEmail);
-    body.set("content", input.content);
-
-    let response;
-    try {
-      response = await fetchJson(buildWordPressEndpoint(this), {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body,
-      });
-    } catch {
-      throw new CommentDataError([
-        "Unable to submit the comment. Check your network connection and try again.",
-      ]);
-    }
-
-    if (!response.ok || !isWordPressCommentPayload(response.payload)) {
-      throw createCommentDataError(response.payload);
-    }
-
-    return {
-      publication: response.payload.status === "approved"
-        ? "published"
-        : "pending_moderation",
-    };
+    if (input.parentId) body.set('parent', input.parentId);
+    body.set('author_name', input.authorName);
+    body.set('author_email', input.authorEmail);
+    body.set('content', input.content);
+    const response = await fetchWordPressJson(buildWordPressEndpoint(this), { method: 'POST', body });
+    if (!response.ok || !Number.isSafeInteger(response.payload?.id) || response.payload.id <= 0
+      || Number(response.payload.post) !== this.targetPublicId) throw wordPressFailure(response, true);
+    return { publication: response.payload.status === 'approved' ? 'published' : 'pending_moderation' };
   }
 }
 
@@ -678,7 +712,7 @@ function normalizeWordPressComment(comment) {
   return {
     id,
     parentId,
-    authorName: String(comment.author_name || ""),
+    authorName: htmlToCommentText(comment.author_name || ""),
     authorKind: "guest",
     createdAt,
     contentText,
@@ -749,19 +783,8 @@ function htmlToCommentText(html) {
     .replace(/<br\b[^>]*\/?>[ \t]*(?:\r?\n)?/gi, "\n")
     .replace(/<\/p\s*>[ \t]*(?:\r?\n)?/gi, "\n\n");
   const doc = new DOMParser().parseFromString(normalized, "text/html");
+  doc.querySelectorAll("script, style, iframe, object").forEach((node) => node.remove());
   return (doc.body.textContent || "").replace(/\n{3,}/g, "\n\n").trim();
-}
-
-function isWordPressCommentPayload(payload) {
-  return Boolean(
-    payload &&
-    typeof payload === "object" &&
-    !Array.isArray(payload) &&
-    payload.id !== undefined &&
-    payload.post !== undefined &&
-    payload.content &&
-    typeof payload.content === "object",
-  );
 }
 
 function isZeroPressSubmissionPayload(payload) {

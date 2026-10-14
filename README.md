@@ -167,6 +167,65 @@ configuration error. To hide the newsletter entry point, set
 `site.newsletter.enabled` to `false` in Preview Data. Preserve `config.json`
 when replacing the other files with updated copies.
 
+### WordPress comments
+
+For a Studio site retaining its original WordPress database, choose **WordPress**
+in Studio's **Site settings → Site comments**, then publish the updated Preview
+Data. Imported Posts and Pages keep their WordPress IDs; new Studio content has
+no WordPress comment target. Reading comments requires a publicly accessible
+WordPress REST API and, for cross-origin requests, CORS access from the static
+site's origin. Writing comments additionally requires WordPress to permit
+anonymous REST submissions from the integration. No WordPress credentials are
+configured in the theme.
+
+Blog loads one page initially (50 comments by default, at most 100 per request).
+**Load more** fetches subsequent pages on demand. Existing comments
+and reply drafts remain available if an additional request fails. Blog supports
+installations where only the REST API is public: it does not infer a WordPress
+page URL from the API address. Failures offer retry or submission-status guidance.
+Minimal loads up to three pages and links to the original WordPress page.
+Neither adapter automatically retries an uncertain comment submission.
+
+With WordPress comments, set the newsletter sample's `newsletter_endpoint`
+explicitly to a ZeroPress Edge newsletter API URL. Automatic endpoint inference
+uses only the ZeroPress comment provider. Without an endpoint, the enabled sample
+shows setup guidance.
+
+#### ZeroPress Static comment writing policy
+
+The blog theme supports the ZeroPress Static WordPress plugin's runtime writing
+policy. With writing disabled, comments remain visible without a form or reply
+buttons. Enabled writing uses the plugin's PoW or Cloudflare Turnstile setting.
+Policy failures keep the list visible and offer a writing-options retry.
+
+The blog theme uses these paths on the configured WordPress API host:
+
+| Exact path | HTTP methods | Purpose |
+| --- | --- | --- |
+| `/wp-json/wp/v2/comments` | `GET`, `POST` | Read comments and submit comments or replies |
+| `/wp-json/zeropress-static/v1/comments/policy` | `GET` | Read the comment-writing policy |
+| `/wp-json/zeropress-static/v1/comments/challenge` | `POST` | Obtain comment-verification data before submission |
+
+For access-control or proxy rules, match the API hostname and each exact
+path/method pair. Query parameters such as `?post=123&page=2` are separate from
+the path and must be preserved. For a subdirectory installation, include that
+prefix in every path, for example `/blog/wp-json/wp/v2/comments`.
+
+With comment writing disabled, the theme uses only the two `GET` requests.
+Also allow `OPTIONS` on the corresponding paths when CORS preflight is needed.
+Configure WAF exceptions separately, limiting them to security rules that block
+legitimate comment requests.
+
+WordPress front-end pages need not be public. The
+`zeropress_client=theme-v1` submission marker identifies the integration rather
+than proving who sent a request. Normal WordPress authentication, moderation and
+closed-comment rules remain in force.
+
+When WordPress explicitly reports that the policy route is missing, the theme
+uses standard WordPress comment submission. Other policy errors do not enable
+writing.
+No build input or Preview Data changes are required for writing-policy updates.
+
 ## Generated Project
 
 ```text

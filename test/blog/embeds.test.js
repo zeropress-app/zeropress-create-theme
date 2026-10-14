@@ -385,3 +385,15 @@ for (const action of ['confirm', 'unsubscribe']) {
     assert.equal(page.calls.length, 2);
   });
 }
+
+
+test('WordPress keeps explicit newsletter endpoints without inferring one', async t => {
+  const endpoint = endpointFor('newsletter');
+  const page = await openEmbed(t, 'newsletter', {
+    config: { newsletter_endpoint: endpoint },
+    frameElement: () => themeNewsletterFrame(t, { provider: 'wordpress', base: 'https://wordpress.example/wp-json/wp/v2' }),
+    api: url => url === endpoint ? item({ newsletter: { title: 'Explicit newsletter' }, fields: [] }) : undefined,
+  });
+  assert.equal(page.document.querySelector('fieldset').disabled, false);
+  assert.deepEqual(page.calls.map(call => call.url), [page.base + 'config.json', endpoint]);
+});

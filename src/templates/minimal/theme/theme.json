@@ -3,7 +3,7 @@
   "name": "Minimal",
   "namespace": "zeropress",
   "slug": "minimal",
-  "version": "0.7.6",
+  "version": "0.7.8",
   "license": "MIT",
   "runtime": "0.7",
   "description": "Quiet, content-first blog theme with search and single-level navigation. Pure CSS prefers-color-scheme dark mode, serif body / sans headings, lightweight comments island.",

@@ -12,16 +12,17 @@ after(() => fs.rm(temporary, { recursive: true, force: true }));
 const fixtures = await Promise.all(['blog', 'minimal'].map(async templateName => {
   const template = fileURLToPath(new URL(`../../src/templates/${templateName}/`, import.meta.url));
   const source = await fs.readFile(path.join(template, 'theme/assets/comment.js'), 'utf8');
+  const dataSource = await fs.readFile(path.join(template, 'theme/assets/comment-data.js'), 'utf8');
   const data = JSON.parse(await fs.readFile(path.join(template, 'zeropress-preview-data.json'), 'utf8'));
   data.site.comments = { enabled: true, provider: 'wordpress', api_base_url: 'https://comments.example/wp-json/wp/v2' };
   data.content.posts.forEach(post => { post.allow_comments = true; });
   const output = path.join(temporary, templateName);
   await runBuild(path.join(template, 'theme'), data, output);
   const html = await fs.readFile(path.join(output, `posts/${data.content.posts[0].slug}/index.html`), 'utf8');
-  return { templateName, source, html };
+  return { templateName, source, dataSource, html };
 }));
 
-for (const { templateName, source, html } of fixtures) {
+for (const { templateName, source, dataSource, html } of fixtures) {
   const test = (name, run) => baseTest(`${templateName}: ${name}`, run);
 
   const comments = [1, 2, 3].map(id => ({
@@ -34,7 +35,7 @@ for (const { templateName, source, html } of fixtures) {
   });
   const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-  async function openComments(t, overrides = {}, stored = null, dateStyles = null) {
+  async function openComments(t, overrides = {}, stored = null, dateStyles = null, transport = null, threadDepth = null) {
     const errors = [];
     const virtualConsole = new VirtualConsole();
     virtualConsole.on('jsdomError', error => errors.push(error));
@@ -44,10 +45,13 @@ for (const { templateName, source, html } of fixtures) {
     const { window } = dom;
     if (dateStyles) Object.assign(window.document.documentElement.dataset, dateStyles);
     const mount = window.document.querySelector('[data-zp-comments]');
+    if (threadDepth !== null) mount.dataset.zpCommentsThreadingMaxDepth = String(threadDepth);
     const storageKey = `zeropress:comment-draft:v1:${mount.dataset.zpCommentsTargetType}:${mount.dataset.zpCommentsTargetPublicId}`;
     if (stored) window.sessionStorage.setItem(storageKey, JSON.stringify(stored));
     let notifyIdentity;
-    window.fetch = () => { throw new Error('Unexpected network request'); };
+    window.fetch = async (url, options) => new URL(url).pathname.endsWith('/zeropress-static/v1/comments/policy')
+      ? new Response(JSON.stringify({ code: 'rest_no_route' }), { status: 404 })
+      : (transport || (() => { throw new Error('Unexpected network request'); }))(url, options);
     window.ZeroPressCommentData = {
       create: () => ({
         load: async page => pageAt(page),
@@ -57,6 +61,10 @@ for (const { templateName, source, html } of fixtures) {
       }),
       getErrorMessages: error => [error.message],
     };
+    if (transport) {
+      window.AbortController = AbortController;
+      window.eval(dataSource);
+    }
     window.eval(source);
     await tick();
     const form = (parent = '') => [...mount.querySelectorAll('[data-zp-comment-form]')]
@@ -79,6 +87,73 @@ for (const { templateName, source, html } of fixtures) {
     const reply = id => mount.querySelector(`[data-reply-comment-id="${id}"]`).click();
     const submit = parent => form(parent).dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
     return { window, mount, form, values, fill, reply, submit, identity: state => notifyIdentity(state) };
+  }
+
+  test('WordPress results and failures respect the theme source-link policy', async t => {
+    const originalUrl = 'https://wordpress.example/?p=42#comments';
+    const p = await openComments(t, { originalUrl, order: 'desc', load: async () => ({
+      comments, pagination: { currentPage: 1, totalPages: 1, totalComments: 400, limited: true, loadedComments: 3 },
+    }) });
+    assert.equal(p.mount.querySelector('[data-role="count"]').textContent, '400');
+    const link = p.mount.querySelector('.zp-comments__wordpress-note a');
+    if (templateName === 'blog') {
+      assert.equal(link, null);
+      assert.doesNotMatch(p.mount.textContent, /Showing .*comments/);
+    } else {
+      assert.match(p.mount.textContent, /Showing the latest 3 comments/);
+      assert.equal(link.href, originalUrl); assert.equal(link.target, '_blank');
+      assert.equal(link.rel, 'noopener noreferrer');
+    }
+    const failed = await openComments(t, { originalUrl, load: async () => { throw new Error('Cannot reach WordPress'); } });
+    assert.match(failed.mount.textContent, /Cannot reach WordPress/);
+    if (templateName === 'blog') assert.equal(failed.mount.querySelector('.zp-comments__wordpress-note a'), null);
+    else assert.equal(failed.mount.querySelector('.zp-comments__wordpress-note a').href, originalUrl);
+    assert.equal(failed.form(), undefined);
+    assert.equal(failed.mount.querySelector('[data-role="count"]').hidden, true);
+  });
+
+  if (templateName === 'blog') {
+    test('WordPress loads beyond three pages on demand, preserves drafts on failure, and joins late parents', async t => {
+      const calls = [];
+      let fail = true;
+      const pages = [[{ id: 2, parent: 1 }], [{ id: 2, parent: 1 }, { id: 3, parent: 0 }], [{ id: 1, parent: 0 }], [{ id: 4, parent: 0 }]];
+      const p = await openComments(t, {}, null, null, async (url, options) => {
+        const target = new URL(url);
+        assert.equal(target.origin, 'https://comments.example');
+        assert.equal(target.pathname, '/wp-json/wp/v2/comments');
+        assert.equal(options.credentials, 'omit');
+        const page = Number(target.searchParams.get('page'));
+        calls.push(page);
+        if (page === 2 && fail) return new Response('{}', { status: 429 });
+        const payload = pages[page - 1].map(row => ({
+          ...row, post: Number(target.searchParams.get('post')), author_name: 'Reader',
+          date_gmt: '2026-01-01T00:00:00', content: { rendered: '<p>Comment ' + row.id + '</p>' },
+        }));
+        return new Response(JSON.stringify(payload), { headers: { 'X-WP-Total': '4', 'X-WP-TotalPages': '4' } });
+      }, 3);
+      assert.deepEqual(calls, [1]);
+      const draft = p.fill('', 'Unsent comment');
+      p.reply('2');
+      const replyDraft = p.fill('2', 'Unsent reply');
+      const more = () => p.mount.querySelector('[data-action="load-more"]');
+      more().click();
+      await tick();
+      assert.match(p.mount.textContent, /too many requests/);
+      assert.equal(p.mount.querySelectorAll('[data-role="comment-item"]').length, 1);
+      assert.deepEqual(p.values(''), draft);
+      fail = false;
+      for (let page = 2; page <= 4; page++) {
+        more().click();
+        await tick();
+        assert.deepEqual(p.values(''), draft);
+        assert.deepEqual(p.values('2'), replyDraft);
+      }
+      assert.deepEqual(calls, [1, 2, 2, 3, 4]);
+      assert.equal(p.mount.querySelectorAll('[data-role="comment-item"]').length, 4);
+      assert.ok(p.mount.querySelector('[data-comment-id="1"]').contains(p.mount.querySelector('[data-comment-id="2"]')));
+      assert.equal(p.mount.querySelector('[data-role="pagination"]').hidden, true);
+      assert.equal(p.mount.querySelector('.zp-comments__wordpress-note'), null);
+    });
   }
 
   test('comment and reply drafts survive switching replies and cancelling a reply', async t => {
