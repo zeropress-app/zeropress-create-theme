@@ -1,5 +1,17 @@
 <script>
   (function () {
+    var root = document.documentElement;
+    // Reserve the enhanced menu layout while theme.js loads. If it cannot run,
+    // release the pending state so CSS exposes every navigation link.
+    root.classList.add("nav-pending");
+    if (typeof HTMLDialogElement !== "undefined" &&
+        typeof HTMLDialogElement.prototype.showModal === "function") {
+      root.classList.add("mobile-nav-pending");
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      root.classList.remove("nav-pending", "mobile-nav-pending");
+    }, { once: true });
+
     try {
       var savedTheme = null;
       try {
@@ -18,3 +30,4 @@
     }
   }());
 </script>
+<script defer src="/assets/theme.js"></script>

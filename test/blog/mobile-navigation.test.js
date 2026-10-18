@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test, { after } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { JSDOM, VirtualConsole } from 'jsdom';
+import { JSDOM, VirtualConsole, requestInterceptor } from 'jsdom';
 import { runBuild } from '@zeropress/build';
 
 const template = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
@@ -17,20 +17,29 @@ after(() => fs.rm(root, { recursive: true, force: true }));
 await runBuild(path.join(template, 'theme'), data, path.join(root, 'dist'), { projectRoot: root });
 const html = await fs.readFile(path.join(root, 'dist/index.html'), 'utf8');
 
-async function page(t, { scripts = true, nativeDialog = true } = {}) {
+async function page(t, { scripts = true, nativeDialog = true, themeStatus = 200, beforeTheme } = {}) {
+  const themeUrl = new URL(html.match(/<script[^>]*src="([^"]*\/theme[^"/]*\.js)"/)[1], 'https://site.example/').href;
   const errors = [];
   const console = new VirtualConsole();
-  console.on('jsdomError', error => errors.push(error.message));
+  console.on('jsdomError', error => {
+    if (themeStatus !== 200 && error.type === 'resource-loading' && error.url === themeUrl) return;
+    errors.push(error.message);
+  });
   let breakpointChanged;
-  let initializedBeforeBody = false;
   const media = { matches: false, addEventListener(type, handler) { breakpointChanged = handler; } };
   const dom = new JSDOM(html, {
     url: 'https://site.example/', pretendToBeVisual: true,
     runScripts: scripts ? 'dangerously' : 'outside-only', virtualConsole: console,
+    resources: { interceptors: [requestInterceptor(async (request, { element }) => {
+      if (request.url === themeUrl) {
+        await beforeTheme?.(element.ownerDocument.defaultView);
+        return new Response(themeSource, { status: themeStatus, headers: { 'Content-Type': 'application/javascript' } });
+      }
+      return new Response('');
+    })] },
     beforeParse(window) {
       window.matchMedia = query => {
         if (query === '(min-width: 640px)') {
-          initializedBeforeBody = window.document.body === null;
           return media;
         }
         return { matches: false };
@@ -69,14 +78,13 @@ async function page(t, { scripts = true, nativeDialog = true } = {}) {
     if (value === 'Escape' && !event.defaultPrevented) dialog.dispatchEvent(new window.Event('cancel', { cancelable: true }));
     return event;
   };
-  const loadTheme = () => { window.eval(themeSource); document.dispatchEvent(new window.Event('DOMContentLoaded')); };
   const desktop = () => { media.matches = true; breakpointChanged(); window.dispatchEvent(new window.Event('resize')); };
-  return { window, document, dialog, trigger, navigation, parent, close, key, loadTheme, desktop, initializedBeforeBody };
+  return { window, document, dialog, trigger, navigation, parent, close, key, desktop };
 }
 
-test('mobile navigation works before the external theme script and moves a single link tree', async t => {
+test('mobile navigation moves a single link tree after deferred initialization', async t => {
   const p = await page(t);
-  assert.equal(p.initializedBeforeBody, true);
+  assert.equal(p.trigger.disabled, false);
   assert.equal(p.document.documentElement.classList.contains('mobile-nav-ready'), true);
   p.trigger.click();
   assert.equal(p.dialog.open, true);
@@ -85,8 +93,8 @@ test('mobile navigation works before the external theme script and moves a singl
   assert.equal(p.trigger.getAttribute('aria-expanded'), 'true');
   assert.equal(p.document.activeElement, p.close);
   assert.equal(p.document.documentElement.classList.contains('mobile-nav-open'), true);
-  p.loadTheme();
-  assert.equal(p.dialog.open, true, 'Delayed theme.js must not reset the menu');
+  p.window.initMobileNavigation();
+  assert.equal(p.dialog.open, true, 'Repeated enhancement must not reset the menu');
   p.close.click();
   assert.equal(p.navigation.parentElement, p.parent);
   assert.equal(p.document.activeElement, p.trigger);
@@ -156,7 +164,6 @@ test('desktop transition restores the menu and focus and releases scroll lock', 
 
 test('search shortcuts close the mobile menu before opening search', async t => {
   const p = await page(t);
-  p.loadTheme();
   p.trigger.click();
   p.key(p.close, 'k', { ctrlKey: true });
   assert.equal(p.dialog.open, false);
@@ -167,7 +174,7 @@ test('search shortcuts close the mobile menu before opening search', async t => 
   assert.equal(p.document.activeElement, p.trigger);
 });
 
-for (const options of [{ scripts: false }, { nativeDialog: false }]) {
+for (const options of [{ scripts: false }, { nativeDialog: false }, { themeStatus: 503 }]) {
   test(`navigation remains in the document with ${JSON.stringify(options)}`, async t => {
     const p = await page(t, options);
     assert.equal(p.document.documentElement.classList.contains('mobile-nav-ready'), false);
@@ -176,3 +183,23 @@ for (const options of [{ scripts: false }, { nativeDialog: false }]) {
     assert.ok(p.navigation.querySelector('a[href="/#reading"]'));
   });
 }
+
+test('mobile controls wait for the deferred script without moving the link tree', async t => {
+  let pendingChecked = false;
+  const p = await page(t, { beforeTheme: async window => {
+    await new Promise(resolve => setImmediate(resolve));
+    const { document } = window;
+    const trigger = document.querySelector('[data-mobile-nav-trigger]');
+    assert.equal(document.documentElement.classList.contains('mobile-nav-pending'), true);
+    assert.equal(trigger.disabled, true);
+    trigger.click();
+    assert.equal(document.querySelector('[data-mobile-nav-dialog]').open, false);
+    assert.ok(document.querySelector('.header-bottom > [data-mobile-nav-content]'));
+    pendingChecked = true;
+  } });
+  assert.equal(pendingChecked, true);
+  assert.equal(p.trigger.disabled, false);
+  assert.equal(p.navigation.parentElement, p.parent);
+  p.trigger.click();
+  assert.equal(p.dialog.open, true);
+});

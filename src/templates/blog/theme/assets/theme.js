@@ -4,6 +4,10 @@ const SEARCH_LIMIT = 8;
 
 document.documentElement.classList.add("js");
 
+// Deferred scripts run after parsing and before the loading fallback is released.
+initNavigation();
+initMobileNavigation();
+
 let searchAdapterPromise = null;
 let smoothScrollEnhanced = false;
 
@@ -161,6 +165,213 @@ function updateFeaturedPosts(root = document) {
       firstVisible.classList.add("is-featured");
     }
   });
+}
+
+function initNavigation() {
+  const root = document.documentElement;
+  if (root.classList.contains("nav-ready")) return;
+  const desktop = window.matchMedia("(min-width: 640px)");
+
+  function entries(nav) {
+    return Array.from(nav.querySelectorAll(".site-nav__toggle")).map((button) => {
+      const item = button.closest(".site-nav__item");
+      return { button, item, panel: item.querySelector(":scope > .site-nav__submenu") };
+    }).filter((entry) => entry.panel);
+  }
+
+  function collapse({ button, panel }) {
+    button.setAttribute("aria-expanded", "false");
+    panel.removeAttribute("data-nav-open");
+  }
+
+  function close(entry) {
+    entries(entry.item).forEach(collapse);
+  }
+
+  function closeOutside(target) {
+    document.querySelectorAll(".site-nav").forEach((nav) => {
+      if (!nav.contains(target)) entries(nav).forEach(collapse);
+    });
+  }
+
+  function position(entry) {
+    const { panel, item, button } = entry;
+    panel.style.removeProperty("left");
+    panel.style.removeProperty("top");
+    delete button.dataset.opensLeft;
+    if (!desktop.matches || !panel.hasAttribute("data-nav-open")) return;
+
+    const gap = 16;
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+    const anchor = item.getBoundingClientRect();
+    const bounds = panel.getBoundingClientRect();
+    const parentPanel = item.closest(".site-nav__submenu");
+    const parentBounds = parentPanel?.getBoundingClientRect();
+    const nested = Boolean(parentPanel);
+    let left = nested ? parentBounds.right : anchor.left;
+    let top = nested ? anchor.top : anchor.bottom + 4;
+    if (nested && left + bounds.width > viewportWidth - gap) {
+      if (parentBounds.left - bounds.width >= gap) {
+        left = parentBounds.left - bounds.width;
+        button.dataset.opensLeft = "true";
+      } else {
+        // Narrow desktop viewports may not fit two panels side by side.
+        // Open below the row so its link, button, and focus ring stay visible.
+        left = anchor.left;
+        top = anchor.bottom + 4;
+      }
+    }
+    left = Math.max(gap, Math.min(left, viewportWidth - bounds.width - gap));
+    if (!nested && top + bounds.height > viewportHeight - gap && anchor.top - bounds.height - 4 >= gap) {
+      top = anchor.top - bounds.height - 4;
+    }
+    top = Math.max(gap, Math.min(top, viewportHeight - bounds.height - gap));
+    panel.style.left = `${left - anchor.left}px`;
+    panel.style.top = `${top - anchor.top}px`;
+  }
+
+  document.addEventListener("click", (event) => {
+    closeOutside(event.target);
+    const button = event.target.closest?.(".site-nav__toggle");
+    const nav = button?.closest(".site-nav");
+    if (!nav) return;
+    const items = entries(nav);
+    const entry = items.find((item) => item.button === button);
+    if (!entry) return;
+    if (button.getAttribute("aria-expanded") === "true") {
+      close(entry);
+      return;
+    }
+    items.filter((sibling) => sibling !== entry && sibling.item.parentElement === entry.item.parentElement).forEach(close);
+    entry.panel.setAttribute("data-nav-open", "");
+    button.setAttribute("aria-expanded", "true");
+    position(entry);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    const nav = event.target.closest?.(".site-nav");
+    if (!nav) return;
+    const deepest = entries(nav).findLast((entry) => entry.panel.hasAttribute("data-nav-open"));
+    if (!deepest) return;
+    event.preventDefault();
+    event.stopPropagation();
+    close(deepest);
+    deepest.button.focus();
+  });
+  document.addEventListener("focusin", (event) => closeOutside(event.target));
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".site-nav").forEach((nav) => entries(nav).forEach(position));
+  });
+
+  document.querySelectorAll(".site-nav__toggle").forEach((button) => { button.disabled = false; });
+  root.classList.add("nav-ready");
+  root.classList.remove("nav-pending");
+}
+
+function initMobileNavigation() {
+  const root = document.documentElement;
+  if (root.classList.contains("mobile-nav-ready") ||
+      typeof HTMLDialogElement === "undefined" ||
+      typeof HTMLDialogElement.prototype.showModal !== "function") return;
+  const desktop = window.matchMedia("(min-width: 640px)");
+  let active = null;
+
+  function restore(state, focus) {
+    if (active !== state) return;
+    active = null;
+    state.marker.replaceWith(state.content);
+    state.trigger.setAttribute("aria-expanded", "false");
+    root.classList.remove("mobile-nav-open");
+    if (focus?.isConnected) {
+      if (!focus.getClientRects().length) {
+        focus = Array.from(state.content.querySelectorAll("a[href], button, summary"))
+          .find((element) => element.getClientRects().length);
+      }
+      focus?.focus({ preventScroll: true });
+    }
+  }
+
+  function closeNavigation(toDesktop = false) {
+    if (!active) return;
+    const state = active;
+    const focused = document.activeElement;
+    const focus = toDesktop
+      ? (state.content.contains(focused) ? focused : state.content.querySelector("a[href], button, summary"))
+      : state.trigger;
+    if (state.dialog.open) state.dialog.close();
+    restore(state, focus);
+  }
+
+  function openNavigation(trigger) {
+    if (desktop.matches || active) return;
+    const dialog = document.getElementById(trigger.getAttribute("aria-controls"));
+    const content = document.querySelector("[data-mobile-nav-content]");
+    const slot = dialog?.querySelector("[data-mobile-nav-slot]");
+    if (!dialog || !content || !slot) return;
+    const marker = document.createComment("navigation position");
+    content.before(marker);
+    const state = { dialog, content, marker, trigger };
+    active = state;
+    slot.append(content);
+    try {
+      dialog.showModal();
+    } catch {
+      restore(state, trigger);
+      return;
+    }
+    trigger.setAttribute("aria-expanded", "true");
+    root.classList.add("mobile-nav-open");
+    dialog.querySelector("[data-mobile-nav-close]").focus({ preventScroll: true });
+  }
+
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest?.("[data-mobile-nav-trigger]");
+    if (trigger) {
+      openNavigation(trigger);
+      return;
+    }
+    if (!active) return;
+    if (event.target === active.dialog ||
+        event.target.closest?.("[data-mobile-nav-close]") ||
+        (active.content.contains(event.target) && event.target.closest?.("a[href]"))) {
+      closeNavigation();
+    }
+  });
+  document.addEventListener("cancel", (event) => {
+    if (event.target !== active?.dialog) return;
+    event.preventDefault();
+    closeNavigation();
+  }, true);
+  document.addEventListener("close", (event) => {
+    if (event.target === active?.dialog && !active.dialog.open) restore(active, active.trigger);
+  }, true);
+  document.addEventListener("keydown", (event) => {
+    if (!active || event.defaultPrevented || event.key !== "Tab") return;
+    const items = Array.from(active.dialog.querySelectorAll(
+      "a[href], button, input, select, textarea, summary, [tabindex]"
+    )).filter((element) => element.tabIndex >= 0 && !element.disabled &&
+      !element.closest("[inert]") && element.getClientRects().length);
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (!first) { event.preventDefault(); return; }
+    if (!active.dialog.contains(document.activeElement) ||
+        (event.shiftKey && document.activeElement === first)) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+  document.addEventListener("zp:close-navigation", () => closeNavigation());
+  const onBreakpointChange = () => { if (desktop.matches) closeNavigation(true); };
+  if (desktop.addEventListener) desktop.addEventListener("change", onBreakpointChange);
+  else if (desktop.addListener) desktop.addListener(onBreakpointChange);
+  document.querySelectorAll("[data-mobile-nav-trigger]").forEach((button) => { button.disabled = false; });
+  root.classList.add("mobile-nav-ready");
+  root.classList.remove("mobile-nav-pending");
 }
 
 function initNavigationState() {

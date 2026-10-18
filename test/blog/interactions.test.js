@@ -10,7 +10,7 @@ import { JSDOM, VirtualConsole } from 'jsdom';
 const template = fileURLToPath(new URL('../../src/templates/blog/', import.meta.url));
 const source = await fs.readFile(path.join(template, 'theme/assets/theme.js'), 'utf8');
 const inlineTheme = (await fs.readFile(path.join(template, 'theme/partials/theme-init.html'), 'utf8'))
-  .replace(/^<script>\s*|\s*<\/script>\s*$/g, '');
+  .match(/<script>([\s\S]*?)<\/script>/)[1];
 const data = JSON.parse(await fs.readFile(path.join(template, 'zeropress-preview-data.json'), 'utf8'));
 data.site.newsletter.signup_url = '/zp_newsletter/';
 const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'zp-blog-interactions-'));
