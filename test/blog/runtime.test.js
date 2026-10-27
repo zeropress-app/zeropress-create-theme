@@ -15,17 +15,35 @@ function redirect({ pattern = '/posts/:public_id', outputStyle = 'directory', qu
   const destinations = [];
   vm.runInNewContext(redirectSource, {
     document: { currentScript: { dataset: { postPath: pattern, outputStyle } } },
-    window: { location: { pathname, search: query, hash, replace: destination => destinations.push(destination) } },
+    window: { location: { origin: 'https://site.example', pathname, search: query, hash, replace: destination => destinations.push(destination) } },
+    URL,
     URLSearchParams,
   }, { filename: 'legacy-wp-query-redirect.js' });
   return destinations;
 }
 
 test('legacy WordPress redirect uses directory or extensionless public URLs and preserves fragments', () => {
-  assert.deepEqual(redirect(), ['/posts/42/#comments']);
-  assert.deepEqual(redirect({ outputStyle: 'html-extension' }), ['/posts/42#comments']);
-  assert.deepEqual(redirect({ pattern: '/writing/:public_id/' }), ['/writing/42/#comments']);
-  assert.deepEqual(redirect({ pattern: '/writing/:public_id/', outputStyle: 'html-extension' }), ['/writing/42#comments']);
+  assert.deepEqual(redirect(), ['https://site.example/posts/42/#comments']);
+  assert.deepEqual(redirect({ outputStyle: 'html-extension' }), ['https://site.example/posts/42#comments']);
+  assert.deepEqual(redirect({ pattern: '/writing/:public_id/' }), ['https://site.example/writing/42/#comments']);
+  assert.deepEqual(redirect({ pattern: '/writing/:public_id/', outputStyle: 'html-extension' }), ['https://site.example/writing/42#comments']);
+});
+
+test('legacy WordPress redirect rejects malformed and cross-origin destinations', () => {
+  for (const outputStyle of ['directory', 'html-extension']) {
+    for (const pattern of ['/\\outside.example/:public_id', '/\\site.example:8443/:public_id', '/\\[/:public_id']) {
+      assert.deepEqual(redirect({ pattern, outputStyle }), [], `${outputStyle}: ${pattern}`);
+    }
+  }
+});
+
+test('legacy WordPress redirect preserves URL-looking fragments as anchors', () => {
+  for (const outputStyle of ['directory', 'html-extension']) {
+    for (const hash of ['#//outside.example/', '#https://outside.example/', '#javascript:alert(1)']) {
+      const suffix = outputStyle === 'directory' ? '/' : '';
+      assert.deepEqual(redirect({ outputStyle, hash }), [`https://site.example/posts/42${suffix}${hash}`]);
+    }
+  }
 });
 
 test('legacy WordPress redirect leaves URLs requiring unavailable post data unchanged', () => {
@@ -35,7 +53,8 @@ test('legacy WordPress redirect leaves URLs requiring unavailable post data unch
 });
 
 test('legacy WordPress redirect only handles positive IDs on the home page with a supported output style', () => {
-  for (const query of ['', '?p=', '?p=0', '?p=-1', '?p=01', '?p=hello', '?p=42.5']) {
+  for (const query of ['', '?p=', '?p=0', '?p=-1', '?p=01', '?p=hello', '?p=42.5',
+    '?p=https%3A%2F%2Foutside.example', '?p=%2F%2Foutside.example', '?p=%5C%5Coutside.example']) {
     assert.deepEqual(redirect({ query }), [], query);
   }
   assert.deepEqual(redirect({ pathname: '/about/' }), []);
@@ -69,10 +88,14 @@ test('blog renders site date settings and redirects to the same public URLs as t
         hash: '',
       });
       const postLink = html.match(/<h2><a href="([^"]+)"/)?.[1];
-      assert.equal(destination, postLink);
+      const destinationUrl = new URL(destination);
+      assert.equal(destinationUrl.origin, 'https://site.example');
+      assert.equal(destinationUrl.pathname, postLink);
+      assert.equal(destinationUrl.search, '');
+      assert.equal(destinationUrl.hash, '');
       const outputPath = outputStyle === 'directory'
-        ? `${destination.slice(1)}index.html`
-        : `${destination.slice(1)}.html`;
+        ? `${destinationUrl.pathname.slice(1)}index.html`
+        : `${destinationUrl.pathname.slice(1)}.html`;
       await fs.access(path.join(output, outputPath));
     }
   } finally {

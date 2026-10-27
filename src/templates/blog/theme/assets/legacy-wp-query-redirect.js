@@ -31,5 +31,16 @@
     pathname += "/";
   }
 
-  window.location.replace(pathname + window.location.hash);
+  var destination;
+  try {
+    destination = new URL(pathname, window.location.origin);
+  } catch (error) {
+    return;
+  }
+  if (destination.origin !== window.location.origin) {
+    return;
+  }
+
+  destination.hash = window.location.hash;
+  window.location.replace(destination.href);
 }());
